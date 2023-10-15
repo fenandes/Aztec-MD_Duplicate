@@ -12,7 +12,7 @@ module.exports = {
       const { aztec_images } = require("../mangoes/encryptFunc.js");
       const aztecImage = fs.readFileSync("../lib/imogs.jpg");
     
-      await toReact("🙋‍♂️");
+      await xReact("🙋‍♂️");
       const { data: repoData } = await axios.get("https://api.github.com/repos/Vorterx/Aztec-MD");
       const { data: commitData } = await axios.get("https://api.github.com/repos/Vorterx/Aztec-MD/commits");
 
