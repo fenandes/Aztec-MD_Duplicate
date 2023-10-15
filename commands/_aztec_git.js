@@ -13,6 +13,9 @@ module.exports = {
       const aztecImage = fs.readFileSync("../lib/imogs.jpg");
     
       await xReact("🙋‍♂️");
+      let [date, time] = new Date()
+      .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
+      .split(",");
       const { data: repoData } = await axios.get("https://api.github.com/repos/Vorterx/Aztec-MD");
       const { data: commitData } = await axios.get("https://api.github.com/repos/Vorterx/Aztec-MD/commits");
 
@@ -27,7 +30,7 @@ module.exports = {
       │ 📧 Email: amdablack63@gmail.com\n
       │ 🆕 Latest Commit: ${commitData[0].commit.message}\n
       │ 📅 Commit Date: ${commitData[0].commit.author.date}\n
-      │ ⌚ Time: 10:00 AM\n
+      │ ⌚ Time: ${time}\n
       │ 👤 Author: Diegoson\n
       │ *© aztec wabot*
       ╰──────────────────────╯
