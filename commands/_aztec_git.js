@@ -10,7 +10,7 @@ module.exports = {
      
       const fs = require("fs");
       const { aztec_images } = require("../mangoes/encryptFunc.js");
-      const aztecImage = fs.readFileSync("./lib/imogs.jpg");
+      const aztecImage = fs.readFileSync("../lib/imogs.jpg");
     
       await toReact("🙋‍♂️");
       const { data: repoData } = await axios.get("https://api.github.com/repos/Vorterx/Aztec-MD");
