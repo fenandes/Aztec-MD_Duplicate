@@ -160,20 +160,19 @@ async function startAztec() {
    └───────────────┈ ⳹`
  vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``}}})
 } else if (anu.action == 'remove') {
-const xeonbuffer = await getBuffer(ppuser)
-const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-let xeonName = num
-const xeonmembers = metadata.participants.length
+const vorterx_buffer = await getBuffer(imageUser)
+const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+let vorterxName = num
+const vorterx_members = metadata.participants.length
 vorterx_aztec = `┌─❖
 │「 𝗚𝗼𝗼𝗱𝗯𝘆𝗲 👋 」
-└┬❖ 「 @${xeonName.split("@")[0]}  」
+└┬❖ 「 @${vorterxName.split("@")[0]}  」
    │✑  𝗟𝗲𝗳𝘁 
    │✑ ${metadata.subject}
    │✑  𝗠𝗲𝗺𝗯𝗲𝗿 : 
-   │✑ ${xeonmembers}th
+   │✑ ${vorterx_members}th
    │✑  𝗧𝗶𝗺𝗲 : 
-   │✑  ${xeontime} ${xeondate}
+   │✑  ${xeondate}
    └───────────────┈ ⳹`
 vorterx.sendMessage(anu.id,
  { text: xeonbody,
