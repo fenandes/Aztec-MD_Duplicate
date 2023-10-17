@@ -18,7 +18,7 @@ async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
 
-  const vorterx = WAConnection();
+  const vorterx = WAConnection({
   logger: P({ level: 'silent' }),
   printQRInTerminal: false,
   browser: Browsers.firefox('Desktop'),
