@@ -8,6 +8,7 @@ const fs = require('fs');
 const config = require('./config');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
+const botName = config.botName;
 const MessageHandler = require('./lib/message/vorterx');
 
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
@@ -36,24 +37,24 @@ async function startAztec() {
   vorterx.ev.on('creds.update', saveCreds);
 
   vorterx.ev.on('connection.update', async (update) => {
-    const { connection, lastDisconnect } = update;
+  const { connection, lastDisconnect } = update;
 
     if (
-      connection === 'close' ||
-      connection === 'lost' ||
-      connection === 'restart' ||
-      connection === 'timeout'
+   connection === 'close' ||
+   connection === 'lost' ||
+   connection === 'restart' ||
+   connection === 'timeout'
     ) {
-      let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+    let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
-      console.log(`Connection ${connection}, reconnecting...`);
+    console.log(`Connection ${connection}, reconnecting...`);
 
-      if (reason === DisconnectReason.loggedOut) {
-        console.log('Device Logged Out, Please Delete Session and Scan Again.');
-        process.exit();
-      }
+    if (reason === DisconnectReason.loggedOut) {
+    console.log('Device Logged Out, Please Delete Session and Scan Again.');
+    process.exit();
+     }
 
-      await startAztec();
+     await startAztec();
     } else if (connection === 'close') {
       console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
       await startAztec();
