@@ -76,13 +76,12 @@ async function startAztec() {
   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
 
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
-  vorterx.ev.on('groups.update', async (json) => {try {
+  vorterx.ev.on('groups.update', async (data) => {try {
     const imageGc = await vorterx.profilePictureUrl(anu.id, 'image');
     } catch (err) {
     console.log(err);
     imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';}
-    console.log(json);
-    const res = json[0];
+    const res = data[0];
     if (res.announce == true) { await sleep(2000);
     vorterx.sendMessage(res.id, {text: `*【 GROUP MUTTED SS 】*\n\n\`\`\`THE GROUP HAS BEEN LOCKED\`\`\``});
     } else if (res.announce == false) {await sleep(2000);
