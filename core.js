@@ -93,7 +93,7 @@ async function startAztec() {
     const res = json[0];
     if (res.announce == true) {
     await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admins can send messages !`
+    vorterx.sendMessage(res.id, {text: `*【 GROUP MUTTED SS 】*\n\n\`\`\`\THE GROUP HAS BEEN LOCKED`\`\`\`
      });
     } else if (res.announce == false) {
     await sleep(2000);
