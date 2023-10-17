@@ -91,32 +91,15 @@ async function startAztec() {
     }
     console.log(json);
     const res = json[0];
-    if (res.announce == true) {
-    await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `*【 GROUP MUTTED SS 】*\n\n\`\`\`\THE GROUP HAS BEEN LOCKED`\`\`\`
-     });
-    } else if (res.announce == false) {
-    await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nThe group has been opened by admin, Now participants can send messages !`
-      });
-    } else if (res.restrict == true) {
-     await sleep(2000);
-     vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`
-      });
-    } else if (res.restrict == false) {
-     await sleep(2000);
-     vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`
-      });
-    } else if (res.desc !== '') {
-     await sleep(2000);
-     vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\n*Group description has been changed to*\n\n${res.desc}`
-      });
-    } else {
-    await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\n*Group name has been changed to*\n\n*${res.subject}*`
-   });
-    }
-   });
+    if (res.announce == true) { await sleep(2000);
+    vorterx.sendMessage(res.id, {text: `*【 GROUP MUTTED SS 】*\n\n\`\`\`THE GROUP HAS BEEN LOCKED\`\`\``});
+    } else if (res.announce == false) {await sleep(2000);
+    vorterx.sendMessage(res.id, {text: `*【 GROUP UNMUTED SS 】*\n\n\`\`\`THE GROUP HAS BEEN UNLOCKED\`\`\``});
+    } else if (res.restrict == true) {await sleep(2000);
+    vorterx.sendMessage(res.id, {text: `*【 GROUP INFO SS 】*\n\n\`\`\`GROUP INFO HAS BE OONED BY ADMIN\`\`\``});
+    } else if (res.desc !== '') {await sleep(2000);
+    vorterx.sendMessage(res.id, {text: `*【 GROUP DESC SS 】*\n\n\`\`\`GROUP DESC HAS BEEN CHANGED =>\`\`\`\n\n*${res.desc}*`
+    })}});
   //_____________[■■■■■]__
   vorterx.ev.on('group-participants.update', async (anu) => {
   console.log(anu)
