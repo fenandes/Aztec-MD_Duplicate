@@ -84,45 +84,45 @@ async function startAztec() {
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
   vorterx.ev.on('groups.update', async (json) => {
     try {
-      const ppgroup = await vorterx.profilePictureUrl(anu.id, 'image');
+    const imageGc = await vorterx.profilePictureUrl(anu.id, 'image');
     } catch (err) {
-      console.log(err);
-      ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';
+     console.log(err);
+     imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';
     }
     console.log(json);
     const res = json[0];
     if (res.announce == true) {
-      await sleep(2000);
-      vorterx.sendMessage(res.id, {
-        text: `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admins can send messages !`
-      });
+    await sleep(2000);
+    vorterx.sendMessage(res.id, {
+     text: `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admins can send messages !`
+     });
     } else if (res.announce == false) {
-      await sleep(2000);
-      vorterx.sendMessage(res.id, {
-        text: `「 Group Settings Change 」\n\nThe group has been opened by admin, Now participants can send messages !`
+    await sleep(2000);
+    vorterx.sendMessage(res.id, {
+    text: `「 Group Settings Change 」\n\nThe group has been opened by admin, Now participants can send messages !`
       });
     } else if (res.restrict == true) {
-      await sleep(2000);
-      vorterx.sendMessage(res.id, {
-        text: `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`
+     await sleep(2000);
+     vorterx.sendMessage(res.id, {
+     text: `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`
       });
     } else if (res.restrict == false) {
-      await sleep(2000);
-      vorterx.sendMessage(res.id, {
-        text: `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`
+     await sleep(2000);
+     vorterx.sendMessage(res.id, {
+     text: `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`
       });
     } else if (res.desc !== '') {
-      await sleep(2000);
-      vorterx.sendMessage(res.id, {
-        text: `「 Group Settings Change 」\n\n*Group description has been changed to*\n\n${res.desc}`
+     await sleep(2000);
+     vorterx.sendMessage(res.id, {
+     text: `「 Group Settings Change 」\n\n*Group description has been changed to*\n\n${res.desc}`
       });
     } else {
-      await sleep(2000);
-      vorterx.sendMessage(res.id, {
-        text: `「 Group Settings Change 」\n\n*Group name has been changed to*\n\n*${res.subject}*`
-      });
+    await sleep(2000);
+    vorterx.sendMessage(res.id, {
+    text: `「 Group Settings Change 」\n\n*Group name has been changed to*\n\n*${res.subject}*`
+   });
     }
-  });
+   });
 
   const app = express();
   app.listen(PORT, () => {
