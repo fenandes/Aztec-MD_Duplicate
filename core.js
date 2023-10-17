@@ -21,11 +21,11 @@ async function startAztec() {
   const vorterx = WAConnection({
   logger: P({ level: 'silent' }),
   printQRInTerminal: false,
-  browser: Browsers.firefox('Desktop'),
+  browser: Browsers.macOS("Desktop"),
   qrTimeout: undefined,
   auth: state,
   version: version,
-  })
+  });
 
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
