@@ -148,35 +148,24 @@ async function startAztec() {
   const vorterx_time = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 	const vorterx_members = metadata.participants.length
-  xeonbody = `┌─❖
+  vorterx_aztec = `┌─❖
 │「 𝗛𝗶 👋 」
-└┬❖ 「  @${xeonName.split("@")[0]}  」
+└┬❖ 「  @${vorterxName.split("@")[0]}  」
    │✑  𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 
    │✑  ${metadata.subject}
    │✑  𝗠𝗲𝗺𝗯𝗲𝗿 : 
-   │✑ ${xmembers}th
+   │✑ ${vorterx_members}th
    │✑  𝗝𝗼𝗶𝗻𝗲𝗱 : 
-   │✑ ${xtime} ${xdate}
+   │✑ ${vorterx_date}
    └───────────────┈ ⳹`
- vorterx.sendMessage(anu.id,
- { text: xeonbody,
- contextInfo:{
- mentionedJid:[num],
- "externalAdReply": {"showAdAttribution": true,
- "containsAutoReply": true,
- "title": ` ${global.botname}`,
-"body": `${ownername}`,
- "previewType": "PHOTO",
-"thumbnailUrl": ``,
-"thumbnail": XeonWlcm,
-"sourceUrl": `${wagc}`}}})
+ vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``}}})
 } else if (anu.action == 'remove') {
 const xeonbuffer = await getBuffer(ppuser)
 const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 let xeonName = num
 const xeonmembers = metadata.participants.length
-xeonbody = `┌─❖
+vorterx_aztec = `┌─❖
 │「 𝗚𝗼𝗼𝗱𝗯𝘆𝗲 👋 」
 └┬❖ 「 @${xeonName.split("@")[0]}  」
    │✑  𝗟𝗲𝗳𝘁 
