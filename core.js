@@ -25,6 +25,7 @@ async function startAztec() {
   qrTimeout: undefined,
   auth: state,
   version: version,
+  })
 
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
