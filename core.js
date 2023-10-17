@@ -127,20 +127,19 @@ async function startAztec() {
   vorterx.ev.on('group-participants.update', async (anu) => {
   console.log(anu)
   try {
-  let metadata = await XeonBotInc.groupMetadata(anu.id)
+  let metadata = await vorterx.groupMetadata(anu.id)
   let participants = anu.participants
   for (let num of participants) {
   try {
-  ppuser = await XeonBotInc.profilePictureUrl(num, 'image')
+  imageUser = await vorterx.profilePictureUrl(num, 'image')
   } catch (err) {
-  ppuser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
+  imageUser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
   }
   try {
-  ppgroup = await XeonBotInc.profilePictureUrl(anu.id, 'image')
+  imageUser = await vorterx.profilePictureUrl(anu.id, 'image')
   } catch (err) {
-  ppgroup = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
+  imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
   }
-//welcome\\
   memb = metadata.participants.length
   XeonWlcm = await getBuffer(ppuser)
   XeonLft = await getBuffer(ppuser)
