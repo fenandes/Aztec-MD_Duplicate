@@ -194,21 +194,21 @@ console.log(err)
 }
 })
 
-  const app = express();
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}/`);
-  });
+const app = express();
+app.listen(PORT, () => {
+console.log(`Server is running on port ${PORT}/`);
+});
 
-  await vorterx.connect();
+await vorterx.connect();
 }
 
 async function readCommands(vorterx) {
-  const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
 
-  for (const file of commandFiles) {
-    const command = require(`./Commands/${file}`);
-    vorterx.cmd.set(command.name, command);
-  }
+for (const file of commandFiles) {
+const command = require(`./Commands/${file}`);
+vorterx.cmd.set(command.name, command);
+}
 }
 
 startAztec();
