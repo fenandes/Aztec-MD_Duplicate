@@ -148,16 +148,14 @@ async function startAztec() {
   const vorterx_time = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 	const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 	const vorterx_members = metadata.participants.length
-  vorterx_aztec = `┌─❖
-│「 𝗛𝗶 👋 」
-└┬❖ 「  @${vorterxName.split("@")[0]}  」
-   │✑  𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 
-   │✑  ${metadata.subject}
-   │✑  𝗠𝗲𝗺𝗯𝗲𝗿 : 
-   │✑ ${vorterx_members}th
-   │✑  𝗝𝗼𝗶𝗻𝗲𝗱 : 
-   │✑ ${vorterx_date}
-   └───────────────┈ ⳹`
+  vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
+├ 
+├ *Group Name* ${metadata.subject}
+├ *Group Member* ${vorterx_member}
+├ *Due Date* ${vorterx_date}
+├
+│🤩Plz Behave
+╰──────────⭑`
  vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``}}})
 } else if (anu.action == 'remove') {
 const vorterx_buffer = await getBuffer(imageUser)
