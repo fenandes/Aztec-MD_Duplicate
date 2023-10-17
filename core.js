@@ -19,12 +19,12 @@ async function startAztec() {
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
 
   const vorterx = WAConnection();
-  logger: P({ level: 'silent' });
-  printQRInTerminal: false;
-  browser: Browsers.firefox('Desktop').userAgent;
-  qrTimeout: undefined;
-  auth: state;
-  version: version;
+  logger: P({ level: 'silent' }),
+  printQRInTerminal: false,
+  browser: Browsers.firefox('Desktop'),
+  qrTimeout: undefined,
+  auth: state,
+  version: version,
 
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
