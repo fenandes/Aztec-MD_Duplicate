@@ -149,10 +149,9 @@ async function startAztec() {
 	const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 	const vorterx_members = metadata.participants.length
   vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
-├ 
-├ *Group Name* ${metadata.subject}
-├ *Group Member* ${vorterx_member}
-├ *Due Date* ${vorterx_date}
+├ *Group Name*: ${metadata.subject}
+├ *Group Member*: ${vorterx_member}
+├ *Due Date*: ${vorterx_date}
 ├
 │🤩Plz Behave
 ╰──────────⭑`
@@ -162,16 +161,13 @@ const vorterx_buffer = await getBuffer(imageUser)
 const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 let vorterxName = num
 const vorterx_members = metadata.participants.length
-vorterx_aztec = `┌─❖
-│「 𝗚𝗼𝗼𝗱𝗯𝘆𝗲 👋 」
-└┬❖ 「 @${vorterxName.split("@")[0]}  」
-   │✑  𝗟𝗲𝗳𝘁 
-   │✑ ${metadata.subject}
-   │✑  𝗠𝗲𝗺𝗯𝗲𝗿 : 
-   │✑ ${vorterx_members}th
-   │✑  𝗧𝗶𝗺𝗲 : 
-   │✑  ${xeondate}
-   └───────────────┈ ⳹`
+vorterx_aztec = `╭─🙌 *Very Well @${vorterxName.split("@")[0]}
+├ 
+├ *Group Name*: ${metadata.subject}
+├ *Due Date*: ${vorterx_date}
+├
+│👋Uhambe Kahle
+╰──────────⭑`
 vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecL,"sourceUrl": ``,}}})
 } else if (anu.action == 'promote') {
 const vorterx_buffer = await getBuffer(imageUser)
