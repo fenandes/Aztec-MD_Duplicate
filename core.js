@@ -93,33 +93,27 @@ async function startAztec() {
     const res = json[0];
     if (res.announce == true) {
     await sleep(2000);
-    vorterx.sendMessage(res.id, {
-     text: `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admins can send messages !`
+    vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admins can send messages !`
      });
     } else if (res.announce == false) {
     await sleep(2000);
-    vorterx.sendMessage(res.id, {
-    text: `「 Group Settings Change 」\n\nThe group has been opened by admin, Now participants can send messages !`
+    vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nThe group has been opened by admin, Now participants can send messages !`
       });
     } else if (res.restrict == true) {
      await sleep(2000);
-     vorterx.sendMessage(res.id, {
-     text: `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`
+     vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`
       });
     } else if (res.restrict == false) {
      await sleep(2000);
-     vorterx.sendMessage(res.id, {
-     text: `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`
+     vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`
       });
     } else if (res.desc !== '') {
      await sleep(2000);
-     vorterx.sendMessage(res.id, {
-     text: `「 Group Settings Change 」\n\n*Group description has been changed to*\n\n${res.desc}`
+     vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\n*Group description has been changed to*\n\n${res.desc}`
       });
     } else {
     await sleep(2000);
-    vorterx.sendMessage(res.id, {
-    text: `「 Group Settings Change 」\n\n*Group name has been changed to*\n\n*${res.subject}*`
+    vorterx.sendMessage(res.id, {text: `「 Group Settings Change 」\n\n*Group name has been changed to*\n\n*${res.subject}*`
    });
     }
    });
