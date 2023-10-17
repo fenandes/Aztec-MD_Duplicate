@@ -145,10 +145,10 @@ async function startAztec() {
   aztecL = await getBuffer(imageUser)
   if (anu.action == 'add') {const vorterx_buffer = await getBuffer(imageUser)
   let vorterxName = num
-  const vorterx_time = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-	const vorterx_members = metadata.participants.length
-  vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
+ const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+ const vorterx_members = metadata.participants.length
+ vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
+├  
 ├ *Group Name*: ${metadata.subject}
 ├ *Group Member*: ${vorterx_member}
 ├ *Due Date*: ${vorterx_date}
