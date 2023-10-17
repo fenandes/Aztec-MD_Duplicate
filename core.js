@@ -141,13 +141,13 @@ async function startAztec() {
   imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'
   }
   memb = metadata.participants.length
-  XeonWlcm = await getBuffer(ppuser)
-  XeonLft = await getBuffer(ppuser)
-  if (anu.action == 'add') {const xeonbuffer = await getBuffer(ppuser)
-  let xeonName = num
-  const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-	const xmembers = metadata.participants.length
+  aztecW = await getBuffer(imageUser)
+  aztecL = await getBuffer(imageUser)
+  if (anu.action == 'add') {const vorterx_buffer = await getBuffer(imageUser)
+  let vorterxName = num
+  const vorterx_time = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+	const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+	const vorterx_members = metadata.participants.length
   xeonbody = `┌─❖
 │「 𝗛𝗶 👋 」
 └┬❖ 「  @${xeonName.split("@")[0]}  」
@@ -158,7 +158,7 @@ async function startAztec() {
    │✑  𝗝𝗼𝗶𝗻𝗲𝗱 : 
    │✑ ${xtime} ${xdate}
    └───────────────┈ ⳹`
- XeonBotInc.sendMessage(anu.id,
+ vorterx.sendMessage(anu.id,
  { text: xeonbody,
  contextInfo:{
  mentionedJid:[num],
@@ -186,7 +186,7 @@ xeonbody = `┌─❖
    │✑  𝗧𝗶𝗺𝗲 : 
    │✑  ${xeontime} ${xeondate}
    └───────────────┈ ⳹`
-XeonBotInc.sendMessage(anu.id,
+vorterx.sendMessage(anu.id,
  { text: xeonbody,
  contextInfo:{
  mentionedJid:[num],
@@ -222,7 +222,7 @@ const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 let xeonName = num
 xeonbody = `𝗢𝗼𝗽𝘀‼️ @${xeonName.split("@")[0]}, you have been *demoted* from *admin* 😬`
-XeonBotInc.sendMessage(anu.id,
+vorterx.sendMessage(anu.id,
  { text: xeonbody,
  contextInfo:{
  mentionedJid:[num],
