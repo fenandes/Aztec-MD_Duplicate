@@ -108,7 +108,7 @@ async function startAztec() {
   } catch (err) {imageUser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'}try {
   imageUser = await vorterx.profilePictureUrl(anu.id, 'image')
   } catch (err) {imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'}
-  memb = metadata.participants.length
+  vorterx_member = metadata.participants.length
   aztecW = await getBuffer(imageUser)
   aztecL = await getBuffer(imageUser)
   if (anu.action == 'add') {const vorterx_buffer = await getBuffer(imageUser)
@@ -156,29 +156,20 @@ vorterx_aztec = `╭─😭*DEMOTED-RECEIVED*
 ├ *userName*: ${vorterxName.split("@")[0]}
 ├ *Due Date*: ${time}
 ╰──────────⭑`
-vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powered by Aztec`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecL,"sourceUrl": ``,}}})
-}
-}
-} catch (err) {
-console.log(err)
-}
-})
+vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powered by Aztec`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecL,"sourceUrl": ``,}}})}}
+} catch (err) {console.log(err)}})
 
 const app = express();
 app.listen(PORT, () => {
-console.log(`Server is running on port ${PORT}/`);
-});
+console.log(`Server is running on port ${PORT}/`);});
 
-await vorterx.connect();
-}
+await vorterx.connect();}
 
 async function readCommands(vorterx) {
 const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 const command = require(`./Commands/${file}`);
-vorterx.cmd.set(command.name, command);
-}
-}
+vorterx.cmd.set(command.name, command);}}
 
 startAztec();
