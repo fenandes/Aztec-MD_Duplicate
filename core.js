@@ -78,8 +78,7 @@ async function startAztec() {
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
   vorterx.ev.on('groups.update', async (data) => {try {
     const imageGc = await vorterx.profilePictureUrl(anu.id, 'image');
-    } catch (err) {
-    console.log(err);
+    } catch (err) {console.log(err);
     imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';}
     const res = data[0];
     if (res.announce == true) { await sleep(2000);
@@ -92,8 +91,7 @@ async function startAztec() {
     vorterx.sendMessage(res.id, {text: `*【 GROUP DESC SS 】*\n\n\`\`\`GROUP DESC HAS BEEN CHANGED =>\`\`\`\n\n*${res.desc}*`
     })}});
   //_____________[■■■■■]__
-  vorterx.ev.on('group-participants.update', async (anu) => {
-  console.log(anu)try {
+  vorterx.ev.on('group-participants.update', async (anu) => {try {
   let metadata = await vorterx.groupMetadata(anu.id)
   let participants = anu.participants
   for (let num of participants) {try {
