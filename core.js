@@ -90,7 +90,11 @@ async function startAztec() {
     } else if (res.desc !== '') {await sleep(2000);
     vorterx.sendMessage(res.id, {text: `*【 GROUP DESC SS 】*\n\n\`\`\`GROUP DESC HAS BEEN CHANGED =>\`\`\`\n\n*${res.desc}*`
     })}});
-  //_____________[■■■■■]__
+   //_____[TIME : DATE ]__
+   let [date, time] = new Date()
+  .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
+  .split(",");
+  //______[■■■■■]__
   vorterx.ev.on('group-participants.update', async (anu) => {try {
   let metadata = await vorterx.groupMetadata(anu.id)
   let participants = anu.participants
@@ -104,33 +108,29 @@ async function startAztec() {
   aztecL = await getBuffer(imageUser)
   if (anu.action == 'add') {const vorterx_buffer = await getBuffer(imageUser)
   let vorterxName = num
- const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
  const vorterx_members = metadata.participants.length
  vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
 ├  
 ├ *Group Name*: ${metadata.subject}
 ├ *Group Member*: ${vorterx_member}
-├ *Due Date*: ${vorterx_date}
+├ *Due Date*: ${date}
 ├
 │🤩Plz Behave
 ╰──────────⭑`
  vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``}}})
 } else if (anu.action == 'remove') {
-const vorterx_buffer = await getBuffer(imageUser)
-const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
-let vorterxName = num
+const vorterx_buffer = await getBuffer(imageUser)let vorterxName = num
 const vorterx_members = metadata.participants.length
 vorterx_aztec = `╭─🙌 *Very Well @${vorterxName.split("@")[0]}
 ├ 
 ├ *Group Name*: ${metadata.subject}
-├ *Due Date*: ${vorterx_date}
+├ *Due Date*: ${date}
 ├
 │👋Uhambe Kahle
 ╰──────────⭑`
 vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecL,"sourceUrl": ``,}}})
 } else if (anu.action == 'promote') {
 const vorterx_buffer = await getBuffer(imageUser)
-const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 let vorterxName = num
 vorterx_aztec = `╭─🤩*PROMOTED-RECEIVED*
 ├ 
@@ -140,7 +140,6 @@ vorterx_aztec = `╭─🤩*PROMOTED-RECEIVED*
 vorterx.sendMessage(anu.id, { text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": `Powerd by Aztec`,"body": `${botName}`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``,}}})
 } else if (anu.action == 'demote') {
 const vorterx_buffer = await getBuffer(imageUser)
-const vorterx_date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 let vorterxName = num
 vorterx_aztec = `╭─😭*DEMOTED-RECEIVED*
 ├ 
