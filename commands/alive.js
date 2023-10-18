@@ -14,7 +14,7 @@ module.exports = {
   name: 'alive',
   category: 'General',
   description: 'Check if the bot is online',
-  async xstart(vorterx, message, { args, xReact }) {
+  async xstart(vorterx, m, { args, xReact,text }) {
     
     await xReact("💙");
     const image = fs.readFileSync('../lib/imogs.jpg');
@@ -33,7 +33,7 @@ module.exports = {
     ├ 📌 *Prefix*: ${PREFIX}
     ├ 📌 *Version*: ${version}
     │
-    ├ Type ${PREFIX}menu for the full command list.
+    ├ Type ${PREFIX}menu toget my cmds.
     │
     ╰──────────⭑ ©vorterx
     `;
@@ -54,6 +54,6 @@ module.exports = {
       },
     };
 
-    await vorterx.sendMessage(message.from, messageOptions, { quoted: m });
+    await vorterx.sendMessage(m.from, messageOptions, { quoted: m });
   },
 };
