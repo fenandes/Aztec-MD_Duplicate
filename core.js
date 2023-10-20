@@ -24,8 +24,9 @@ async function startAztec() {
   vorterx.browser = Browsers.macOS("Desktop");
   vorterx.qrTimeout = undefined;
   
-  const { creds } = state || {};
-  
+  const authState = { 
+  creds: state && state.creds
+  };
   if (creds) {
   vorterx.loadAuthInfo(creds);
   }
