@@ -7,9 +7,7 @@ const moment = require('moment-timezone');
 const fs = require('fs');
 const qrcode = require('qrcode');
 const config = require('./config');
-const sessionId = config.sessionId;
 const { Collection } = require('discord.js');
-const Auth = require('./mangoes/mongo_connect/mongouse.js');
 const contact = require('./mangoes/contact.js');
 const botName = config.botName;
 const MessageHandler = require('./lib/message/vorterx');
@@ -81,10 +79,9 @@ async function startAztec() {
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
   
   const app = express();
-  app.get("/qr", async (req, res) => {
-  res.setHeader("content-type", "image/png");
-  res.send(await qrcode.toBuffer(qr_gen));
-  });
+  app.get('/', (req, res) => {
+  res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
+  })
 
   app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}/`);
