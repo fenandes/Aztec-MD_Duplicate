@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 let qr_gen = "invalid";
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
-  const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
+  const { state, saveState, clearState } = await getAuthFromDatabase();
 const { getAuthFromDatabase } = new Auth(sessionId);
 
   const vorterx = WAConnection({
