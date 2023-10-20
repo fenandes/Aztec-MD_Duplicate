@@ -18,6 +18,7 @@ let qr_gen = "invalid";
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
+const { getAuthFromDatabase } = new Auth(sessionId);
 
   const vorterx = WAConnection({
   logger: P({ level: 'silent' }),
