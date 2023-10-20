@@ -1,35 +1,33 @@
 const express = require('express');
-const {default: WAConnection,DisconnectReason,Browsers,fetchLatestBaileysVersion,makeInMemoryStore,delay,useMultiFileAuthState} = require('@adiwajshing/baileys');
+const { WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore } = require('@adiwajshing/baileys');
 const { Boom } = require('@hapi/boom');
-const P = require('pino');
-const { QuickDB } = require('quick.db');
+const pino = require('pino');
+const QuickDB = require('quick.db');
 const moment = require('moment-timezone');
 const fs = require('fs');
-const qrcode = require('qrcode');
-const config = require('./config');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const botName = config.botName;
 const { imageSync } = require('qr-image');
 const MessageHandler = require('./lib/message/vorterx');
-
-const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
 const PORT = process.env.PORT || 3000;
+const Redis = require('ioredis');
+const redis = new Redis(process.env.REDIS_URL);
 
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
-  const { state, saveCreds,clearState } = await useMultiFileAuthState('session')
-
+  const { state, saveCreds, clearState } = await useMultiFileAuthState('session');
 
   const vorterx = WAConnection();
-  vorterx.logger = P({ level: 'silent' });
+  vorterx.logger = pino({ level: 'silent' });
   vorterx.printQRInTerminal = false;
   vorterx.browser = Browsers.macOS("Desktop");
   vorterx.qrTimeout = undefined;
   vorterx.auth = state;
   vorterx.version = version;
 
-  store.bind(vorterx.ev);
+  store.bind(vorterx);
   vorterx.cmd = new Collection();
   vorterx.DB = new QuickDB();
   vorterx.contactDB = vorterx.DB.table('contacts');
@@ -37,25 +35,26 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.ev.on('creds.update', saveCreds);
-  vorterx.ev.on('connection.update', async (update) => {
-  const { connection, lastDisconnect } = update;
+  vorterx.on('auth-state.update', saveCreds);
+  vorterx.on('connection.update', async (update) => {
+    const { connection, lastDisconnect } = update;
     if (update.qr) {
-    vorterx.QR = imageSync(update.qr)
+    vorterx.QR = imageSync(update.qr);
+    await redis.set('qr_code', vorterx.QR.toString('base64'), 'EX', 1200); 
     }
     if (
       connection === 'close' ||
       connection === 'lost' ||
       connection === 'restart' ||
       connection === 'timeout'
-     ) {
+    ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
       console.log(`Connection ${connection}, reconnecting...`);
 
       if (reason === DisconnectReason.loggedOut) {
-      console.log('Device Logged Out, Please Delete Session and Scan Again.');
-      process.exit();
+        console.log('Device Logged Out, Please Delete Session and Scan Again.');
+        process.exit();
       }
 
       await startAztec();
@@ -76,28 +75,31 @@ async function startAztec() {
     }
   });
 
-  vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
-  
-  const app = express();
-  app.get('/', (req, res) => {
-  res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
-  })
+  vorterx.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
+  vorterx.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
 
-  app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}/`);
+ const app = express();
+ app.get('/', async (req, res) => {
+ const qrCode = await redis.get('qr_code');
+ if (!qrCode) {
+ res.status(404).send('QR code not available');
+ } else {
+  res.status(200).setHeader('Content-Type', 'image/png').send(Buffer.from(qrCode, 'base64'));
+  }
   });
 
-  await vorterx.connect();
- }
+app.listen(PORT, () => {
+console.log(`Server is running on port ${PORT}/`);
+});
 
+ await vorterx.connect();
+}
 async function readCommands(vorterx) {
-    const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
+  const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
+  for (const file of commandFiles) {
+  const command = require(`./Commands/${file}`);
+  vorterx.cmd.set(command.name,command);
+  }
+  }
 
-    for (const file of commandFiles) {
-    const command = require(`./Commands/${file}`);
-    vorterx.cmd.set(command.name, command);
-   }
-   }
-
-startAztec();
+  startAztec();
