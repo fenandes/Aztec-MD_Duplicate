@@ -14,6 +14,7 @@ const MessageHandler = require('./lib/message/vorterx');
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 const PORT = process.env.PORT || 3000;
 
+let qr_gen = "invalid";
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
