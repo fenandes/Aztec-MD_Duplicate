@@ -6,7 +6,7 @@ let config = {
   botName: process.env.BOTNAME || 'AZTEC MD',
   prefix: process.env.PREFIX || '.',
   owner_number: process.env.OWNER_NUMBER || '27686881509',   
-  sessionld: process.env.SESSION_ID || 'add something',
+  sessionId: process.env.SESSION_ID || 'add something',
   level_up: process.env.LEVEL_UP || '', //Set true or false or enable/ disable
   menu: process.env.MENU || '', //2 Is default menu aztec 0 is Suhail md menu 
   thumb: process.env.THUMB || 'https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg',
