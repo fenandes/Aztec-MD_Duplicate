@@ -41,7 +41,9 @@ async function startAztec() {
   vorterx.ev.on('creds.update', saveCreds);
   vorterx.ev.on('connection.update', async (update) => {
   const { connection, lastDisconnect } = update;
-
+    if (update.qr) {
+    vorterx.QR = imageSync(update.qr)
+    }
     if (
       connection === 'close' ||
       connection === 'lost' ||
