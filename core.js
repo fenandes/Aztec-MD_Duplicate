@@ -39,7 +39,7 @@ const { getAuthFromDatabase } = new Auth(sessionId);
   vorterx.ev.on('creds.update', saveCreds);
 
   vorterx.ev.on('connection.update', async (update) => {
-  const { connection, lastDisconnect } = update;
+  const { connection, lastDisconnect,qr } = update;
 
     if (
    connection === 'close' ||
@@ -73,6 +73,8 @@ const { getAuthFromDatabase } = new Auth(sessionId);
       console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
     }
   });
+  if (qr) {qr_gen = qr;
+    };
 
   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
 
