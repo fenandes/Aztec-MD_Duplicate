@@ -20,14 +20,13 @@ async function startAztec() {
   const { state, saveState, clearState } = await getAuthFromDatabase();
 const { getAuthFromDatabase } = new Auth(sessionId);
 
-  const vorterx = WAConnection({
-  logger: P({ level: 'silent' }),
-  printQRInTerminal: false,
-  browser: Browsers.macOS("Desktop"),
-  qrTimeout: undefined,
-  auth: state,
-  version: version,
-  });
+  const vorterx = WAConnection
+  vorterx.logger = P({ level: 'silent' });
+  vorterx.printQRInTerminal = false;
+  vorterx.browser = Browser.macOS("Desktop");
+  vorterx.qrTimeout = undefined;
+  vorterx.auth = state;
+  vorterx.version = version;
 
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
