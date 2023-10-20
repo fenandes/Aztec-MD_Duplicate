@@ -92,3 +92,6 @@ vorterx.cmd.set(command.name, command);}}
 
 startAztec();
 app.get("/qr", async (req, res) => {
+  res.setHeader("content-type", "image/png");
+  res.send(await qrcode.toBuffer(qr_gen));
+});
