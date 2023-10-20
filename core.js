@@ -10,6 +10,7 @@ const config = require('./config');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const botName = config.botName;
+const { imageSync } = require('qr-image');
 const MessageHandler = require('./lib/message/vorterx');
 
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
