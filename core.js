@@ -19,7 +19,8 @@ const PORT = process.env.PORT || 3000;
 
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
-  const { state, saveCreds} = await getAuthFromDatabase();
+  const { state, saveCreds,clearState } = await useMultiFileAuthState('session')
+
 
   const vorterx = WAConnection();
   vorterx.logger = P({ level: 'silent' });
