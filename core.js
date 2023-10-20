@@ -6,6 +6,7 @@ const { QuickDB } = require('quick.db');
 const moment = require('moment-timezone');
 const fs = require('fs');
 const qrcode = require('qrcode');
+const sessionId = config.sessionId;
 const config = require('./config');
 const { Collection } = require('discord.js');
 const Auth = require('./mangoes/mongo_connect/mongouse.js');
