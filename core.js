@@ -17,11 +17,9 @@ const MessageHandler = require('./lib/message/vorterx');
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 const PORT = process.env.PORT || 3000;
 
-let qr_gen = "invalid";
 async function startAztec() {
-  const { getAuthFromDatabase } = new Auth(sessionId);
   const { version } = await fetchLatestBaileysVersion();
-  const { state, saveState, clearState } = await getAuthFromDatabase();
+  const { state, saveCreds} = await getAuthFromDatabase();
 
   const vorterx = WAConnection();
   vorterx.logger = P({ level: 'silent' });
