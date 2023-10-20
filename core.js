@@ -7,6 +7,7 @@ const moment = require('moment-timezone');
 const fs = require('fs');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
+const config = require('./config.js');
 const botName = config.botName;
 const { imageSync } = require('qr-image');
 const MessageHandler = require('./lib/message/vorterx');
