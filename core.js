@@ -27,8 +27,8 @@ async function startAztec() {
   const authState = { 
   creds: state && state.creds
   };
-  if (creds) {
-  vorterx.loadAuthInfo(creds);
+  if(authState.creds) {
+  vorterx.loadAuthInfo(authState.creds);
   }
   vorterx.version = version;
   
