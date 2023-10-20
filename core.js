@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 3000;
 
 let qr_gen = "invalid";
 async function startAztec() {
+  const { getAuthFromDatabase } = new Auth(sessionId);
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveState, clearState } = await getAuthFromDatabase();
 
