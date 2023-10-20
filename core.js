@@ -1,5 +1,5 @@
 const express = require('express');
-const {default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const QuickDB = require('quick.db');
@@ -23,7 +23,9 @@ async function startAztec() {
   vorterx.printQRInTerminal = false;
   vorterx.browser = Browsers.macOS("Desktop");
   vorterx.qrTimeout = undefined;
-  vorterx.auth = state;
+  const { creds } = state;
+
+  vorterx.loadAuthInfo(creds);
   vorterx.version = version;
 
   store.bind(vorterx);
@@ -38,15 +40,15 @@ async function startAztec() {
   vorterx.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
-    vorterx.QR = imageSync(update.qr);
-    fs.writeFileSync('qr_code.png', vorterx.QR);
+      vorterx.QR = imageSync(update.qr);
+      fs.writeFileSync('qr_code.png', vorterx.QR);
     }
     if (
       connection === 'close' ||
       connection === 'lost' ||
       connection === 'restart' ||
       connection === 'timeout'
-     ) {
+    ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
       console.log(`Connection ${connection}, reconnecting...`);
@@ -79,27 +81,27 @@ async function startAztec() {
 
   const app = express();
   app.get('/', async (req, res) => {
-  if (!vorterx.QR) {
-  res.status(404).send('QR code not available');
-  } else {
-  fs.writeFileSync('qr_code.png', vorterx.QR);
-  res.status(200).send('QR code saved as qr_code.png');
-  }
- });
+    if (!vorterx.QR) {
+      res.status(404).send('QR code not available');
+    } else {
+      fs.writeFileSync('qr_code.png', vorterx.QR);
+      res.status(200).send('QR code saved as qr_code.png');
+    }
+  });
 
-app.listen(PORT, () => {
-console.log(`Server is running on port ${PORT}/`);
-});
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}/`);
+  });
 
-await vorterx.connect();
+  await vorterx.connect();
 }
 
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
-  for (const file of commandFiles) {
-  const command = require(`./Commands/${file}`);
-  vorterx.cmd.set(command.name, command);
+ for (const file of commandFiles) {
+ const command = require(`./Commands/${file}`);
+ vorterx.cmd.set(command.name, command);
   }
   }
-
-  startAztec();
+ 
+startAztec();
