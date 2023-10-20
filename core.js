@@ -8,6 +8,7 @@ const fs = require('fs');
 const qrcode = require('qrcode');
 const config = require('./config');
 const { Collection } = require('discord.js');
+const Auth = require("./mangoese//MongoAuth");
 const contact = require('./mangoes/contact.js');
 const botName = config.botName;
 const MessageHandler = require('./lib/message/vorterx');
