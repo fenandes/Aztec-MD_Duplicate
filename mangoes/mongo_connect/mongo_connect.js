@@ -1,5 +1,5 @@
 const { sessionSchema } = require("./connicto/SessionSchema.js");
-const { sessionSchema } = require("./connicto/core.js");
+//const { sessionSchema } = require("./connicto/core.js");
 
 module.exports = class Database {
   constructor() {}
