@@ -17,25 +17,28 @@ const PORT = process.env.PORT || 3000;
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
-
+  
   const vorterx = WAConnection();
   vorterx.logger = pino({ level: 'silent' });
   vorterx.printQRInTerminal = false;
   vorterx.browser = Browsers.macOS("Desktop");
   vorterx.qrTimeout = undefined;
-  const { creds } = state;
-
+  
+  const { creds } = state || {};
+  
+  if (creds) {
   vorterx.loadAuthInfo(creds);
+  }
   vorterx.version = version;
-
+  
   store.bind(vorterx);
   vorterx.cmd = new Collection();
   vorterx.DB = new QuickDB();
   vorterx.contactDB = vorterx.DB.table('contacts');
   vorterx.contact = contact;
-
+  
   await readCommands(vorterx);
-
+  
   vorterx.on('auth-state.update', saveCreds);
   vorterx.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
@@ -50,14 +53,14 @@ async function startAztec() {
       connection === 'timeout'
     ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-
+  
       console.log(`Connection ${connection}, reconnecting...`);
-
+  
       if (reason === DisconnectReason.loggedOut) {
         console.log('Device Logged Out, Please Delete Session and Scan Again.');
         process.exit();
       }
-
+  
       await startAztec();
     } else if (connection === 'close') {
       console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
@@ -75,10 +78,10 @@ async function startAztec() {
       console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
     }
   });
-
+  
   vorterx.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
   vorterx.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
-
+  
   const app = express();
   app.get('/', async (req, res) => {
     if (!vorterx.QR) {
@@ -88,20 +91,20 @@ async function startAztec() {
       res.status(200).send('QR code saved as qr_code.png');
     }
   });
-
+  
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}/`);
+  console.log(`Server is running on port ${PORT}/`);
   });
-
+  
   await vorterx.connect();
 }
 
 async function readCommands(vorterx) {
-  const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
- for (const file of commandFiles) {
- const command = require(`./Commands/${file}`);
- vorterx.cmd.set(command.name, command);
-  }
-  }
- 
+const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
+for (const file of commandFiles) {
+const command = require(`./Commands/${file}`);
+vorterx.cmd.set(command.name, command);
+}
+}
+
 startAztec();
