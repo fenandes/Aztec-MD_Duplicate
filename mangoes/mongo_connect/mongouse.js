@@ -1,4 +1,4 @@
-const { initAuthCreds, BufferJSON, proto } = require("adiwajishing/baileys");
+const { initAuthCreds, BufferJSON, proto } = require("@adiwajshing/baileys");
 const Database = require("./mongo_connect.js");
 
 module.exports = class Authenication {
