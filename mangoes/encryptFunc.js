@@ -7,11 +7,11 @@ let json = {};
 
 function loadLanguage() {
   return new Promise((resolve, reject) => {
-    let langFile = './connection/Images/' + config.LANG + '.json';
+    let langFile = './mangoes/connection/Images/' + config.LANG + '.json';
 
     fs.readFile(langFile, 'utf8', (err, data) => {
       if (err) {
-        fs.readFile('./connection/Images/VOR_TERX.json', 'utf8', (err, data) => {
+        fs.readFile('./mangoes/connection/Images/VO_TERX.json', 'utf8', (err, data) => {
           if (err) {
             reject(err);
           } else {
