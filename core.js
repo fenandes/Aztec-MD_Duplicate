@@ -19,14 +19,12 @@ async function startAztec() {
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
   const vorterx = WAConnection({
-  logger: pino({ level: 'silent' }),
-  printQRInTerminal: false,
-  browser: Browsers.macOS("Desktop"),
-  qrTimeout: undefined,
+  logger.level: 'silent',
+  browserDescription: Browsers.macOS("Desktop"),
+  qrTimeoutMs: undefined,
   auth: state,
   version
   });
-
   store.bind(vorterx);
   vorterx.cmd = new Collection();
   vorterx.DB = new QuickDB();
@@ -35,8 +33,8 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.addHandler('auth-state.update', saveCreds);
-  vorterx.addHandler('connection.update', async (update) => {
+  vorterx.on('auth-state.update', saveCreds);
+  vorterx.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
       vorterx.QR = imageSync(update.qr);
@@ -75,8 +73,8 @@ async function startAztec() {
     }
   });
 
-  vorterx.addHandler('message-new', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.addHandler('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
+  vorterx.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
+  vorterx.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
 
   const app = express();
   app.get('/', async (req, res) => {
@@ -98,9 +96,9 @@ async function startAztec() {
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
-  const command = require(`./Commands/${file}`);
-  vorterx.cmd.set(command.name, command);
+    const command = require(`./Commands/${file}`);
+    vorterx.cmd.set(command.name, command);
   }
-  }
+}
 
-  startAztec();
+startAztec();
