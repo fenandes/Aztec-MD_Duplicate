@@ -19,7 +19,7 @@ async function startAztec() {
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
   const vorterx = WAConnection({
-  logger.level: 'silent',
+  logger: pino({level: 'silent'}),
   browserDescription: Browsers.macOS("Desktop"),
   qrTimeoutMs: undefined,
   auth: state,
