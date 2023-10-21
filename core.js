@@ -1,5 +1,5 @@
 const express = require('express');
-const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const {default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const QuickDB = require('quick.db');
@@ -17,51 +17,46 @@ const PORT = process.env.PORT || 3000;
 async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
-  
-  const vorterx = WAConnection();
-  vorterx.logger = pino({ level: 'silent' });
-  vorterx.printQRInTerminal = false;
-  vorterx.browser = Browsers.macOS("Desktop");
-  vorterx.qrTimeout = undefined;
-  
-  const authState = { 
-  creds: state && state.creds
-  };
-  if(authState.creds) {
-  vorterx.loadAuthInfo(authState.creds);
-  }
-  vorterx.version = version;
-  
+
+  const vorterx = WAConnection({
+  logger:pino({ level: 'silent' }),
+  printQRInTerminal: false,
+  browser: Browsers.macOS("Desktop"),
+  qrTimeout: undefined,
+  auth: state,
+  version: version,
+  });
+
   store.bind(vorterx);
   vorterx.cmd = new Collection();
   vorterx.DB = new QuickDB();
   vorterx.contactDB = vorterx.DB.table('contacts');
   vorterx.contact = contact;
-  
+
   await readCommands(vorterx);
-  
+
   vorterx.on('auth-state.update', saveCreds);
   vorterx.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
-      vorterx.QR = imageSync(update.qr);
-      fs.writeFileSync('qr_code.png', vorterx.QR);
+    vorterx.QR = imageSync(update.qr);
+    fs.writeFileSync('qr_code.png', vorterx.QR);
     }
     if (
       connection === 'close' ||
       connection === 'lost' ||
       connection === 'restart' ||
       connection === 'timeout'
-    ) {
+     ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-  
+
       console.log(`Connection ${connection}, reconnecting...`);
-  
+
       if (reason === DisconnectReason.loggedOut) {
         console.log('Device Logged Out, Please Delete Session and Scan Again.');
         process.exit();
       }
-  
+
       await startAztec();
     } else if (connection === 'close') {
       console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
@@ -79,33 +74,33 @@ async function startAztec() {
       console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
     }
   });
-  
+
   vorterx.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
   vorterx.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
-  
+
   const app = express();
   app.get('/', async (req, res) => {
-    if (!vorterx.QR) {
-      res.status(404).send('QR code not available');
-    } else {
-      fs.writeFileSync('qr_code.png', vorterx.QR);
-      res.status(200).send('QR code saved as qr_code.png');
-    }
-  });
-  
-  app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}/`);
-  });
-  
-  await vorterx.connect();
+  if (!vorterx.QR) {
+  res.status(404).send('QR code not available');
+  } else {
+  fs.writeFileSync('qr_code.png', vorterx.QR);
+  res.status(200).send('QR code saved as qr_code.png');
+  }
+ });
+
+app.listen(PORT, () => {
+console.log(`Server is running on port ${PORT}/`);
+});
+
+await vorterx.connect();
 }
 
 async function readCommands(vorterx) {
-const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
-for (const file of commandFiles) {
-const command = require(`./Commands/${file}`);
-vorterx.cmd.set(command.name, command);
-}
-}
+  const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
+  for (const file of commandFiles) {
+  const command = require(`./Commands/${file}`);
+  vorterx.cmd.set(command.name, command);
+  }
+  }
 
-startAztec();
+  startAztec();
