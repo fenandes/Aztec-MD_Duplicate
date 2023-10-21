@@ -26,7 +26,7 @@ async function startAztec() {
   version
   });
   
-  store.bind(vorterx);
+  store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.DB = new QuickDB();
   vorterx.contactDB = vorterx.DB.table('contacts');
