@@ -7,7 +7,7 @@ module.exports = {
   category: 'Group',
   description: 'Detects and removes users who send bad words to gc',
   enabled: true,
-  async xstart(vorterx, m, { xReact, xReply, text, args, isAdmin, isGroup, isBotAdmin }) {
+  async xstart(vorterx, m, { xReact, xReply, text, args, isGroup, isBotAdmin }) {
    
     if (!isGroup) {
     await xReact('😐'); return m.reply('Im sorry but this cmd is for Admins only');
