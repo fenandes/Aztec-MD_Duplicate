@@ -24,7 +24,7 @@ async function startAztec() {
   browser: Browsers.macOS("Desktop"),
   qrTimeout: undefined,
   auth: state,
-  version: version,
+  version
   });
 
   store.bind(vorterx);
