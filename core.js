@@ -100,5 +100,6 @@ async function readCommands(vorterx) {
     const command = require(`./Commands/${file}`);
     vorterx.cmd.set(command.name, command);
  }
+         }
 
 startAztec();
