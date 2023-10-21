@@ -4,6 +4,7 @@
 
 const { getBuffer } = require('../mangoes/myFunc.js');
 const { AptoideScraper } = require('aptoide-scraper');
+const jimp = require('jimp');
 const config = require('../config.js');
 
 module.exports = {
