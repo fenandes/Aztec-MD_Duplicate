@@ -40,7 +40,7 @@ async function Decent() {
     let LangG = getString('config');
     displayMessage('Loading ' + config.LANG + ' language...');
   } catch (error) {
-    console.error('Failed to load language for Aztec:', error);
+    console.error('Failed to load language:', error);
   }
 }
 
