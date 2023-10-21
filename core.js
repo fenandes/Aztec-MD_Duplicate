@@ -1,5 +1,5 @@
 const express = require('express');
-const {default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const QuickDB = require('quick.db');
@@ -19,11 +19,11 @@ async function startAztec() {
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
   const vorterx = WAConnection({
-  logger:pino({ level: 'silent' }),
-  printQRInTerminal: false,
+  logger: pino({ level: 'silent' }),
+  printQRInTerminal = false,
   browser: Browsers.macOS("Desktop"),
   qrTimeout: undefined,
-  auth: state,
+  authInfo: state,
   version
   });
 
@@ -35,19 +35,19 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.ev.on('auth-state.update', saveCreds);
-  vorterx.ev.on('connection.update', async (update) => {
+  vorterx.addHandler('auth-state.update', saveCreds);
+  vorterx.addHandler('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
-    vorterx.QR = imageSync(update.qr);
-    fs.writeFileSync('qr_code.png', vorterx.QR);
+      vorterx.QR = imageSync(update.qr);
+      fs.writeFileSync('qr_code.png', vorterx.QR);
     }
     if (
       connection === 'close' ||
       connection === 'lost' ||
       connection === 'restart' ||
       connection === 'timeout'
-     ) {
+    ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
       console.log(`Connection ${connection}, reconnecting...`);
@@ -75,24 +75,24 @@ async function startAztec() {
     }
   });
 
-  vorterx.ev.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.ev.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
+  vorterx.addHandler('message-new', async (messages) => await MessageHandler(messages, vorterx));
+  vorterx.addHandler('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
 
   const app = express();
   app.get('/', async (req, res) => {
-  if (!vorterx.QR) {
-  res.status(404).send('QR code not available');
-  } else {
-  fs.writeFileSync('qr_code.png', vorterx.QR);
-  res.status(200).send('QR code saved as qr_code.png');
-  }
- });
+    if (!vorterx.QR) {
+      res.status(404).send('QR code not available');
+    } else {
+      fs.writeFileSync('qr_code.png', vorterx.QR);
+      res.status(200).send('QR code saved as qr_code.png');
+    }
+  });
 
-app.listen(PORT, () => {
-console.log(`Server is running on port ${PORT}/`);
-});
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}/`);
+  });
 
-await vorterx.connect();
+  await vorterx.connect();
 }
 
 async function readCommands(vorterx) {
