@@ -20,7 +20,7 @@ async function startAztec() {
 
   const vorterx = WAConnection({
   logger: pino({ level: 'silent' }),
-  printQRInTerminal = false,
+  printQRInTerminal: false,
   browser: Browsers.macOS("Desktop"),
   qrTimeout: undefined,
   authInfo: state,
