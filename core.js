@@ -92,9 +92,9 @@ async function startAztec() {
   await vorterx.connect();
 }
 async function readCommands(vorterx) {
-  const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
+  const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
-    const command = require(`./Commands/${file}`);
+    const command = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
   }
 }
