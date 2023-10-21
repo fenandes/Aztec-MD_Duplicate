@@ -37,7 +37,7 @@ async function Decent() {
   try {
     const jsonData = await loadLanguage();
     json = jsonData;
-    let LangG = getString('config');
+    let LangG = getString('../config');
     displayMessage('Loading ' + config.LANG + ' language...');
   } catch (error) {
     console.error('Failed to load language:', error);
@@ -47,7 +47,7 @@ async function Decent() {
 Decent();
 
 function cou_ntry() {
-  let LangG = getString('config');
+  let LangG = getString('../config');
   return LangG;
 }
 
