@@ -1,5 +1,5 @@
 const express = require('express');
-const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const QuickDB = require('quick.db');
@@ -26,7 +26,7 @@ async function startAztec() {
   version
   });
   
-  store.bind(vorterx);
+ store.bind(vorterx);
   vorterx.cmd = new Collection();
   vorterx.DB = new QuickDB();
   vorterx.contactDB = vorterx.DB.table('contacts');
@@ -34,18 +34,18 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.addHandler('auth-state.update', saveCreds);
-  vorterx.addHandler('connection.update', async (update) => {
+  vorterx.addHandler('auth-state-update', saveCreds);
+  vorterx.addHandler('connection-update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
       vorterx.QR = imageSync(update.qr);
       fs.writeFileSync('qr_code.png', vorterx.QR);
     }
     if (
-      connection === 'close' ||
-      connection === 'lost' ||
-      connection === 'restart' ||
-      connection === 'timeout'
+      connection === DisconnectReason.close ||
+      connection === DisconnectReason.lost ||
+      connection === DisconnectReason.restart ||
+      connection === DisconnectReason.timeout
     ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
@@ -57,16 +57,16 @@ async function startAztec() {
       }
 
       await startAztec();
-    } else if (connection === 'close') {
+    } else if (connection === DisconnectReason.close) {
       console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
       await startAztec();
-    } else if (connection === 'lost') {
+    } else if (connection === DisconnectReason.lost) {
       console.log(`[ 🦅AZTEC ] Connection Lost from Server, reconnecting...`);
       await startAztec();
-    } else if (connection === 'restart') {
+    } else if (connection === DisconnectReason.restart) {
       console.log(`[ 🦅AZTEC ] Server has just started...`);
       await startAztec();
-    } else if (connection === 'timeout') {
+    } else if (connection === DisconnectReason.timeout) {
       console.log(`[ 🐲 AZTEC ] Connection Timed Out, Trying to Reconnect...`);
       await startAztec();
     } else {
@@ -93,13 +93,12 @@ async function startAztec() {
 
   await vorterx.connect();
 }
-
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
     const command = require(`./Commands/${file}`);
     vorterx.cmd.set(command.name, command);
- }
-         }
+  }
+}
 
 startAztec();
