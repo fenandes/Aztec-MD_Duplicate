@@ -1,5 +1,5 @@
 const express = require('express');
-const {default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const QuickDB = require('quick.db');
@@ -19,13 +19,13 @@ async function startAztec() {
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
   const vorterx = WAConnection({
-  logger: pino({level: 'silent'}),
-  browserDescription: Browsers.macOS("Desktop"),
-  qrTimeoutMs: undefined,
-  auth: state,
-  version
+    logger: pino({ level: 'silent' }),
+    browserDescription: Browsers.macOS("Desktop"),
+    qrTimeoutMs: undefined,
+    auth: state,
+    version
   });
-  
+
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
@@ -75,6 +75,8 @@ async function startAztec() {
   vorterx.ev.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
   vorterx.ev.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
 
+  await vorterx.connect();
+
   const app = express();
   app.get('/', async (req, res) => {
     if (!vorterx.QR) {
@@ -88,15 +90,14 @@ async function startAztec() {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}/`);
   });
-
-  await vorterx.connect();
 }
+
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
   }
-}
+  }
 
-startAztec();
+  startAztec(); 
