@@ -23,7 +23,7 @@ async function startAztec() {
   printQRInTerminal: false,
   browser: Browsers.macOS("Desktop"),
   qrTimeout: undefined,
-  authInfo: state,
+  auth: state,
   version
   });
 
