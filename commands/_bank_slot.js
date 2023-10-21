@@ -1,5 +1,4 @@
 const fs = require("fs");
-const userName = m.pushName;
 
 module.exports = {
   name: "bank",
@@ -27,7 +26,7 @@ module.exports = {
     }
 
     await vorterx.sendMessage(m.from,{image: fs.readFileSync("./lib/images/bank.png"),caption: `*╭────❰* *BANK-SERVICE*\n
-        *❒* *AUTHOR* *${userName}*\n
+        *❒* *AUTHOR* *${m.pushName}*\n
         *❒* *BANK BALANCE*: *${balance.bank}/${balance.bankCapacity}*\n
         *❒* *WEALTH*: *${role}*\n
         *╰─────────────⭓*\n`, },{ quoted: m });
