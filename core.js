@@ -75,8 +75,6 @@ async function startAztec() {
   vorterx.ev.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
   vorterx.ev.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
 
-  await vorterx.connect();
-
   const app = express();
   app.get('/', async (req, res) => {
     if (!vorterx.QR) {
@@ -98,6 +96,6 @@ async function readCommands(vorterx) {
     const command = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
   }
-  }
+}
 
-  startAztec(); 
+startAztec();
