@@ -53,7 +53,7 @@ function cou_ntry() {
 
 function aztec_images() {
   return new Promise((resolve, reject) => {
-    let LangG = getString('config');
+    let LangG = getString('../config');
     let max_up = [
       `${LangG.image1}`,
       `${LangG.image2}`,
