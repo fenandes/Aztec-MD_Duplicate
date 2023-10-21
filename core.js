@@ -35,8 +35,8 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.on('auth-state.update', saveCreds);
-  vorterx.on('connection.update', async (update) => {
+  vorterx.ev.on('auth-state.update', saveCreds);
+  vorterx.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
     vorterx.QR = imageSync(update.qr);
@@ -75,8 +75,8 @@ async function startAztec() {
     }
   });
 
-  vorterx.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
+  vorterx.ev.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
+  vorterx.ev.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
 
   const app = express();
   app.get('/', async (req, res) => {
