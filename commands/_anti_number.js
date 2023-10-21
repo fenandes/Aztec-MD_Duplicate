@@ -4,7 +4,7 @@ module.exports = {
   category: "Group",
 
   on: false,
-  async xstart(vorterx, m, { text,isAdmin,isBotAdmin,xReact }) {
+  async xstart(vorterx, m, { text,isBotAdmin,xReact }) {
     
     const isGroupMessage = m.isGroupMsg;
     const isAdmin = isGroupMessage ? await vorterx.isGroupAdmin(m.from) : true;
