@@ -7,7 +7,7 @@ let json = {};
 
 function loadLanguage() {
   return new Promise((resolve, reject) => {
-    let langFile = './connection/Images/' + config.LANG + '.json';
+    let langFile = '../connection/Images/' + config.LANG + '.json';
 
     fs.readFile(langFile, 'utf8', (err, data) => {
       if (err) {
