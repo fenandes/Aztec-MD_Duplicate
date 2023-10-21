@@ -28,7 +28,6 @@ async function startAztec() {
   
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
-  vorterx.contactDB = vorterx.DB.table('contacts');
   vorterx.contact = contact;
 
   await readCommands(vorterx);
