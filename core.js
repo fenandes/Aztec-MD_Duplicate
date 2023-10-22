@@ -20,19 +20,6 @@ const botName = config.botName;
 const { imageSync } = require('qr-image');
 const MessageHandler = require('./lib/message/vorterx');
 
-async function generateQRCode(connection) {
-  return new Promise((resolve, reject) => {
-    connection.ev.on('qr', (qr) => {
-      const QR = imageSync(qr);
-      fs.writeFileSync('qr_code.png', QR);
-      resolve(QR);
-    });
-    connection.ev.on('connection-created', () => {
-      reject(new Error('Failed to generate QR code'));
-    });
-  });
-}
-
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
   const { version } = await fetchLatestBaileysVersion();
