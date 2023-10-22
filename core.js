@@ -33,6 +33,7 @@ async function generateQRCode(connection) {
 }
 
 async function startAztec() {
+  const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
