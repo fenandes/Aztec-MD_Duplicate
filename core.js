@@ -18,8 +18,6 @@ const config = require('./config.js');
 const botName = config.botName;
 const { imageSync } = require('qr-image');
 const MessageHandler = require('./lib/message/vorterx');
-const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
-const PORT = process.env.PORT || 3000;
 
 async function generateQRCode(connection) {
   return new Promise((resolve, reject) => {
@@ -38,7 +36,7 @@ async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
-  const vorterx = WAConnection({
+   const vorterx = WAConnection({
     printQRInTerminal: true,
     logger: pino({ level: 'silent' }),
     browserDescription: Browsers.macOS("Desktop"),
@@ -98,16 +96,18 @@ async function startAztec() {
   );
 
   const app = express();
+  const PORT = process.env.PORT || 3000;
+
   app.get('/', async (req, res) => {
     if (!vorterx.QR) {
       res.status(404).send('QR code not available');
     } else {
-      res.status(200).send('QR code saved as qr_code.png');
+      res.sendFile('qr_code.png', { root: __dirname });
     }
   });
 
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}/`);
+    console.log(`Server is running on port ${PORT}`);
   });
 }
 
