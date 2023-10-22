@@ -44,8 +44,9 @@ async function startAztec() {
   vorterx.ev.on('connection-update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
-      vorterx.QR = await generateQRCode(vorterx);
-    }
+      console.log(`[${chalk.red('!')}]`, 'white')
+      vorterx.QR = imageSync(update.qr)
+      }
     if (
       connection === DisconnectReason.close ||
       connection === DisconnectReason.lost ||
