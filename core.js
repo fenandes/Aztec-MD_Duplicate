@@ -38,7 +38,7 @@ async function startAztec() {
     const command = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
     }
-  }
+   }
 
   readcommands();
 
@@ -65,31 +65,29 @@ async function startAztec() {
       startAztec();
       } else {
       console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
+      }
      }
-    }
 
     if (connection === "open") {
     const aztec_text = `\`\`\`Vorterx connected \n\nVERSION : ${require(__dirname + "/package.json").version}\nBOTNAME: ${botName}\nPREFIX: ${addHandlers}\`\`\``;
-    vorterx.sendMessage(vorterx.user.id, {image: {url: aztec_image}, { text: aztec_text }});
+    vorterx.sendMessage(vorterx.user.id, { image: { url: aztec_image }, text: aztec_text });
     }
-    if (update.qr) {
-    vorterx.QR = qr.imageSync(update.qr);
+    if (update.qr) {vorterx.QR = qr.imageSync(update.qr);
     }
    });
 
-  app.get("/", (req, res) => {
-  res.end(vorterx.QR);
+  const app = express();
+  const PORT = process.env.PORT || 3000;
+
+  app.get("/", (req, res) => {res.end(vorterx.QR);
   });
 
   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
-}
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  });
+  }
 
-app.listen(PORT, () => {
-console.log(`Server is running on port ${PORT}`);
-});
-
-startAztec();
+  startAztec();                                          
