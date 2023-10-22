@@ -34,14 +34,14 @@ async function startAztec() {
     version
   });
 
-  store.bind(vorterx.addListener);
+  store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
 
   await readCommands(vorterx);
 
-  vorterx.ev.addListener('auth-state-update', saveCreds);
-  vorterx.ev.addListener('connection-update', async (update) => {
+  vorterx.ev.on('auth-state-update', saveCreds);
+  vorterx.ev.on('connection-update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
       vorterx.QR = imageSync(update.qr);
@@ -80,12 +80,12 @@ async function startAztec() {
     }
   });
 
-  vorterx.ev.addListener('message-new', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.ev.addListener('contacts-received', async ({ updatedContacts }) =>
+  vorterx.ev.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
+  vorterx.ev.on('contacts-received', async ({ updatedContacts }) =>
     await contact.saveContacts(updatedContacts, vorterx)
   );
 
-  vorterx.ev.addListener('connection-created', async () => {
+  vorterx.ev.on('connection-created', async () => {
     if (!vorterx.QR) {
       console.log('QR code not available');
     } else {
