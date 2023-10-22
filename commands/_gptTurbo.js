@@ -1,3 +1,6 @@
+//BY VORTERX
+//@DiegosonTech
+
 module.exports = {
   name: "gpt",
   alias: ["ai", "openai", "chatgpt"],
