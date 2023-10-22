@@ -36,7 +36,7 @@ async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
-  const vorterx = new WAConnection({
+  const vorterx = WAConnection({
     printQRInTerminal: true,
     logger: pino({ level: 'silent' }),
     browserDescription: Browsers.macOS("Desktop"),
