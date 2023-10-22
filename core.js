@@ -36,7 +36,7 @@ async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
-   const vorterx = WAConnection({
+  const vorterx = new WAConnection({
     printQRInTerminal: true,
     logger: pino({ level: 'silent' }),
     browserDescription: Browsers.macOS("Desktop"),
@@ -45,6 +45,7 @@ async function startAztec() {
     version
   });
 
+  const store = new QuickDB();
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
@@ -64,14 +65,14 @@ async function startAztec() {
       connection === DisconnectReason.timeout
     ) {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-
+  
       console.log(`Connection ${connection}, reconnecting...`);
-
+  
       if (reason === DisconnectReason.loggedOut) {
         console.log('Device Logged Out, Please Delete Session and Scan Again.');
         process.exit();
       }
-
+  
       await startAztec();
     } else if (connection === DisconnectReason.close) {
       console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
