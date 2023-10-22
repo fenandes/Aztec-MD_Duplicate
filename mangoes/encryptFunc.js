@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const Config = require('../config');
 const config = require('../config');
 
 let json = {};
