@@ -1,4 +1,3 @@
-const app = require("express");
 const {default: VorterxConnection,DisconnectReason,Browsers,delay,fetchLatestBaileysVersion,makeInMemoryStore,useMultiFileAuthState} = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
@@ -9,8 +8,7 @@ const config = require('./config.js');
 const botName = config.botName;
 const qr = require("qr-image");
 const contact = require('./mangoes/contact.js');
-const MessageHandler = require('./lib/message/vorterx.js');
-const PORT = process.env.PORT || 3000;
+const MessageHandler = require('./lib/message/vorterx');
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
@@ -19,7 +17,7 @@ async function startAztec() {
 
   const vorterx = VorterxConnection({
     logger: P({ level: "silent" }),
-    printQRInTerminal: false,
+    printQRInTerminal: true,
     browser: Browsers.macOS("Desktop"),
     qrTimeoutMs: undefined,
     auth: state,
@@ -80,7 +78,10 @@ async function startAztec() {
 
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
   }
+  const app = express();
+  const PORT = process.env.PORT || 3000;
+  
+  app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);});
 
   startAztec();
-
-  app.listen(PORT);
