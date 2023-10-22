@@ -8,7 +8,7 @@ let json = {};
 
 function loadLanguage() {
   return new Promise((resolve, reject) => {
-    let langFile = './mangoes/connection/Images/' + Config.LANG + '.json';
+    let langFile = './mangoes/connection/Images/' + config.LANG + '.json';
 
     fs.readFile(langFile, 'utf8', (err, data) => {
       if (err) {
@@ -39,7 +39,7 @@ async function Decent() {
     const jsonData = await loadLanguage();
     json = jsonData;
     let LangG = getString('Config');
-    displayMessage('Loading ' + Config.LANG + ' language...');
+    displayMessage('Loading ' + config.LANG + ' language...');
   } catch (error) {
     console.error('Failed to load language:', error);
   }
