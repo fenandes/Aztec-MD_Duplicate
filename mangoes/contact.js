@@ -5,11 +5,11 @@
       return { username, jid };
       };
   
-      const saveContacts = async (contacts, dsan) => {
+      const saveContacts = async (contacts, vorterx) => {
       await Promise.all(
       contacts.map(async (contact) => {
       if (contact.id) {
-      await dsan.contactDB.set(contact.id, contact.notify ?? '');
+      await vorterx.contactDB.set(contact.id, contact.notify ?? '');
         }
         })
         );
