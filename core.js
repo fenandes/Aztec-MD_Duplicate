@@ -10,7 +10,7 @@ const {
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const P = require('pino');
-const chalk = require*'chalk'):
+const chalk = require('chalk'):
 const QuickDB = require('quick.db');
 const moment = require('moment-timezone');
 const fs = require('fs');
