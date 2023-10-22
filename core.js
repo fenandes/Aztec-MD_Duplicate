@@ -1,16 +1,9 @@
 const express = require('express');
-const {
-  default: WAConnection,
-  DisconnectReason,
-  Browsers,
-  fetchLatestBaileysVersion,
-  makeInMemoryStore,
-  useMultiFileAuthState,
-} = require('@whiskeysockets/baileys');
+const {default: WAConnection,DisconnectReason,Browsers,fetchLatestBaileysVersion,makeInMemoryStore,useMultiFileAuthState,} = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const P = require('pino');
-const chalk = require('chalk'):
+const chalk = require('chalk');
 const QuickDB = require('quick.db');
 const moment = require('moment-timezone');
 const fs = require('fs');
