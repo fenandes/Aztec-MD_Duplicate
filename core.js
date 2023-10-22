@@ -34,7 +34,7 @@ async function startAztec() {
     version
   });
 
-  store.bind(vorterx.ev);
+  store.bind(vorterx.addListener);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
 
