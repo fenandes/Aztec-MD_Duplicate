@@ -38,7 +38,7 @@ async function Decent() {
   try {
     const jsonData = await loadLanguage();
     json = jsonData;
-    let LangG = getString('config');
+    let LangG = getString('Config');
     displayMessage('Loading ' + Config.LANG + ' language...');
   } catch (error) {
     console.error('Failed to load language:', error);
@@ -48,13 +48,13 @@ async function Decent() {
 Decent();
 
 function cou_ntry() {
-  let LangG = getString('config');
+  let LangG = getString('Config');
   return LangG;
 }
 
 function aztec_images() {
   return new Promise((resolve, reject) => {
-    let LangG = getString('config');
+    let LangG = getString('Config');
     let max_up = [
       `${LangG.image1}`,
       `${LangG.image2}`,
