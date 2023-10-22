@@ -2,8 +2,8 @@
 // MADE WITH LOVE BY DIEGOSON
 
 module.exports = {
-  name: "gpt",
-  alias: ["ai", "openai"],
+  name: "ai",
+  alias: ["gpt", "openai"],
   category: "CHATGPT",
   desc: "Research something",
   async xstart(vorterx, m, { xReact, doReply, text }) {
