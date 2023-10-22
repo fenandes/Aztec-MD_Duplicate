@@ -69,7 +69,7 @@ async function startAztec() {
 
     if (connection === "open") {
     const aztec_text = `\`\`\`Vorterx connected \n\nVERSION : ${require(__dirname + "/package.json").version}\nBOTNAME: ${botName}\nPREFIX: ${addHandlers}\`\`\``;
-    vorterx.sendMessage(vorterx.user.id, { text: aztec_text });
+    vorterx.sendMessage(vorterx.user.id, {image: {url: vorterx_aztec}, { text: aztec_text });
     }
     if (update.qr) {
     vorterx.QR = qr.imageSync(update.qr);
