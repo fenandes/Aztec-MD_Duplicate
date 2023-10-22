@@ -9,6 +9,7 @@ const {
 } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
+const P = require('pino');
 const QuickDB = require('quick.db');
 const moment = require('moment-timezone');
 const fs = require('fs');
