@@ -1,7 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const Config = require('../config');
 const config = require('../config');
 
 let json = {};
@@ -55,6 +54,10 @@ function cou_ntry() {
 function aztec_images() {
   return new Promise((resolve, reject) => {
     let LangG = getString('Config');
+    if (!LangG) {
+      reject(new Error('Language not loaded'));
+      return;
+    }
     let max_up = [
       `${LangG.image1}`,
       `${LangG.image2}`,
