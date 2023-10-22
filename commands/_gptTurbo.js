@@ -6,7 +6,7 @@ module.exports = {
   async xstart(vorterx,m,{ text, xReact, args }) {
     
     if (!text) {  
-    await xReact('❌'); return m.reply(`\`\`\`Provide me a query ex who made Aztec\`\`\``);
+    await xReact('❌'); return m.reply(`*Provide me a query ex who made Aztec*`);
     }
 
     try {
