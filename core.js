@@ -88,13 +88,9 @@ async function startAztec() {
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  app.get('/', async (req, res) => {
-    if (!vorterx.QR) {
-      res.status(404).send('QR code not available');
-    } else {
-      res.sendFile('qr_code.png', { root: __dirname });
-    }
-  });
+  app.get('/', (req, res) => {
+  res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
+  })
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
