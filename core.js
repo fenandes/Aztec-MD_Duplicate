@@ -100,12 +100,14 @@ async function startAztec() {
     res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR);
   });
 
+  app.get('/favicon.ico', (req, res) => {
+    res.status(204).end();
+  });
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-}
-
-async function generateQRImage(qrData) {
+  async function generateQRImage(qrData) {
   const canvas = createCanvas(300, 300);
   const ctx = canvas.getContext('2d');
   const qrImage = await loadImage(qrData);
@@ -116,9 +118,9 @@ async function generateQRImage(qrData) {
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    vorterx.cmd.set(command.name, command);
+  const command = require(`./commands/${file}`);
+  vorterx.cmd.set(command.name, command);
   }
-}
+ }
 
 startAztec();
