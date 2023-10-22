@@ -1,13 +1,13 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const config = require('../../config.js');
+const config = require('../config');
 
 let json = {};
 
 function loadLanguage() {
   return new Promise((resolve, reject) => {
-    let langFile = './mangoes/connection/Images/' + config.LANG + '.json';
+    let langFile = './mangoes/connection/Images/' + Config.LANG + '.json';
 
     fs.readFile(langFile, 'utf8', (err, data) => {
       if (err) {
@@ -37,8 +37,8 @@ async function Decent() {
   try {
     const jsonData = await loadLanguage();
     json = jsonData;
-    let LangG = getString('../../config.js');
-    displayMessage('Loading ' + config.LANG + ' language...');
+    let LangG = getString('config');
+    displayMessage('Loading ' + Config.LANG + ' language...');
   } catch (error) {
     console.error('Failed to load language:', error);
   }
@@ -47,13 +47,13 @@ async function Decent() {
 Decent();
 
 function cou_ntry() {
-  let LangG = getString('../../config.js');
+  let LangG = getString('config');
   return LangG;
 }
 
 function aztec_images() {
   return new Promise((resolve, reject) => {
-    let LangG = getString('../../config.js');
+    let LangG = getString('config');
     let max_up = [
       `${LangG.image1}`,
       `${LangG.image2}`,
