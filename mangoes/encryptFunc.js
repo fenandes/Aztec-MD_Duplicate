@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const config = require('../config.js');
+const config = require('../../config.js');
 
 let json = {};
 
@@ -37,7 +37,7 @@ async function Decent() {
   try {
     const jsonData = await loadLanguage();
     json = jsonData;
-    let LangG = getString('../config');
+    let LangG = getString('../../config.js');
     displayMessage('Loading ' + config.LANG + ' language...');
   } catch (error) {
     console.error('Failed to load language:', error);
@@ -47,13 +47,13 @@ async function Decent() {
 Decent();
 
 function cou_ntry() {
-  let LangG = getString('../config');
+  let LangG = getString('../../config.js');
   return LangG;
 }
 
 function aztec_images() {
   return new Promise((resolve, reject) => {
-    let LangG = getString('../config');
+    let LangG = getString('../../config.js');
     let max_up = [
       `${LangG.image1}`,
       `${LangG.image2}`,
