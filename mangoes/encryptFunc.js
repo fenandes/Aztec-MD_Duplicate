@@ -39,6 +39,9 @@ async function Decent() {
     json = jsonData;
     let LangG = getString('Config');
     displayMessage('Loading ' + config.LANG + ' language...');
+    
+    // Call the displayAztecPicture function here
+    displayAztecPicture();
   } catch (error) {
     console.error('Failed to load language:', error);
   }
@@ -84,8 +87,6 @@ async function displayAztecPicture() {
     console.error('Failed to fetch the picture for Aztec:', error);
   }
 }
-
-displayAztecPicture();
 
 module.exports = {
   cou_ntry,
