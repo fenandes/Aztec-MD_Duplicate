@@ -45,7 +45,6 @@ async function startAztec() {
     version
   });
 
-  const store = new QuickDB(); // Create a new instance of QuickDB
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
