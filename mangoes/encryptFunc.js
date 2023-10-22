@@ -26,7 +26,7 @@ function loadLanguage() {
 }
 
 function getString(file) {
-  return json['STRINGS'][file];
+  return json && json['STRINGS'] && json['STRINGS'][file];
 }
 
 function displayMessage(message) {
@@ -38,9 +38,10 @@ async function Decent() {
     const jsonData = await loadLanguage();
     json = jsonData;
     let LangG = getString('Config');
+    if (!LangG) {
+      throw new Error('Language config not found');
+    }
     displayMessage('Loading ' + config.LANG + ' language...');
-    
-    // Call the displayAztecPicture function here
     displayAztecPicture();
   } catch (error) {
     console.error('Failed to load language:', error);
