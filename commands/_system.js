@@ -9,7 +9,7 @@ module.exports = {
   name: "system",
   description: "To check the system status",
   category: "user",
-  async xstart(vorterx, m, { xReact }) {
+  async xstart(vorterx, m, { xReact,text }) {
     const latensi = now() - now();
     await xReact("📟");
 
@@ -28,18 +28,18 @@ module.exports = {
 
     const formattedAztec = chalk.bold(aztec);
 
-    const templates = [
-      { name: "Template 1", text: formattedAztec },
-      { name: "Template 2", text: formattedAztec },
-      { name: "Template 3", text: formattedAztec },
-      { name: "Template 4", text: bubble(aztec, "blue") },
-      { name: "Template 5", text: bubble(aztec, "green") },
-      { name: "Template 6", text: bubble(aztec, "purple") },
+    const D3centX = [
+      { name: "selectAztec 1", text: formattedAztec },
+      { name: "selectAztec 2", text: formattedAztec },
+      { name: "selectAztec 3", text: formattedAztec },
+      { name: "selectAztec 4", text: bubble(aztec, "blue") },
+      { name: "selectAztec 5", text: bubble(aztec, "green") },
+      { name: "selectAztec 6", text: bubble(aztec, "purple") },
     ];
 
-    const selectedTemplate = templates[Math.floor(Math.random() * templates.length)];
+    const selectedAztec = D3centX[Math.floor(Math.random() * D3centX.length)];
 
     const img = `https://i.ibb.co/GnZ0J9K/IMG-20230723-WA0085.jpg`;
-    vorterx.sendMessage(m.from, { image: { url: img }, caption: selectedTemplate.text });
+    vorterx.sendMessage(m.from, { image: { url: img }, caption: selectedAztec.text });
   },
 };
