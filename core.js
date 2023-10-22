@@ -1,5 +1,12 @@
-const express = require('express');
-const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const express = require('express');const express = require('express');
+const {
+  default: WAConnection,
+  DisconnectReason,
+  Browsers,
+  fetchLatestBaileysVersion,
+  makeInMemoryStore,
+  useMultiFileAuthState,
+} = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const pino = require('pino');
 const QuickDB = require('quick.db');
@@ -33,8 +40,8 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.ev.on('auth-state-update', saveCreds);
-  vorterx.ev.on('connection-update', async (update) => {
+  vorterx.ev.addListener('auth-state-update', saveCreds);
+  vorterx.ev.addListener('connection-update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
       vorterx.QR = imageSync(update.qr);
@@ -73,15 +80,25 @@ async function startAztec() {
     }
   });
 
-  vorterx.ev.on('message-new', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.ev.on('contacts-received', async ({ updatedContacts }) => await contact.saveContacts(updatedContacts, vorterx));
+  vorterx.ev.addListener('message-new', async (messages) => await MessageHandler(messages, vorterx));
+  vorterx.ev.addListener('contacts-received', async ({ updatedContacts }) =>
+    await contact.saveContacts(updatedContacts, vorterx)
+  );
+
+  vorterx.ev.addListener('connection-created', async () => {
+    if (!vorterx.QR) {
+      console.log('QR code not available');
+    } else {
+      fs.writeFileSync('qr_code.png', vorterx.QR);
+      console.log('QR code saved as qr_code.png');
+    }
+  });
 
   const app = express();
   app.get('/', async (req, res) => {
     if (!vorterx.QR) {
       res.status(404).send('QR code not available');
     } else {
-      fs.writeFileSync('qr_code.png', vorterx.QR);
       res.status(200).send('QR code saved as qr_code.png');
     }
   });
@@ -94,7 +111,7 @@ async function startAztec() {
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    constcommand = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
   }
 }
