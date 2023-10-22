@@ -10,8 +10,7 @@ const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const config = require('./config.js');
 const botName = config.botName;
-const { imageSync } = require('qr-image');
-const MessageHandler = require('./lib/message/vorterx');
+const qrcode = require('qrcode');
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
@@ -86,16 +85,22 @@ async function startAztec() {
       console.log(`[🦅AZTEC] Connection message sent to ${vorterx.user.id}`);
     } catch (error) {
       console.error('[🦅AZTEC] Failed to send connection message:', error);
-    }
-
-    vorterx.QR = imageSync(vorterx.qr);
+                }
+    
+    qrcode.toDataURL(vorterx.qr, (err, url) => {
+      if (err) {
+        console.error('[🦅AZTEC] Failed to generate QR code:', err);
+        return;
+      }
+      vorterx.QR = url;
+    });
   });
 
   const app = express();
   const PORT = process.env.PORT || 3000;
 
   app.get('/', (req, res) => {
-    res.status(200).contentType('image/png').send(vorterx.QR);
+    res.status(200).contentType('text/html').send(`<img src="${vorterx.QR}" alt="QR Code" />`);
   });
 
   app.listen(PORT, () => {
@@ -105,12 +110,35 @@ async function startAztec() {
 
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
+
   for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
   }
 }
 
-startAztec().catch((error) => {
-  console.error('[🦅AZTEC] An error occurred while starting Aztec:', error);
-});
+async function MessageHandler(messages, vorterx) {
+  for (const message of messages) {
+    const { from, to, body, quotedMsg, mentionedIds } = message;
+    const [command, ...args] = body.trim().split(/\s+/);
+
+    if (command.startsWith(config.prefix)) {
+      const cmd = command.slice(config.prefix.length);
+      const commandFile = vorterx.cmd.get(cmd);
+
+      if (!commandFile) {
+        await vorterx.sendMessage(from, 'Command not found.', 'conversation');
+        return;
+      }
+
+      try {
+        await commandFile.execute({ vorterx, message, args });
+      } catch (error) {
+        console.error(`Error executing command: ${cmd}`, error);
+        await vorterx.sendMessage(from, 'An error occurred while executing the command.', 'conversation');
+      }
+    }
+  }
+}
+
+startAztec().catch((error) => console.error('Error starting Aztec:', error));
