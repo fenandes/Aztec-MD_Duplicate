@@ -36,7 +36,7 @@ async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
 
-  const vorterx = WAConnection({
+  const vorterx = new WAConnection({
     printQRInTerminal: true,
     logger: pino({ level: 'silent' }),
     browserDescription: Browsers.macOS("Desktop"),
@@ -45,7 +45,7 @@ async function startAztec() {
     version
   });
 
-  const store = new QuickDB.create();
+  const store = new QuickDB(); // Create a new instance of QuickDB
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
