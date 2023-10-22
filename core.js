@@ -34,6 +34,58 @@ async function startAztec() {
     version
   });
 
+  I apologize for the oversight. It seems that the `vorterx.QR` property is not being set correctly. To resolve this issue, we can modify the code to use a Promise-based approach for generating the QR code and setting the `vorterx.QR` property. Here's the updated code:
+
+```javascript
+const express = require('express');
+const {
+  default: WAConnection,
+  DisconnectReason,
+  Browsers,
+  fetchLatestBaileysVersion,
+  makeInMemoryStore,
+  useMultiFileAuthState,
+} = require('@whiskeysockets/baileys');
+const { Boom } = require('@hapi/boom');
+const pino = require('pino');
+const QuickDB = require('quick.db');
+const moment = require('moment-timezone');
+const fs = require('fs');
+const { Collection } = require('discord.js');
+const contact = require('./mangoes/contact.js');
+const config = require('./config.js');
+const botName = config.botName;
+const { imageSync } = require('qr-image');
+const MessageHandler = require('./lib/message/vorterx');
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
+const PORT = process.env.PORT || 3000;
+
+async function generateQRCode(connection) {
+  return new Promise((resolve, reject) => {
+    connection.ev.on('qr', (qr) => {
+      const QR = imageSync(qr);
+      fs.writeFileSync('qr_code.png', QR);
+      resolve(QR);
+    });
+    connection.ev.on('connection-created', () => {
+      reject(new Error('Failed to generate QR code'));
+    });
+  });
+}
+
+async function startAztec() {
+  const { version } = await fetchLatestBaileysVersion();
+  const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
+
+  const vorterx = WAConnection({
+    printQRInTerminal: true,
+    logger: pino({ level: 'silent' }),
+    browserDescription: Browsers.macOS("Desktop"),
+    qrTimeoutMs: undefined,
+    auth: state,
+    version
+  });
+
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
@@ -44,8 +96,7 @@ async function startAztec() {
   vorterx.ev.on('connection-update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
-      vorterx.QR = imageSync(update.qr);
-      fs.writeFileSync('qr_code.png', vorterx.QR);
+      vorterx.QR = await generateQRCode(vorterx);
     }
     if (
       connection === DisconnectReason.close ||
@@ -84,15 +135,6 @@ async function startAztec() {
   vorterx.ev.on('contacts-received', async ({ updatedContacts }) =>
     await contact.saveContacts(updatedContacts, vorterx)
   );
-
-  vorterx.ev.on('connection-created', async () => {
-    if (!vorterx.QR) {
-      console.log('QR code not available');
-    } else {
-      fs.writeFileSync('qr_code.png', vorterx.QR);
-      console.log('QR code saved as qr_code.png');
-    }
-  });
 
   const app = express();
   app.get('/', async (req, res) => {
