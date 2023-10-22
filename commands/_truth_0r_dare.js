@@ -32,8 +32,8 @@ module.exports = {
 
      await xReact(m, ['🆗', '❌']);
 
-     const reactionFilter = (reaction, user) => user.id === m.author.id && ['🆗', '❌'].includes(reaction.emoji.name);
-     const collected = await vorterx.awaitReactions(reactionFilter, { max: 1, time: 60000, errors: ['time'] });
+     const Aztecreactions = (reaction, user) => user.id === m.author.id && ['🆗', '❌'].includes(reaction.emoji.name);
+     const collected = await vorterx.awaitReactions(Aztecreactions, { max: 1, time: 60000, errors: ['time'] });
 
      const reaction = collected.first();
      if (reaction.emoji.name === '🆗') {
