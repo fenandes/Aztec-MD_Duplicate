@@ -10,7 +10,7 @@ const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const config = require('./config.js');
 const botName = config.botName;
-const { imageSync } = require('qr-image');
+const { createCanvas, loadImage } = require('canvas');
 const MessageHandler = require('./lib/message/vorterx');
 
 async function startAztec() {
@@ -26,7 +26,7 @@ async function startAztec() {
     auth: state,
     version
   });
-
+  
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contact = contact;
@@ -38,7 +38,8 @@ async function startAztec() {
     const { connection, lastDisconnect } = update;
     if (update.qr) {
       console.log(`[${chalk.red('!')}]`, 'white');
-      vorterx.QR = imageSync(update.qr);
+      const qrImage = await generateQRImage(update.qr);
+      vorterx.QR = qrImage;
     }
     if (
       connection === DisconnectReason.close ||
@@ -104,11 +105,19 @@ async function startAztec() {
   });
 }
 
+async function generateQRImage(qrData) {
+  const canvas = createCanvas(300, 300);
+  const ctx = canvas.getContext('2d');
+  const qrImage = await loadImage(qrData);
+  ctx.drawImage(qrImage, 0, 0, 300, 300);
+  return canvas.toBuffer('image/png');
+}
+
 async function readCommands(vorterx) {
   const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  vorterx.cmd.set(command.name, command);
+    const command = require(`./commands/${file}`);
+    vorterx.cmd.set(command.name, command);
   }
 }
 
