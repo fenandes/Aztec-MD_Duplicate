@@ -9,7 +9,7 @@ let config = {
   session_Id: process.env.SESSION_ID || 'add something',
   level_up: process.env.LEVEL_UP || '', //Set true or false or enable/disable
   menu: process.env.MENU || '', //2 is the default menu Aztec, 0 is Suhail MD menu
-  thumb: process.env.THUMB || 'https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg',
+  thumb: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
   neofetchOptions: {
     os: true,
