@@ -5,10 +5,10 @@
 //================
 
 const fs = require("fs");
-const BOTNAME = global.botName;
-const PREFIX = global.prefix;
+const config = require('../config.js');
+const BOTNAME = config.botName;
+const PREFIX = config.prefix;
 const { aztec_images } = require('../mangoes/encryptFunc.js');
-require("../config");
 
 module.exports = {
   name: 'alive',
