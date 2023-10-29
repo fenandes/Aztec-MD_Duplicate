@@ -22,7 +22,7 @@ module.exports = {
     const searchResults = await searchYouTubeVideos(text);
     const formattedResults = formatResults(searchResults);
 
-    const messageOptions = buildMessageOptions(formattedResults);
+    const messageOptions = buildMessageOptions(vorterx, m, formattedResults);
 
     await vorterx.sendMessage(m.from, messageOptions);
   },
@@ -44,18 +44,18 @@ function formatResults(results) {
   for (let i = 0; i < results.length; i++) {
     const result = results[i];
     formatted += `Result ${i + 1}:\n`;
-    formatted += `Title: ${result.title}\n`;
-    formatted += `Channel: ${result.channelTitle}\n`;
-    formatted += `Views: ${result.viewCount}\n`;
-    formatted += `Duration: ${result.duration}\n\n`;
+    formatted += `📺 Title: ${result.title}\n`;
+    formatted += `📺 Channel: ${result.channelTitle}\n`;
+    formatted += `👁️ Views: ${result.viewCount}\n`;
+    formatted += `⏱️ Duration: ${result.duration}\n\n`;
   }
 
   return formatted;
 }
 
-function buildMessageOptions(content) {
-  vorterx.sendMessage(m.from,{
-    caption: `*YOUTUBE SEARCH RESULTS*\n\n${content}`,
-    quoted: m})
-};
-
+function buildMessageOptions(vorterx, m, content) {
+  return {
+  caption: `*YOUTUBE SEARCH RESULTS*\n\n${content}`,
+  quoted: m
+  };
+ }
