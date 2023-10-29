@@ -22,8 +22,7 @@ module.exports = {
     const image = config.thumb;
     const userName = m.pushName;
     const botName = process.env.BOTNAME;
-    const version = require("../package.json").version;
-
+  
     const cap = `
     ╭─💙 *Bot Status*
     │
@@ -33,7 +32,7 @@ module.exports = {
     ├ ✨ Let's embark the world of automation together!
     ├
     ├ 📌 *Prefix*: ${PREFIX}
-    ├ 📌 *Version*: ${version}
+    ├ 📌 *Version*: 3.0.0
     │
     ├ Type ${PREFIX}menu to get my commands.
     │
