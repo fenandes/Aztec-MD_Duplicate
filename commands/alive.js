@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const config = require('../config.js');
 const BOTNAME = config.botName;
-const PREFIX = config.prefix;
+const prefix = config.prefix;
 const { aztec_images } = require('../mangoes/encryptFunc.js');
 
 module.exports = {
@@ -20,21 +20,21 @@ module.exports = {
     await xReact("💙");
     //const imagePath = path.join(__dirname, "./lib/imogs.jpg");
     const image = config.thumb;
-    const userName = m.pushName;
-    const botName = process.env.BOTNAME;
+    //const userName = m.pushName;
+    //const botName = process.env.BOTNAME;
   
     const cap = `
     ╭─💙 *Bot Status*
     │
-    ├ Hey ${userName}! 👋
-    ├ Welcome to ${botName}! 🤖
+    ├ Hey ${m.pushName}! 👋
+    ├ Welcome to ${process.env.BOTNAME}! 🤖
     ├ I am a WhatsApp user bot developed by Diegoson.
     ├ ✨ Let's embark the world of automation together!
     ├
-    ├ 📌 *Prefix*: ${PREFIX}
+    ├ 📌 *Prefix*: ${prefix}
     ├ 📌 *Version*: 3.0.0
     │
-    ├ Type ${PREFIX}menu to get my commands.
+    ├ Type ${prefix}menu to get my commands.
     │
     ╰──────────⭑ ©vorterx
     `;
