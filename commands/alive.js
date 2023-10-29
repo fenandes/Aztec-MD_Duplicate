@@ -20,7 +20,7 @@ module.exports = {
     const image = fs.readFileSync('./lib/imogs.jpg');
     const userName = m.pushName;
     const botName = process.env.BOTNAME;
-    const version = require(__dirname + "/package.json").version;
+    const version = require(__dirname + "../package.json").version;
 
     const cap = `
     ╭─💙 *Bot Status*
