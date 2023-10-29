@@ -12,12 +12,12 @@ module.exports = {
   name: "xnxxsh",
   description: "18 videos only",
   category: "Download",
-  async xstart(vorterx, m, { xReact, text, args }) {
+  async xstart(vorterx, m, { xReact, text, doReply,args }) {
     let me = fs.readFileSync("./lib/imogs.jpg");
   
     if (!text) {
     await xReact("⛔");
-    return m.reply("Please provide a search term.");
+    doReply("Please provide a search term.");
     }
     await xReact("🍑");
 
