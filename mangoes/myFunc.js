@@ -142,7 +142,4 @@ const extractUrls = (content) => {
 module.exports = {
   extractNumbers,
   extractUrls,
-  getBuffer,
-  buffergif,
- TelegraPh,
 };
