@@ -1,35 +1,33 @@
 //==============
-
-// MDE WITH LUV BY DIEGOSON 
-
+// MADE WITH LUV BY DIEGOSON
 //================
 
 const fs = require("fs");
 const path = require("path");
-const config = require('../config.js');
+const config = require("../config.js");
 const BOTNAME = config.botName;
 const prefix = config.prefix;
-const { aztec_images } = require('../mangoes/encryptFunc.js');
+const { aztec_images } = require("../mangoes/encryptFunc.js");
 
 module.exports = {
-  name: 'alive',
-  category: 'General',
-  description: 'Check if the bot is online',
+  name: "alive",
+  category: "General",
+  description: "Check if the bot is online",
   async xstart(vorterx, m, { args, xReact, text }) {
-
     await xReact("💙");
-    //const imagePath = path.join(__dirname, "./lib/imogs.jpg");
-    const image = config.thumb;
-    //const userName = m.pushName;
-    //const botName = process.env.BOTNAME;
-    const xnxx = 'https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg';
+    
+    const image = {
+      url: "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
+      mimetype: "image/jpeg",
+    };
+    
     const cap = `
     ╭─💙 *Bot Status*
     │
     ├ Hey ${m.pushName}! 👋
     ├ Welcome to ${process.env.BOTNAME}! 🤖
     ├ I am a WhatsApp user bot developed by Diegoson.
-    ├ ✨ Let's embark the world of automation together!
+    ├ ✨ Let's embark on the world of automation together!
     ├
     ├ 📌 *Prefix*: ${prefix}
     ├ 📌 *Version*: 3.0.0
@@ -40,16 +38,16 @@ module.exports = {
     `;
 
     const messageOptions = {
-      image: xnxx,
+      image: image,
       caption: cap,
       contextInfo: {
         externalAdReply: {
-          title: 'Powered by Aztec',
-          body: 'Unleash your imagination',
+          title: "Powered by Aztec",
+          body: "Unleash your imagination",
           thumbnail: image,
           mediaType: 1,
-          mediaUrl: '',
-          sourceUrl: 'https://vorterx.com',
+          mediaUrl: "",
+          sourceUrl: "https://vorterx.com",
           ShowAdAttribution: true,
         },
       },
