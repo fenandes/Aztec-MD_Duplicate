@@ -22,8 +22,8 @@ module.exports = {
     const image = config.thumb;
     //const userName = m.pushName;
     //const botName = process.env.BOTNAME;
-     const xnxx = 'https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg',
-    const cap = `
+    const xnxx = 'https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg',
+    let cap = `
     ╭─💙 *Bot Status*
     │
     ├ Hey ${m.pushName}! 👋
