@@ -102,12 +102,6 @@ exports.TelegraPh = (Path) => {
     }
   });
 };
-const extractNumbers = (content) => {
-const numbers = content.match(/(-?\d+)/g)
-return numbers ? numbers.map((n) => Math.max(parseInt(n), 0)) : []
-}
-const extractUrls = (content) => linkify.find(content).map((url) => url.value)
-
 exports.buffergif = async (image) => {
   const filename = `${Math.random().toString(36)}`;
   await fs.writeFileSync(`./dustbin/${filename}.gif`, image);
@@ -124,12 +118,31 @@ exports.buffergif = async (image) => {
   return buffer5;
 };
 exports.getBuffer = async (url) => {
-  try {
-    const response = await axios.get(url, {
-    responseType: 'arraybuffer'
-    })
-       return response
-       } catch (error) {
-       console.log(error);
-       }     
-        }
+try {
+const response = await axios.get(url, {
+responseType: 'arraybuffer'
+})
+return response
+} catch (error) {
+ console.log(error);
+ }     
+ }
+// Function to extract numbers
+const extractNumbers = (content) => {
+  const numbers = content.match(/(-?\d+)/g);
+  return numbers ? numbers.map((n) => Math.max(parseInt(n), 0)) : [];
+};
+
+// Function to extract URLs
+const extractUrls = (content) => {
+  const urls = content.match(/(\bhttps?:\/\/\S+)/gi);
+  return urls || [];
+};
+
+module.exports = {
+  extractNumbers,
+  extractUrls,
+  getBuffer,
+  buffergif,
+ TelegraPh,
+};
