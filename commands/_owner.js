@@ -21,7 +21,6 @@ module.exports = {
           title: "Aztec MD.",
           body: "Powerd by Aztec",
           renderLargerThumbnail: true,
-          thumbnailUrl: logo,
           thumbnail: logo,
           mediaType: 1,
           mediaUrl: "",
