@@ -28,14 +28,14 @@ module.exports = {
     const video = res.data;
 
     let D3centX = `╭─🎬*XNXX VIDEO DOWNLOAD*
-    │
-    ├ 🍑TITLE: XNXX
-    ├ 
-    ├ 📟BOTNAME: ${process.env.BOTNAME}
-    ├ 
-    ├ 📤DOWNLOAD LINK: [${video}]
-    │
-    ╰──────────⭑ `;
+│
+├ 🍑TITLE: XNXX
+├ 
+├ 📟BOTNAME: ${process.env.BOTNAME}
+├ 
+├ 📤DOWNLOAD LINK: [${video}]
+│
+╰──────────⭑ `;
 
     let buttonMessage = {
       video: video,
