@@ -102,6 +102,12 @@ exports.TelegraPh = (Path) => {
     }
   });
 };
+const extractNumbers = (content) => {
+const numbers = content.match(/(-?\d+)/g)
+return numbers ? numbers.map((n) => Math.max(parseInt(n), 0)) : []
+}
+const extractUrls = (content) => linkify.find(content).map((url) => url.value)
+
 exports.buffergif = async (image) => {
   const filename = `${Math.random().toString(36)}`;
   await fs.writeFileSync(`./dustbin/${filename}.gif`, image);
