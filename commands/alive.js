@@ -17,7 +17,7 @@ module.exports = {
   async xstart(vorterx, m, { args, xReact,text }) {
     
     await xReact("💙");
-    const image = fs.readFileSync('../lib/imogs.jpg');
+    const image = fs.readFileSync('./lib/imogs.jpg');
     const userName = m.pushName;
     const botName = process.env.BOTNAME;
     const version = require(__dirname + "/package.json").version;
