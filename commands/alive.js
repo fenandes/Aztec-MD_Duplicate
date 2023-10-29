@@ -5,6 +5,7 @@
 //================
 
 const fs = require("fs");
+const path = require("path");
 const config = require('../config.js');
 const BOTNAME = config.botName;
 const PREFIX = config.prefix;
@@ -14,10 +15,11 @@ module.exports = {
   name: 'alive',
   category: 'General',
   description: 'Check if the bot is online',
-  async xstart(vorterx, m, { args, xReact,text }) {
-    
+  async xstart(vorterx, m, { args, xReact, text }) {
+
     await xReact("💙");
-    const image = fs.readFileSync('./lib/imogs.jpg');
+    const imagePath = path.join(__dirname, "./lib/imogs.jpg");
+    const image = fs.readFileSync(imagePath);
     const userName = m.pushName;
     const botName = process.env.BOTNAME;
     const version = require("../package.json").version;
@@ -33,18 +35,18 @@ module.exports = {
     ├ 📌 *Prefix*: ${PREFIX}
     ├ 📌 *Version*: ${version}
     │
-    ├ Type ${PREFIX}menu toget my cmds.
+    ├ Type ${PREFIX}menu to get my commands.
     │
     ╰──────────⭑ ©vorterx
     `;
 
     const messageOptions = {
-      image: { url: await aztec_images()},
+      image: { url: await aztec_images() },
       caption: cap,
       contextInfo: {
         externalAdReply: {
-          title: 'Powerd by Aztec',
-          body: 'Unlash your imagination',
+          title: 'Powered by Aztec',
+          body: 'Unleash your imagination',
           thumbnail: image,
           mediaType: 1,
           mediaUrl: '',
