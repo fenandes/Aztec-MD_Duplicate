@@ -56,8 +56,7 @@ function formatResults(results) {
 function buildMessageOptions(content) {
   const messageOptions = {
     caption: `*YOUTUBE SEARCH RESULTS*\n\n${content}`,
-    quoted: m,
-  };
+    quoted: m};
 
   return messageOptions;
 }
