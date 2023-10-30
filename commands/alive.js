@@ -21,20 +21,19 @@ module.exports = {
       mimetype: "image/jpeg",
     };
     
-    const cap = `
-    ╭─💙 *Bot Status*
-    │
-    ├ Hey ${m.pushName}! 👋
-    ├ Welcome to ${process.env.BOTNAME}! 🤖
-    ├ I am a WhatsApp user bot developed by Diegoson.
-    ├ ✨ Let's embark on the world of automation together!
-    ├
-    ├ 📌 *Prefix*: ${prefix}
-    ├ 📌 *Version*: 3.0.0
-    │
-    ├ Type ${prefix}menu to get my commands.
-    │
-    ╰──────────⭑ ©vorterx
+    const cap = `╭─💙 *Bot Status*
+│
+├ Hey ${m.pushName}! 👋
+├ Welcome to ${process.env.BOTNAME}! 🤖
+├ Im ${process.env.BOTNAME} made by Diegoson.
+├ ✨Let's embark the world together!
+├
+├ 📌 *Prefix*: ${prefix}
+├ 📌 *Version*: 3.0.0
+│
+├ use${prefix}menu tget cmds.
+│
+╰──────────⭑
     `;
 
     const messageOptions = {
