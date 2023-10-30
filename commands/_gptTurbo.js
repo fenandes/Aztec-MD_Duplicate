@@ -1,5 +1,6 @@
 //BY VORTERX
 //@DiegosonTech
+const fetch = require('node-fetch');
 
 module.exports = {
   name: "gpt",
