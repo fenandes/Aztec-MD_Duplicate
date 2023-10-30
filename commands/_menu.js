@@ -46,7 +46,7 @@ module.exports = {
         let formatted = "";
 
         for (const [file, ...aliases] of commands) {
-          let up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end;
+          var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end;
           let random_menu = 0;
           if (!process.env.MENU) {
             random_menu = Math.floor(Math.random() * 2) + 1; // Replace '2' with the exact number of styles you have added
