@@ -21,7 +21,7 @@
     "LEVEL_UP": {
     "description": "To enable auto level up set true or false or enable or disable",
     },
-    "IMAGES": {
+    "LANG": {
     "description": "Choose images to show on menu available images(VOR_TERX)",
     },
     "MENU": {
