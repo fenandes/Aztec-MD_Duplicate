@@ -14,7 +14,7 @@ module.exports = {
   category: 'Downloads',
   async xstart(vorterx, m, { xReact, doReply, text, args }) {
     if (!text) {
-    await toReact('⛔');
+    await xReact('⛔');
     return m.reply('*Provide a query example how to create Aztec*');
     }
 
