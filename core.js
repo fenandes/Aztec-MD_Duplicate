@@ -17,7 +17,7 @@ async function startAztec() {
   let { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState(__dirname + "./lib/session");
   if (!fs.existsSync("./lib/session/creds.json")) {
-  MakeSession(config.SESSION_ID, "./lib/session/creds.json");
+  AztecSession(config.SESSION_ID, "./lib/session/creds.json");
             
 
   const vorterx = VorterxConnection({
