@@ -91,7 +91,8 @@ module.exports = {
       const pluginsDir = path.join(process.cwd(), "commands");
       const uniquecommands = getUniquecommands(pluginsDir);
       const formattedcommandList = formatcommandList(uniquecommands);
-
+     
+      let up_up = "";
       let vorterxInstant = `${up_up}
 ${up_mid} User: ${tiny(userName)}
 ${up_mid} BotName: ${tiny(BotName)}
