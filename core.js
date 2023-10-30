@@ -38,6 +38,7 @@ async function startAztec() {
     for (const file of cmdfile) {
       const command = require(`./commands/${file}`);
       vorterx.cmd.set(command.name, command);
+      console.log('👩‍💻Plugins has been loaded successfully'); 
     }
   }
 
