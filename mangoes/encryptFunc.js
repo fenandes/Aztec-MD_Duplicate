@@ -11,7 +11,7 @@ function loadLanguage() {
 
     fs.readFile(langFile, 'utf8', (err, data) => {
       if (err) {
-        fs.readFile('./mangoes/connection/Images/VO_TERX.json', 'utf8', (err, data) => {
+        fs.readFile('./mangoes/connection/Images/VOR_TERX.json', 'utf8', (err, data) => {
           if (err) {
             reject(err);
           } else {
