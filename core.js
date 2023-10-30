@@ -14,7 +14,7 @@ const MessageHandler = require('./lib/message/vorterx');
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
   let { version } = await fetchLatestBaileysVersion();
-  const { state, saveCreds, clearState } = await useMultiFileAuthState('session_Id');
+  const { state, saveCreds, clearState } = await useMultiFileAuthState(__dirname + "/lib/session");
 
   const vorterx = VorterxConnection({
     logger: P({ level: "silent" }),
