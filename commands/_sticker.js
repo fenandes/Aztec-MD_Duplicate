@@ -1,20 +1,20 @@
+// THANKS TO RAY SENPAI
 
 const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter');
 
 module.exports = {
   name: "sticker",
-  alias: ["sticker", "s"],
-  desc: "makes sticker from images/videos/gifs",
-  category: "Utils",
-  react: "✅",
-
-  start: async (client, m, { pushName, body, quoted, mime, text, args, flags }) => {
-    if (!quoted) return await client.sendMessage(m.from, { text: "Reply/tag an image/video" });
-
-    pack = 'ETERNITY';
+  alias: ["s"],
+  description: "makes sticker",
+  category: "Media",
+  async xstart (vorterx, m, { body, quoted, mime, doReply,text, args, xReact }) {
+    if (!quoted) { await xReact('❌'); return doReply('Reply to Something please');
+     }
+    await xReact('🐼');
+    pack = 'VORTERX';
     author = '';
 
-    if (/image/.test(mime)) {
+     if (/image/.test(mime)) {
       let media = await quoted.download();
       let sticker = new Sticker(media, {
         pack: pack,
@@ -26,10 +26,10 @@ module.exports = {
         background: 'transparent'
       });
       const buffer = await sticker.toBuffer();
-      client.sendMessage(m.from, { sticker: buffer }, { quoted: m });
-    } else if (/video/.test(mime)) {
-      if ((quoted.msg || quoted).seconds > 20) {
-        return client.sendMessage(m.from, { text: '🕐 Cannot fetch videos longer than *11 Seconds*' });
+      vorterx.sendMessage(m.from, { sticker: buffer }, { quoted: m });
+     } else if (/video/.test(mime)) {
+     if ((quoted.msg || quoted).seconds > 20) {
+     return vorterx.sendMessage(m.from, { text: '🕐 Cannot fetch videos longer than *11 Seconds*' });
       }
       let media = await quoted.download();
       let sticker = new Sticker(media, {
@@ -41,10 +41,10 @@ module.exports = {
         quality: 30,
         background: 'transparent'
       });
-      const stikk = await sticker.toBuffer();
-      client.sendMessage(m.from, { sticker: stikk }, { quoted: m });
-    } else {
-      client.sendMessage(m.from, { text: "❌ Could not find any Image/Video in context" }, { quoted: m });
+      const stk = await sticker.toBuffer();
+      vorterx.sendMessage(m.from, { sticker: stk }, { quoted: m });
+     } else {
+      vorterx.sendMessage(m.from, { text: "❌ Could not find any Image/Video in context" }, { quoted: m });
+     }
     }
-  }
-};
+   };
