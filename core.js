@@ -1,4 +1,4 @@
-const { default: VorterxConnection, DisconnectReason, Browsers, delay, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { default: VorterxConnection, DisconnectReason, Browsers, delay, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@adiwajishing/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require('express');
@@ -7,7 +7,7 @@ const fs = require("fs");
 const { Collection } = require('discord.js');
 const config = require('./config.js');
 const botName = config.botName;
-const { MakeSession } = require("./lib/session");
+const { AztecSession } = require("./lib/session.js");
 const qr = require("qr-image");
 const contact = require('./mangoes/contact.js');
 const MessageHandler = require('./lib/message/vorterx');
