@@ -8,12 +8,12 @@ module.exports = {
   description: "Randomly search",
   async xstart(vorterx, m, { text, xReact, args }) {
     if (!text) {
-      await xReact('❌');
+      await xReact("❌");
       return m.reply(`*Provide me a query ex who made Aztec*`);
     }
 
     try {
-      const fetch = await import('node-fetch');
+      const fetch = await import("node-fetch");
       const response = await fetch.default(
         `https://xzn.wtf/api/openai?text=${encodeURIComponent(text)}&apikey=aztec`
       );
@@ -21,12 +21,13 @@ module.exports = {
       const aiTurbo = result.result;
 
       const externalAdReply = {
-        title: 'GPT TURBO 3.5K',
+        title: "GPT TURBO 3.5K",
         mediaType: 1,
-        mediaUrl: '',
-        sourceUrl: '',
+        mediaUrl: "",
+        sourceUrl: "",
         showAdAttribution: true,
-        thumbnail: 'https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png',
+        thumbnail:
+          "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png",
         renderLarger: true,
       };
 
@@ -35,7 +36,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      await m.reply('An error occurred while processing the request.');
+      await m.reply("An error occurred while processing the request.");
     }
   },
 };
