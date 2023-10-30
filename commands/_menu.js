@@ -32,9 +32,11 @@ module.exports = {
       const formatcommandList = (commands) => {
         let formatted = "";
         for (const [file, ...aliases] of commands) {
-        var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end;
-      
-        // code omitted for brevity
+          var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end;
+        
+          // code omitted for brevity
+        }
+        return formatted.trim();
       };
 
       const pluginsDir = path.join(process.cwd(), "commands");
@@ -44,7 +46,8 @@ module.exports = {
       let up_up = "";
       
       let random_menu = 0;
-      if (!process.env.MENU) {random_menu = Math.floor(Math.random() * 2) + 1; // Replace '2' with the exact number of styles you have added
+      if (!process.env.MENU) {
+        random_menu = Math.floor(Math.random() * 2) + 1; // Replace '2' with the exact number of styles you have added
       }
 
       if (
@@ -71,17 +74,14 @@ module.exports = {
         ctgry_end = `\n\n└─────────◉\n`;
         // code omitted for brevity
       }
-        const capitalizedFile =
+      
+      const capitalizedFile =
         file.replace(".js", "").charAt(0).toUpperCase() +
         file.replace(".js", "").slice(1);
-        const aliasesList = aliases.map((cmd) => `${cmd_L} ${PREFIX}${cmd}`).join("\n");
+      const aliasesList = aliases.map((cmd) => `${cmd_L} ${PREFIX}${cmd}`).join("\n");
 
-        formatted += `${ctgry_L} *${capitalizedFile}* ${ctgry_R}\n\n`;
-        formatted += `\`\`\`${aliasesList}\`\`\`${ctgry_end}\n`;
-        }
-        return formatted.trim();
-        };
-          
+      let formatted = `${ctgry_L} *${capitalizedFile}* ${ctgry_R}\n\n`;
+      formatted += `\`\`\`${aliasesList}\`\`\`${ctgry_end}\n`;
 
       let vorterxInstant = `${up_up}
 ${up_mid} User: ${userName}
@@ -89,7 +89,7 @@ ${up_mid} BotName: ${BotName}
 ${up_mid} Prefix: ${PREFIX}
 ${up_mid} Time: ${time}
 ${up_mid} Date: ${date}
-${up_btm}\n${formattedcommandList}`;
+${up_btm}\n${formatted}${formattedcommandList}`;
 
       vorterxInstant += `_📔Send ${PREFIX}menu <command name> to get detailed information of a specific command_`;
 
