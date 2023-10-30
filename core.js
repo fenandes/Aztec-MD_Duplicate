@@ -14,7 +14,6 @@ const MessageHandler = require('./lib/message/vorterx');
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-  let { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds, clearState } = await useMultiFileAuthState(__dirname + "./lib/session");
   if (!fs.existsSync("./lib/session/creds.json")) {
   AztecSession(config.session_Id, "./lib/session/creds.json");
@@ -26,7 +25,7 @@ async function startAztec() {
     browser: Browsers.macOS("Desktop"),
     qrTimeoutMs: undefined,
     auth: state,
-    version
+    version: (await fetchLatestBaileysVersion()).version,
   });
 
   store.bind(vorterx.ev);
