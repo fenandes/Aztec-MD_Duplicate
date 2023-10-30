@@ -23,8 +23,8 @@ module.exports = {
       await vorterx.sendPresenceUpdate("composing", m.from);
       const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
 
-      const getUniqueCommands = (dirPath) => {
-        const uniqueCommands = [];
+      const getUniquecommands = (dirPath) => {
+        const uniquecommands = [];
         const files = fs.readdirSync(dirPath);
 
         for (const file of files) {
@@ -32,17 +32,17 @@ module.exports = {
           const stat = fs.statSync(filePath);
 
           if (stat.isDirectory()) {
-            uniqueCommands.push(...getUniqueCommands(filePath));
+            uniquecommands.push(...getUniquecommands(filePath));
           } else if (stat.isFile() && file.endsWith(".js")) {
             const { alias = [] } = require(filePath);
-            uniqueCommands.push([file, ...alias]);
+            uniquecommands.push([file, ...alias]);
           }
         }
 
-        return uniqueCommands;
+        return uniquecommands;
       };
 
-      const formatCommandList = (commands) => {
+      const formatcommandList = (commands) => {
         let formatted = "";
 
         for (const [file, ...aliases] of commands) {
@@ -88,9 +88,9 @@ module.exports = {
         return formatted.trim();
       };
 
-      const pluginsDir = path.join(process.cwd(), "Commands");
-      const uniqueCommands = getUniqueCommands(pluginsDir);
-      const formattedCommandList = formatCommandList(uniqueCommands);
+      const pluginsDir = path.join(process.cwd(), "commands");
+      const uniquecommands = getUniquecommands(pluginsDir);
+      const formattedcommandList = formatcommandList(uniquecommands);
 
       let vorterxInstant = `${up_up}
 ${up_mid} User: ${tiny(userName)}
@@ -100,7 +100,7 @@ ${up_mid} Prefix: ${tiny(PREFIX)}
 ${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
 ${up_mid} Time: ${tiny(time)}
 ${up_mid} Date: ${tiny(date)}
-${up_btm}\n${formattedCommandList}`;
+${up_btm}\n${formattedcommandList}`;
 
       vorterxInstant += `_📔Send ${PREFIX}menu <command name> to get detailed information of a specific command_`;
 
