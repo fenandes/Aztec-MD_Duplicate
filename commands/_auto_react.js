@@ -2,7 +2,7 @@
 //_____[@For auto react use on e.g( AUTO_REACT: process.env.AUTO_REACT || 'on'; it turn it on else off then goes of
 //____[@AZTEC_MD 
 
-const config= require('../config.js');
+const config = require('../config.js');
 const prefix = config.prefix;
 
 const commandHandler = async (vorterx, m, { xReact, text, args }) {
