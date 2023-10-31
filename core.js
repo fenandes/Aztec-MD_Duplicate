@@ -69,7 +69,6 @@ async function startAztec() {
         console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
       }
     }
-      
 
     if (connection === "open") {
       const aztec_text = `\`\`\`Vorterx connected \nversion : ${require(__dirname + "/package.json").version}\nBotName: ${botName}\`\`\``;
@@ -87,123 +86,8 @@ async function startAztec() {
   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
 
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
- }
 }
-  vorterx.ev.on('groups.update', async (data) => {try {
-    const imageGc = await vorterx.profilePictureUrl(anu.id, 'image');
-    } catch (err) {console.log(err);
-    imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';}
-    const res = data[0];
-    if (res.announce == true) { await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `*【 GROUP MUTTED SS 】*\n\n\`\`\`THE GROUP HAS BEEN LOCKED\`\`\``});
-    } else if (res.announce == false) {await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `*【 GROUP UNMUTED SS 】*\n\n\`\`\`THE GROUP HAS BEEN UNLOCKED\`\`\``});
-    } else if (res.restrict == true) {await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `*【 GROUP INFO SS 】*\n\n\`\`\`GROUP INFO HAS BE OONED BY ADMIN\`\`\``});
-    } else if (res.desc !== '') {await sleep(2000);
-    vorterx.sendMessage(res.id, {text: `*【 GROUP DESC SS 】*\n\n\`\`\`GROUP DESC HAS BEEN CHANGED =>\`\`\`\n\n*${res.desc}*`
-    })}});
-   //_____[TIME : DATE ]__
-   let [date, time] = new Date()
-  .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
-  .split(",");
-  //______[■■■■■]__
-vorterx.ev.on('group-participants.update', async (anu) => {
-  try {
-    let metadata = await vorterx.groupMetadata(anu.id);
-    let participants = anu.participants;
-    for (let num of participants) {
-      try {
-        imageUser = await vorterx.profilePictureUrl(num, 'image');
-      } catch (err) {
-        imageUser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60';
-      }
-      try {
-        imageUser = await vorterx.profilePictureUrl(anu.id, 'image');
-      } catch (err) {
-        imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';
-      }
-      vorterx_member = metadata.participants.length;
-      aztecW = await getBuffer(imageUser);
-      aztecL = await getBuffer(imageUser);
-      
-      if (anu.action == 'add') {
-        const vorterx_buffer = await getBuffer(imageUser);
-        let vorterxName = num;
-        const vorterx_members = metadata.participants.length;
-        vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
-├  
-├ *Group Name*: ${metadata.subject}
-├ *Group Member*: ${vorterx_member}
-├ *Due Date*: ${date}
-├
-│🤩Plz Behave
-╰──────────⭑`;
-        vorterx.sendMessage(anu.id, {
-          text: vorterx_aztec,
-          contextInfo: {
-            mentionedJid: [num],
-            "externalAdReply": {
-              "showAdAttribution": true,
-              "containsAutoReply": true,
-              "title": `${botName}`,
-              "body": "Powerd by Aztec",
-              "previewType": "PHOTO",
-              "thumbnail": aztecW,
-              "sourceUrl": ``,
-            }
-          }
-        });
-      } else if (anu.action == 'remove') {
-        var vorterx_buffer = await getBuffer(imageUser);
-        var vorterxName = num;
-        const vorterx_members = metadata.participants.length;
-        vorterx_aztec = `╭─🙌 *Very Well @${vorterxName.split("@")[0]}
-├ 
-├ *Group Name*: ${metadata.subject}
-├ *Due Date*: ${date}
-├
-│👋Uhambe Kahle
-╰──────────⭑`;
-        vorterx.sendMessage(anu.id, {
-          text: vorterx_aztec,
-          contextInfo: {
-            mentionedJid: [num],
-            "externalAdReply": {
-              "showAdAttribution": true,
-              "containsAutoReply": true,
-              "title": `${botName}`,
-              "body": "Powerd by Aztec",
-              "previewType": "PHOTO",
-              "thumbnail": aztecL,
-              "sourceUrl": ``,
-            }
-          }
-        });
-      } else if (anu.action == 'promote') {
-        const vorterx_buffer = await getBuffer(imageUser);
-        let vorterxName = num;
-        vorterx_aztec = `╭─🤩*PROMOTED-RECEIVED*
-├ 
-├ *userName*: ${vorterxName.split("@")[0]}
-├ *Due Date*: ${time}
-╰──────────⭑`;
-        vorterx.sendMessage(anu.id, {
-          text: vorterx_aztec,
-          contextInfo: {
-            mentionedJid: [num],
-            "externalAdReply": {
-              "showAdAttribution": true,
-              "containsAutoReply": true,
-              "title": "Powerd by Aztec",
-              "body": `${botName}`,
-              "previewType": "PHOTO",
-              "thumbnail": aztecW,
-              "sourceUrl": ``,
-            }
-          }
-        });
-      }}}}catch (err))
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
