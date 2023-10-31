@@ -86,7 +86,7 @@ async function startAztec() {
   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
 
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
-}
+}}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
