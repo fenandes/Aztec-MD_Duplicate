@@ -7,7 +7,7 @@ const fs = require("fs");
 const { Collection } = require('discord.js');
 const config = require('./config.js');
 const botName = config.botName;
-const { AztecSession } = require("./lib/session/session.js");
+const { MakeSession } = require("./lib/session/session.js");
 const qr = require("qr-image");
 const contact = require('./mangoes/contact.js');
 const MessageHandler = require('./lib/message/vorterx');
@@ -16,7 +16,7 @@ async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
   const { state, saveCreds, clearState } = await useMultiFileAuthState(__dirname + "/lib/session");
   if (!fs.existsSync("./lib/session/creds.json")) {
-  AztecSession(config.session_Id, "./lib/session/creds.json");
+  MakeSession(config.session_Id, "./lib/session/creds.json");
             
 
   const vorterx = VorterxConnection({
@@ -38,7 +38,6 @@ async function startAztec() {
     for (const file of cmdfile) {
       const command = require(`./commands/${file}`);
       vorterx.cmd.set(command.name, command);
-      console.log('👩‍💻Plugins has been loaded successfully'); 
     }
   }
 
