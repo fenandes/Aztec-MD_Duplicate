@@ -106,60 +106,102 @@ async function startAztec() {
   .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
   .split(",");
   //______[■■■■■]__
-  vorterx.ev.on('group-participants.update', async (anu) => {try {
-  let metadata = await vorterx.groupMetadata(anu.id)
-  let participants = anu.participants
-  for (let num of participants) {try {
-  imageUser = await vorterx.profilePictureUrl(num, 'image')
-  } catch (err) {imageUser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'}try {
-  imageUser = await vorterx.profilePictureUrl(anu.id, 'image')
-  } catch (err) {imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60'}
-  vorterx_member = metadata.participants.length
-  aztecW = await getBuffer(imageUser)
-  aztecL = await getBuffer(imageUser)
-  if (anu.action == 'add') {const vorterx_buffer = await getBuffer(imageUser)
-  let vorterxName = num
- const vorterx_members = metadata.participants.length
- vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
+vorterx.ev.on('group-participants.update', async (anu) => {
+  try {
+    let metadata = await vorterx.groupMetadata(anu.id);
+    let participants = anu.participants;
+    for (let num of participants) {
+      try {
+        imageUser = await vorterx.profilePictureUrl(num, 'image');
+      } catch (err) {
+        imageUser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60';
+      }
+      try {
+        imageUser = await vorterx.profilePictureUrl(anu.id, 'image');
+      } catch (err) {
+        imageGc = 'https://i.ibb.co/RBx5SQC/avatar-group-large-v2.png?q=60';
+      }
+      vorterx_member = metadata.participants.length;
+      aztecW = await getBuffer(imageUser);
+      aztecL = await getBuffer(imageUser);
+      
+      if (anu.action == 'add') {
+        const vorterx_buffer = await getBuffer(imageUser);
+        let vorterxName = num;
+        const vorterx_members = metadata.participants.length;
+        vorterx_aztec = `╭─💙 *Welcome @${vorterxName.split("@")[0]}
 ├  
 ├ *Group Name*: ${metadata.subject}
 ├ *Group Member*: ${vorterx_member}
 ├ *Due Date*: ${date}
 ├
 │🤩Plz Behave
-╰──────────⭑`
- vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``}}})
-} else if (anu.action == 'remove') {
-var vorterx_buffer = await getBuffer(imageUser)var vorterxName = num
-const vorterx_members = metadata.participants.length
-vorterx_aztec = `╭─🙌 *Very Well @${vorterxName.split("@")[0]}
+╰──────────⭑`;
+        vorterx.sendMessage(anu.id, {
+          text: vorterx_aztec,
+          contextInfo: {
+            mentionedJid: [num],
+            "externalAdReply": {
+              "showAdAttribution": true,
+              "containsAutoReply": true,
+              "title": `${botName}`,
+              "body": "Powerd by Aztec",
+              "previewType": "PHOTO",
+              "thumbnail": aztecW,
+              "sourceUrl": ``,
+            }
+          }
+        });
+      } else if (anu.action == 'remove') {
+        var vorterx_buffer = await getBuffer(imageUser);
+        var vorterxName = num;
+        const vorterx_members = metadata.participants.length;
+        vorterx_aztec = `╭─🙌 *Very Well @${vorterxName.split("@")[0]}
 ├ 
 ├ *Group Name*: ${metadata.subject}
 ├ *Due Date*: ${date}
 ├
 │👋Uhambe Kahle
-╰──────────⭑`
-vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecL,"sourceUrl": ``,}}})
-} else if (anu.action == 'promote') {
-const vorterx_buffer = await getBuffer(imageUser)
-let vorterxName = num
-vorterx_aztec = `╭─🤩*PROMOTED-RECEIVED*
+╰──────────⭑`;
+        vorterx.sendMessage(anu.id, {
+          text: vorterx_aztec,
+          contextInfo: {
+            mentionedJid: [num],
+            "externalAdReply": {
+              "showAdAttribution": true,
+              "containsAutoReply": true,
+              "title": `${botName}`,
+              "body": "Powerd by Aztec",
+              "previewType": "PHOTO",
+              "thumbnail": aztecL,
+              "sourceUrl": ``,
+            }
+          }
+        });
+      } else if (anu.action == 'promote') {
+        const vorterx_buffer = await getBuffer(imageUser);
+        let vorterxName = num;
+        vorterx_aztec = `╭─🤩*PROMOTED-RECEIVED*
 ├ 
 ├ *userName*: ${vorterxName.split("@")[0]}
 ├ *Due Date*: ${time}
-╰──────────⭑`
-vorterx.sendMessage(anu.id, { text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": `Powerd by Aztec`,"body": `${botName}`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``,}}})
-} else if (anu.action == 'demote') {
-const vorterx_buffer = await getBuffer(imageUser)
-let vorterxName = num
-vorterx_aztec = `╭─😭*DEMOTED-RECEIVED*
-├ 
-├ *userName*: ${vorterxName.split("@")[0]}
-├ *Due Date*: ${time}
-╰──────────⭑`
-vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powered by Aztec`,"previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecL,"sourceUrl": ``,}}})}}
-} catch (err) {console.log(err)}})
-
+╰──────────⭑`;
+        vorterx.sendMessage(anu.id, {
+          text: vorterx_aztec,
+          contextInfo: {
+            mentionedJid: [num],
+            "externalAdReply": {
+              "showAdAttribution": true,
+              "containsAutoReply": true,
+              "title": "Powerd by Aztec",
+              "body": `${botName}`,
+              "previewType": "PHOTO",
+              "thumbnail": aztecW,
+              "sourceUrl": ``,
+            }
+          }
+        });
+      } 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
