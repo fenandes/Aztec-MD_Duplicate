@@ -130,7 +130,7 @@ async function startAztec() {
 ╰──────────⭑`
  vorterx.sendMessage(anu.id,{ text: vorterx_aztec,contextInfo:{mentionedJid:[num],"externalAdReply": {"showAdAttribution": true,"containsAutoReply": true,"title": ` ${botName}`,"body": `Powerd by Aztec`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": aztecW,"sourceUrl": ``}}})
 } else if (anu.action == 'remove') {
-const vorterx_buffer = await getBuffer(imageUser)const vorterxName = num
+var vorterx_buffer = await getBuffer(imageUser)var vorterxName = num
 const vorterx_members = metadata.participants.length
 vorterx_aztec = `╭─🙌 *Very Well @${vorterxName.split("@")[0]}
 ├ 
