@@ -13,8 +13,8 @@ module.exports = {
 
     await xReact('Ⓜ️');
     let [date, time] = new Date()
-      .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
-      .split(",");
+   .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
+   .split(",");
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
       const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
@@ -33,8 +33,7 @@ module.exports = {
         let formatted = "";
         for (const [file, ...aliases] of commands) {
           var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end;
-        
-          // code omitted for brevity
+         // code omitted for brevity
         }
         return formatted.trim();
       };
@@ -62,8 +61,7 @@ module.exports = {
         ctgry_R = `❏ \n`;
         cmd_L = `│`;
         ctgry_end = `\n╰━━━━━━━━━━━━━━──⊷`;
-       
-        // code omitted for brevity
+       // code omitted for brevity
       } else {
         up_up = `┏━━⟪ *${BotName}* ⟫━━⦿`;
         up_mid = `┃ ✗`;
