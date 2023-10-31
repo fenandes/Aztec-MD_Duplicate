@@ -69,6 +69,7 @@ async function startAztec() {
         console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
       }
     }
+      }
 
     if (connection === "open") {
       const aztec_text = `\`\`\`Vorterx connected \nversion : ${require(__dirname + "/package.json").version}\nBotName: ${botName}\`\`\``;
