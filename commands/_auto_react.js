@@ -1,31 +1,32 @@
-const config = require('../config.js');
+//___________[MADE BY DIEGOSON]___
+//_____[@For auto react use on e.g( AUTO_REACT: process.env.AUTO_REACT || 'on'; it turn it on else off then goes of
+//____[@AZTEC_MD 
 
-module.exports = {
-  name: "auto-react",
-  description: "Enable or disable auto-reactions",
-  category: "user",
-  async xstart(vorterx, m, { xReact, activeAutoReact, deactiveAutoReact }) {
-    
-   if (m.author.id !== config.mods) {
-      await xReact("❌ You are not authorized to use this command.");
-      return;
+const config= require('../config.js');
+const prefix = config.prefix;
+
+const commandHandler = async (vorterx, m, { xReact, text, args }) {
+  if (sender && prefix && config) {
+  const AUTO_REACT = config.AUTO_REACT || 'off';
+  let emojis = ['😀','🐥','🐤','🐦', '👻','😎','😴','🥫','🍿','🤬','🕵️','😁','🤩','😍','😏','🤮','💩','💥','🔥','💯','🐺','🌚','🦄','🐕','⚽','😊', '🎉', '🌟', '🐱', '🌈', '❤', '👥', '🛴', '🎎', '👮‍♂️', '😂', '⚡️', '🍕', '🎸', '🌺','🐧'];
+
+    function runAztec_React() {
+    const Index = Math.floor(Math.random() * emojis.length);
+    return emojis[Index];
     }
 
-    const command = m.body.toLowerCase();
-    if (command === "active_auto react") {
-      activeAutoReact();
-      const reactions = ["👍", "❤️", "😄", "🔥", "🎉", "🌟", "👏", "😊", "🥳", "💯"];
-      const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-      await xReact(randomReaction + " Auto-reactions enabled!");
-    } else if (command === "deactive_auto react") {
-      deactiveAutoReact();
-      const reactions = ["👎", "💔", "😔", "🙅‍♀️", "😢", "👻", "😞", "🚫", "😕", "😭"];
-      const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-      await xReact(randomReaction + " Auto-reactions disabled!");
-    } else {
-      const reactions = ["❌", "⚠️", "🤔", "🙄", "🔍", "🤷‍♂️", "🤦‍♀️", "👀", "💭", "👉"];
-      const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-      await xReact(randomReaction + " Invalid command. Please use `active_auto react` or `deactive_auto react`.");
-    }
-   },
-  };
+    if (AUTO_REACT === 'on') {
+    const maxAttempts = 80;
+    let runAztec_React;
+
+      for (let attempts = 0; attempts < maxAttempts; attempts++) {
+      autoAttempt = runAztec_React();
+      if (!xReact.includes(runAztec_React)) {
+      await xReact(autoAttempt);
+      break;
+       }
+      }
+     if (attempts >= maxAttempts) {
+      m.reply('Unable to find the emoji');
+      }}}
+     };
