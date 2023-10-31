@@ -69,7 +69,7 @@ async function startAztec() {
         console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
       }
     }
-      }
+      
 
     if (connection === "open") {
       const aztec_text = `\`\`\`Vorterx connected \nversion : ${require(__dirname + "/package.json").version}\nBotName: ${botName}\`\`\``;
@@ -88,6 +88,7 @@ async function startAztec() {
 
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
  }
+}
   vorterx.ev.on('groups.update', async (data) => {try {
     const imageGc = await vorterx.profilePictureUrl(anu.id, 'image');
     } catch (err) {console.log(err);
@@ -202,7 +203,7 @@ vorterx.ev.on('group-participants.update', async (anu) => {
             }
           }
         });
-      } 
+      }
 const app = express();
 const PORT = process.env.PORT || 3000;
 
