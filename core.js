@@ -203,7 +203,7 @@ vorterx.ev.on('group-participants.update', async (anu) => {
             }
           }
         });
-      }
+      }}}}
 const app = express();
 const PORT = process.env.PORT || 3000;
 
