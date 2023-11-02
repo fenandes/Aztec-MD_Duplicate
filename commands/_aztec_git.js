@@ -9,8 +9,7 @@ module.exports = {
   description: "Retrieve Aztec information",
   category: "General",
   async xstart(vorterx, m, { xReact, text, args }) {
-    const aztecImage = fs.readFileSync("./lib/imogs.jpg");
-
+    let aztecImage = "https://i.ibb.co/Bc7f99L/T0s-Ay-RIh-T6-Ni4v-Uw.jpg";
     await xReact("🙋‍♂️");
     let [date, time] = new Date()
       .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
