@@ -69,8 +69,8 @@ module.exports = {
       await vorterx.sendMessage(m.from, doc, { quoted: m });
       const emojis = ['🎵', '🎶', '🎧', '🎼', '🎤'];
 
-      const vorterx_react = vorterx_react(emojis);
-      await xReact(randomEmoji);
+      const aztec_react = vorterx_react(emojis);
+      await xReact(aztec_react);
 
       fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
        if (err) {
