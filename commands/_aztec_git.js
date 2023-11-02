@@ -1,6 +1,5 @@
 const axios = require("axios");
 const moment = require("moment-timezone");
-const { fancyText } = require("@viper-x/fancytext");
 const fs = require("fs");
 const { aztec_images } = require("../mangoes/encryptFunc.js");
 
@@ -14,8 +13,8 @@ module.exports = {
 
     await xReact("🙋‍♂️");
     let [date, time] = new Date()
-    .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
-    .split(",");
+      .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
+      .split(",");
     const { data: repoData } = await axios.get(
       "https://api.github.com/repos/Vorterx/Aztec-MD"
     );
@@ -23,7 +22,7 @@ module.exports = {
       "https://api.github.com/repos/Vorterx/Aztec-MD/commits"
     );
 
-    const gitMessage = fancyText(`
+    const gitMessage = `
       ╭──────────────────────╮
       │ *乂 AZTEC M D- REPO 乂*│
       ├──────────────────────┤
@@ -38,7 +37,7 @@ module.exports = {
       │ 👤 Author: Diegoson\n
       │ *© aztec wabot*
       ╰──────────────────────╯
-    `);
+    `;
 
     const aztecMessage = {
       image: { url: await aztec_images() },
@@ -54,9 +53,9 @@ module.exports = {
           mediaUrl: "",
           sourceUrl: "",
         },
-       },
-     };
+      },
+    };
 
-     await vorterx.sendMessage(m.from, aztecMessage, { quoted: m });
+    await vorterx.sendMessage(m.from, aztecMessage, { quoted: m });
   },
-  };
+};
