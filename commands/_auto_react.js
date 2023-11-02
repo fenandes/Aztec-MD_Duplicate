@@ -5,7 +5,7 @@
 const config = require('../config.js');
 const prefix = config.prefix;
 
-const commandHandler = async (vorterx, m, { xReact, text, args }) {
+const commandHandler = async (vorterx, m, { xReact, text, args })
   if (sender && prefix && config) {
   const AUTO_REACT = config.AUTO_REACT || 'off';
   let emojis = ['😀','🐥','🐤','🐦', '👻','😎','😴','🥫','🍿','🤬','🕵️','😁','🤩','😍','😏','🤮','💩','💥','🔥','💯','🐺','🌚','🦄','🐕','⚽','😊', '🎉', '🌟', '🐱', '🌈', '❤', '👥', '🛴', '🎎', '👮‍♂️', '😂', '⚡️', '🍕', '🎸', '🌺','🐧'];
@@ -28,5 +28,4 @@ const commandHandler = async (vorterx, m, { xReact, text, args }) {
       }
      if (attempts >= maxAttempts) {
       m.reply('Unable to find the emoji');
-      }}}
-     };
+      }}};
