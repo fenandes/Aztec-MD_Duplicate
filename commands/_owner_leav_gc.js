@@ -6,7 +6,7 @@ module.exports = {
     if (!isGroup) {
       const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
       const randomReaction = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-      await toReact(randomReaction);
+      await xReact(randomReaction);
       return m.reply("*🤔 Where are you heading? This command is for groups only.*");
      }
 
