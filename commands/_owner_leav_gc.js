@@ -5,14 +5,14 @@ module.exports = {
   async xstart(vorterx, m, { isAdmin, isGroup, xReact, isBotAdmin }) {
     if (!m.isGroup) {
       const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
-      const randomReaction = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-      await xReact(randomReaction);
-      return m.reply("*🤔 Where are you heading? This command is for groups only.*");
+      const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
+      await xReact(vorterx_react);
+      return m.reply("*🤔 Where are you heading? This command is for owner only.*");
      }
 
     const reactAztec = ["👋", "👋🏼", "🤚", "✌️", "👋🏽"];
-    const randomReaction = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-    await xReact(randomReaction);
+    const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
+    await xReact(vorterx_react);
 
      const Diegoson = [
       "👋 Farewell, mates! Until we meet again! 👋",
@@ -22,10 +22,10 @@ module.exports = {
       "👋 Leaving the group. Thanks for the memories! 👋",
      ];
 
-     const randomTemplate = Diegoson[Math.floor(Math.random() * Diegoson.length)];
-     const caption = `*${randomTemplate}*`;
+     const vorterx_cap = Diegoson[Math.floor(Math.random() * Diegoson.length)];
+     const caption = `*${vorterx_cap}*`;
 
      await m.reply(caption);
-    await vorterx.groupLeave(m.chat, m.from);
+    await vorterx.groupLeave(m.from, {quoted:m});
    },
   };
