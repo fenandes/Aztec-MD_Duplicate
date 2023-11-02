@@ -73,11 +73,8 @@ module.exports = {
       await xReact(aztec_react);
 
       fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
-       if (err) {
-       console.error(`Failed to delete audio file: ${err}`);
-       } else {
-       console.log(`Deleted audio file: ${tmpDir}/${title}.mp3`);
-       }
+      if (err) {} 
+      else {}
       });
       } catch (error) {
       console.error(error);
