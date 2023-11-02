@@ -3,7 +3,7 @@ const Heroku = require("heroku-client");
 const config = require("../config.js");
 const heroku = new Heroku({ token: config.HEROKU.API_KEY });
 const baseURI = "/apps/" + Config.HEROKU.APP_NAME;
-const { runtime } = require("../lib/index");
+const { runtime } = require("../mangoes/myFunc.js");
 
 module.exports = {
   name: "command",
