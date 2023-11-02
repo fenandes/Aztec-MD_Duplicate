@@ -14,18 +14,20 @@ const MessageHandler = require('./lib/message/vorterx');
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-  const { state, saveCreds, clearState } = await useMultiFileAuthState(__dirname + "/lib/session");
+  const { state, saveCreds, clearState } = await useMultiFileAuthState("session_Id");
   if (!fs.existsSync("./lib/session/creds.json")) {
   MakeSession(config.session_Id, "./lib/session/creds.json");
             
 
   const vorterx = VorterxConnection({
     logger: P({ level: "silent" }),
-    printQRInTerminal: false,
+    printQRInTerminal: true,
     browser: Browsers.macOS("Desktop"),
     qrTimeoutMs: undefined,
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
+    downloadHistory: false,
+    syncFullHistory: false,
   });
 
   store.bind(vorterx.ev);
