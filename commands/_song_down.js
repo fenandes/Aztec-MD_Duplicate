@@ -1,80 +1,84 @@
-const fs = require('fs');
 const ytdl = require('ytdl-core');
-const yts = require('yt-search');
+const yts = require('youtube-search');
+const fs = require('fs');
 const { pipeline } = require('stream');
 const { promisify } = require('util');
-const os = require('os');
-
+const tmp = require('tmp-promise');
+const axios = require('axios');
 const streamPipeline = promisify(pipeline);
+
+function vorterx_react(emojis) {
+const Index = Math.floor(Math.random() * emojis.length);
+return emojis[Index];
+}
 
 module.exports = {
   name: 'song',
-  description: 'Download songs',
+  alias: ['play', 'audio'],
+  description: 'To download random music',
   category: 'Downloads',
-  async xstart(vorterx, m, { xReact, text }) {
+  async xstart(vorterx, m, { xReact, text, doReply }) {
     if (!text) {
-      await xReact('⛔');
-      return m.reply('Please provide a song name (e.g., Banyana by Daliwonga).');
+     await xReact('❌');
+     return m.reply('Please provide the name of a song.');
     }
 
-     try {
-      await xReact('📤');
-      await m.reply('Downloading your song...');
+    try {
+      const query = encodeURIComponent(text);
+      const response = await axios.get(`https://gurubot.com/ytsearch?text=${query}`);
+      const final = response.data.results[0];
+      if (!final) {
+      await xReact('❌');
+       m.reply('Could not proceed, sorry');
+      return;
+      }
 
-       const searchResults = await yts(text);
-       const videos = searchResults.videos;
+      const { title, thumbnail, duration, views, uploaded, url } = final;
+      const replyMessage = `Downloading your '${title}'... ⏳`;
+      await vorterx.sendMessage(m.from, replyMessage, { quoted: m });
 
-        if (!videos.length) {
-        await xReact('⛔');
-        return m.reply('Song not found. Please try another name (e.g., Mnike by Tyler lcu).');
-       }
-
-       const randomIndex = Math.floor(Math.random() * videos.length);
-       const { title, thumbnail, url } = videos[randomIndex];
-
-       const tmpDir = os.tmpdir();
-       const fileName = `${title}.mp3`;
-
-       const audioStream = ytdl(url, {
-        filter: 'audioonly',
-        quality: 'highestaudio',
+      const audioStream = ytdl(url, {
+       filter: 'audioonly',
+       quality: 'highestaudio',
       });
 
-       const writableStream = fs.createWriteStream(`${tmpDir}/${fileName}`);
-       await streamPipeline(audioStream, writableStream);
+      const { path: tmpDir } = await tmp.dir();
+      const writableStream = fs.createWriteStream(`${tmpDir}/${title}.mp3`);
+      await streamPipeline(audioStream, writableStream);
 
-       const doc = {
+      const doc = {
         audio: {
-        url: `${tmpDir}/${fileName}`,
+        url: `${tmpDir}/${title}.mp3`,
         },
-        mimetype: 'audio/mp4',
-        fileName: title,
+        mimetype: 'audio/mpeg',
+        ptt: false,
+        waveform: [100, 0, 0, 0, 0, 0, 100],
+        fileName: `${title}`,
         contextInfo: {
           externalAdReply: {
             showAdAttribution: true,
             mediaType: 2,
             mediaUrl: url,
-            title,
-            body: 'Powered by Aztec',
+            title: title,
+            body: 'SONG DOWNLOADED',
             sourceUrl: url,
-            thumbnail,
-           },
-         },
+            thumbnail: thumbnail,
+          }, },
         };
 
-        await vorterx.sendMessage(m.from, doc, { quoted: m });
+      await vorterx.sendMessage(m.from, doc, { quoted: m });
+      const emojis = ['🎵', '🎶', '🎧', '🎼', '🎤'];
 
-        fs.unlink(`${tmpDir}/${fileName}`, (err) => {
-        if (err) {
-          console.error(`Failed to delete audio file: ${err}`);
-        } else {
-          console.log(`Deleted audio file: ${tmpDir}/${fileName}`);
-        }
-        });
-        } catch (error) {
-        console.error('Error occurred while processing the song:', error);
-        await xReact('⛔');
-        return m.reply('An error occurred while processing the song. Please try again later.');
+      const vorterx_react = vorterx_react(emojis);
+      await xReact(randomEmoji);
+
+      fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
+       if (err) {
+       console.error(`Failed to delete audio file: ${err}`);
+       } else {
+       console.log(`Deleted audio file: ${tmpDir}/${title}.mp3`);
        }
-      },
-     };
+      });
+      } catch (error) {
+      console.error(error);
+     }},};
