@@ -7,16 +7,16 @@ const fs = require("fs");
 const { Collection } = require('discord.js');
 const config = require('./config.js');
 const botName = config.botName;
-const { MakeSession } = require("./lib/session/session.js");
+//const { MakeSession } = require("./lib/session/session.js");
 const qr = require("qr-image");
 const contact = require('./mangoes/contact.js');
 const MessageHandler = require('./lib/message/vorterx');
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-  const { state, saveCreds, clearState } = await useMultiFileAuthState("session_Id");
-  if (!fs.existsSync("./lib/session/creds.json")) {
-  MakeSession(config.session_Id, "./lib/session/creds.json");
+  const { state, saveCreds, clearState } = await useMultiFileAuthState("session_Id")
+ // if (!fs.existsSync("./lib/session/creds.json")) {
+  //MakeSession(config.session_Id, "./lib/session/creds.json");
             
 
   const vorterx = VorterxConnection({
@@ -26,8 +26,8 @@ async function startAztec() {
     qrTimeoutMs: undefined,
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
-    downloadHistory: false,
-    syncFullHistory: false,
+   // downloadHistory: false,
+   // syncFullHistory: false,
   });
 
   store.bind(vorterx.ev);
