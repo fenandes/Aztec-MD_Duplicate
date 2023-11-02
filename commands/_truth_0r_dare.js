@@ -6,7 +6,6 @@ module.exports = {
   description: 'Truth or dare is a game to test your mind',
   category: 'games',
   async xstart(vorterx, m, { xReact, args, text }) {
-    
     if (args[0] === 'TruthOrDare') {
       await vorterx.sendMessage(
         'To play Truth or Dare, use one of the following commands:\n' +
@@ -34,7 +33,7 @@ module.exports = {
 
     await xReact(m, ['🆗', '❌']);
     const Aztecreactions = (reaction, user) =>
-    ['🆗', '❌'].includes(reaction.emoji.name) && user.id === m.author.id;
+      ['🆗', '❌'].includes(reaction.emoji.name) && user.id === m.author.id;
 
     const collected = await vorterx.awaitReactions(Aztecreactions, {
       max: 1,
@@ -44,9 +43,9 @@ module.exports = {
 
     const reaction = collected.first();
     if (reaction.emoji.name === '🆗') {
-    await vorterx.sendMessage(`Player ${m.author.username} accepted the promotion. Have fun😁`);
+      await vorterx.sendMessage(`Player ${m.author.username} accepted the promotion. Have fun😁`);
     } else {
-    await vorterx.sendMessage(`Player ${m.author.username} declined the promotion. Game is over.`);
+      await vorterx.sendMessage(`Player ${m.author.username} declined the promotion. Game is over.`);
     }
-   },
-  };
+  },
+};
