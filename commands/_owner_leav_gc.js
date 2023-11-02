@@ -3,7 +3,7 @@ module.exports = {
   description: "Leave the group you are currently in",
   category: "Group",
   async xstart(vorterx, m, { isAdmin, isGroup, xReact, isBotAdmin }) {
-    if (!isGroup) {
+    if (!m.isGroup) {
       const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
       const randomReaction = reactAztec[Math.floor(Math.random() * reactAztec.length)];
       await xReact(randomReaction);
