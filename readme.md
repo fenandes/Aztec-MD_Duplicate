@@ -14,8 +14,9 @@
 > This Script WhatsApp Bot Using Whiskey Baileys & Script is free for everyone, not for Sale!
 ---
 
-### DEPLOYMENT METHOD
-[![Deploy with Heroku](https://www.herokucdn.com/deploy/button.svg "Deploy with Heroku")](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD/blob/master/ "Deploy with Heroku")
+### DEPLOY
+<a href="https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD/"><img title="DEPLOY" src="https://img.shields.io/badge/DEPLOY-h?color=black&style=for-the-badge&logo=heroku"></a>
+
 --- 
 </a>
 
