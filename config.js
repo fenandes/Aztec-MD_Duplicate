@@ -7,7 +7,6 @@
 //                     |
 //                     ------------------------------------------------------
 
-
 const fs = require('fs');
 require('dotenv').config();
 const chalk = require('chalk');
@@ -22,21 +21,12 @@ let config = {
   menu: process.env.MENU || '', // 2 is the default menu Aztec, 0 is Suhail MD menu
   thumb: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
-  neofetchOptions: {
-    os: true,
-    kernel: true,
-    uptime: true,
-    packages: true,
-    shell: true,
-  },
-  fileUrl: process.env.FILE_URL || 'https://example.com/file',
-  uploadFileUrl: process.env.UPLOAD_FILE_URL || 'https://example.com/upload', // https://eu.httpbin.org/stream-bytes/500000
   LANG: process.env.LANG || 'VOR_TERX',
 };
 
 config.HEROKU = {
-API_KEY: process.env.HEROKU_API_KEY || '',
-APP_NAME: process.env.HEROKU_APP_NAME || '',
+  API_KEY: process.env.HEROKU_API_KEY || '',
+  APP_NAME: process.env.HEROKU_APP_NAME || '',
 };
 
 module.exports = config;
@@ -49,7 +39,7 @@ function watchAndReloadConfig(filePath) {
   console.log(chalk.redBright(`Configuration file '${filePath}' updated`));
   delete require.cache[filePath];
   config = require(filePath);
- });
+  });
 }
 
 process.on('SIGINT', () => {
