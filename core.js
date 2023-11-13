@@ -72,11 +72,15 @@ async function startAztec() {
     }
 
     if (connection === "open") {
-      const aztec_text = `\`\`\`Vorterx connected \nversion : ${require(__dirname + "/package.json").version}\nBotName: ${botName}\`\`\``;
+      const vorsion = ${require(__dirname +"/package.json").version}
+      const  BotName = ${require (__dirname +"/config.js").botName}
+      const Mods = ${require(__dirname + "/config.js").mods}
+      const aztec_text = 
+      `\`\`\`Vorterx connected \nversion : ${vorsion}\nBotName: ${BotName}\nNUMBER: ${Mods}\`\`\``;
       vorterx.sendMessage(vorterx.user.id, { text: aztec_text });
     }
     if (update.qr) {
-      vorterx.QR = qr.imageSync(update.qr);
+     vorterx.QR = qr.imageSync(update.qr);
     }
   });
 
