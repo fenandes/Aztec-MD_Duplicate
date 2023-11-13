@@ -4,55 +4,34 @@
 
 //===============>
 
-const fs = require("fs");
-const util = require("util");
-const neofetch = require("neofetch");
-const axios = require("axios");
-
-const readFile = util.promisify(fs.readFile);
-const downloadFile = util.promisify(axios.get);
-
-const config = require("../config");
+const { getFileSizeInMB, getCpuSpeed, getUploadSpeed } = require("../lib/_speedSystem.js");
+const os = require("os");
+const speed = require("performance-now");
+const { exec } = require("child_process");
 
 module.exports = {
-  name: 'ping',
-  category: 'user',
-  description: 'Check ping',
-  async xstart(vorterx, m, { xReact }) {
-    await xReact("🚀");
+   name: 'ping',
+   category: 'Mics',
+   description: 'Check the speedy',
+   async xstart(vorterx, m, { xReact,text }) {
+      await xReact("🏇");
 
-    const start = process.hrtime();
+      const fileSizeInMB = getFileSizeInMB("../lib/_speedSystem");
+      const cpuSpeedResult = { speed: getCpuSpeed() }; 
+      const uploadSpeedInMbps = getUploadSpeed(); 
 
-    try {
-      const { neofetchOptions, fileUrl, uploadFileUrl } = config;
+      const startTimestamp = speed();
+      exec(`neofetch --stdout`, (error, stdout, stderr) => {
+         const endTimestamp = speed();
+         const latency = endTimestamp - startTimestamp;
 
-      const systemInfo = await neofetch(neofetchOptions);
-      const end = process.hrtime(start);
-      const latency = (end[0] * 1000 + end[1] / 1000000).toFixed(4);
+         const child = stdout.toString("utf-8");
+         const aztec = child.replace(/Memory:/, "Ram:");
 
-      const formattedOutput = systemInfo.replace(/Memory:/, "Ram:");
-
-      const fileResponse = await downloadFile(fileUrl, { responseType: 'stream' });
-      const fileSizeInBytes = fileResponse.headers['content-length'];
-      const fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
-
-      const uploadStartTime = process.hrtime();
-      await axios.post(uploadFileUrl, fs.createReadStream(fileUrl));
-      const uploadEndTime = process.hrtime(uploadStartTime);
-      const uploadSpeedInBitsPerSecond = (fileSizeInBytes * 8) / (uploadEndTime[0] + uploadEndTime[1] / 1e9);
-      const uploadSpeedInMbps = (uploadSpeedInBitsPerSecond / 1e6).toFixed(2);
-
-      m.reply(`
-        ${formattedOutput}
-        *🛑 Performance:* ${latency} ms
-        *📥 File Size:* ${fileSizeInMB} MB
-        *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
-        *📖 RAM Speed:* ${ramSpeedResult} MB/s
-        *📤 Upload Speed:* ${uploadSpeedInMbps} Mbps
-      `);
-    } catch (error) {
-      console.error("➖Failed to retrieve system information:", error);
-      m.reply("➖Failed to retrieve system information.");
-    }
-  }
-};
+         m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
+         *📥 File Size:* ${fileSizeInMB} MB
+         *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
+         *📤 Upload Speed:* ${uploadSpeedInMbps} Mbps`);
+      });
+     }
+   };
