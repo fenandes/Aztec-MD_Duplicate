@@ -15,7 +15,7 @@ module.exports = {
     try {
       const fetch = await import("node-fetch");
       const response = await fetch.default(
-        `https://xzn.wtf/api/openai?text=${encodeURIComponent(text)}&apikey=aztec`
+        `https://api.botcahx.live/api/search/gpt?text=${text}&apikey=${aztec}`
       );
       const result = await response.json();
       const aiTurbo = result.result;
