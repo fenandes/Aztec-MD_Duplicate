@@ -36,9 +36,9 @@ async function startAztec() {
   vorterx.contact = contact;
 
   async function readcommands() {
-    const cmdfile = fs.readdirSync("./commands").filter((file) => file.endsWith(".js"));
+    const cmdfile = fs.readdirSync("./commanded").filter((file) => file.endsWith(".js"));
     for (const file of cmdfile) {
-      const command = require(`./commands/${file}`);
+      const command = require(`./commanded/${file}`);
       vorterx.cmd.set(command.name, command);
     }
   }
