@@ -5,7 +5,7 @@ module.exports = {
   name: 'gcfullp',
   description: 'Set group full picture dp',
   category: 'Group',
-  async xstart(vorterx, m, { isAdmin, isBotAdmin, xReact, text, quoted, args }) {
+  async xstart(vorterx, m, { isAdmin, isBotAdmin, mime, xReact, text, quoted, args }) {
    
     if (!isAdmin) {
       await xReact("❌");
