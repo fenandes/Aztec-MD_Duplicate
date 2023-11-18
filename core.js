@@ -15,7 +15,7 @@ const MessageHandler = require('./lib/message/vorterx');
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
   const { state, saveCreds } = await useMultiFileAuthState(__dirname + './auth_info_baileys/')
-  if (!fs.existsSync("./lib/session/creds.json")) {
+  if (!fs.existsSync("./lib/auth_info_baileya/")) {
   MakeSession(config.session_Id, "./auth_info_baileys/");
             
 
