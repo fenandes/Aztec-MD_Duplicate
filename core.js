@@ -21,7 +21,7 @@ async function startAztec() {
 
   const vorterx = VorterxConnection({
     logger: P({ level: "silent" }),
-    printQRInTerminal: true,
+    printQRInTerminal: false,
     browser: Browsers.macOS("Desktop"),
     qrTimeoutMs: undefined,
     auth: state,
