@@ -5,8 +5,8 @@ module.exports = {
   alias: ['tiktok'],
   description: 'TikTok Video Downloader',
   category: 'Downloads',
-  async xstart(vorterx, m, { xReact, text }) {
-    await xReact("📤");
+  async xstart(vorterx, m) {
+  
     await downloadTikTokVideo(vorterx, m);
   },
 };
