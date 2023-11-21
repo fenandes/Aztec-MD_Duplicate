@@ -7,6 +7,6 @@ module.exports = {
   category: 'Downloads',
   async xstart(vorterx, m, { xReact, text }) {
     await xReact("📤");
-    await downloadTikTokVideo(vorterx, m, { xReact, text });
+    await downloadTikTokVideo(vorterx, m);
   },
 };
