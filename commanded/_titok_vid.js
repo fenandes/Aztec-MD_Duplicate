@@ -1,4 +1,4 @@
-const downloadTikTokVideo = require("./path/to/downloadTikTokVideo.js");
+const downloadTikTokVideo = require("../lib/plugins/_tiktok.js");
 
 module.exports = {
   name: 'tik',
