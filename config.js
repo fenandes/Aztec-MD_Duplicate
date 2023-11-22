@@ -14,10 +14,10 @@ const chalk = require('chalk');
 let config = {
   botName: process.env.BOTNAME || 'AZTEC MD',
   prefix: process.env.PREFIX || '.',
+  name: process.env.OWNER_NAME || '', //Add your name here as its required
   owner_number: process.env.OWNER_NUMBER || '27686881509',
   session_Id: process.env.SESSION_ID || 'add something',
   level_up: process.env.LEVEL_UP || '', // Set true or false or enable/disable
-  AUTO_REACT: process.env.AUTO_REACT || '', // on or off to turn it on and off
   menu: process.env.MENU || '', // 2 is the default menu Aztec, 0 is Suhail MD menu
   thumb: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
