@@ -24,8 +24,8 @@
     "LANG": {
     "description": "Choose images to show on menu available images(VOR_TERX)",
     },
-    "AUTO_REACT": {
-    "description": "For auto react (e.g on or off)",
+    "OWNER_NAME": {
+    "description": "Add your name (e.g diegosonTech or suhailTechInfo)",
     },
     "MENU": {
     "description": "Choose number between 0 and 2 were 2 is aztec menu 0 suhail menu or if you want it to change randomly leave it blank",
