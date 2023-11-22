@@ -10,14 +10,14 @@ const botName = config.botName;
 const { MakeSession } = require("./lib/session/session.js");
 const qr = require("qr-image");
 const contact = require('./mangoes/contact.js');
-const MessageHandler = require('./lib/message/vorterx');
+const MessageHandler = require('./lib/message/vorterx.js');
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-  const { state, saveCreds } = await useMultiFileAuthState(__dirname + './lib/auth_info_baileys/')
+  const { state, saveCreds } = await useMultiFileAuthState(__dirname + './lib/auth_info_baileys/');
   if (!fs.existsSync("./lib/auth_info_baileys/")) {
-  MakeSession(config.session_Id, "./lib/auth_info_baileys/");
-            
+    MakeSession(config.session_Id, "./lib/auth_info_baileys/");
+  }
 
   const vorterx = VorterxConnection({
     logger: P({ level: "silent" }),
@@ -69,17 +69,17 @@ async function startAztec() {
       }
     }
 
-if (connection === "open") {
-  const version = require(__dirname + "/package.json").version;
-  const BotName = require(__dirname + "/config.js").botName;
-  const Mods = require(__dirname + "/config.js").mods;
-  const aztec_text = `\`\`\`Vorterx connected \nversion: ${version}\nBotName: ${BotName}\nNUMBER: ${Mods}\`\`\``;
-  vorterx.sendMessage(vorterx.user.id, { text: aztec_text });
-}
+    if (connection === "open") {
+      const version = require(__dirname + "/package.json").version;
+      const BotName = require(__dirname + "/config.js").botName;
+      const Mods = require(__dirname + "/config.js").mods;
+      const aztec_text = `\`\`\`Vorterx connected \nversion: ${version}\nBotName: ${BotName}\nNUMBER: ${Mods}\`\`\``;
+      vorterx.sendMessage(vorterx.user.id, { text: aztec_text });
+    }
 
-if (update.qr) {
-vorterx.QR = qr.imageSync(update.qr);
-}
+    if (update.qr) {
+      vorterx.QR = qr.imageSync(update.qr);
+    }
   });
 
   app.get("/", (req, res) => {
