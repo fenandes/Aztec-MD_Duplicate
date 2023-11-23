@@ -12,8 +12,8 @@ module.exports = {
   async xstart(vorterx,m,{args,xReact,text}) {
    
   try {
-     const author = process.env."DSAN";
-     const owner = '',
+     const author = 'vorterx';
+     const owner = '';
       
       const content = JSON.stringify(m.quoted);
       const isQuotedSticker = (m.type === 'extendedTextMessage' && content.includes('stickerMessage'));
