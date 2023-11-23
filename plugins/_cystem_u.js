@@ -9,7 +9,7 @@ module.exports = {
   name: "system",
   description: "To check the system status",
   category: "user",
-  async xstart(vorterx, m, { xReact,text }) {
+  async xstart(vorterx, m, { xReact, text }) {
     const latensi = now() - now();
     await xReact("📟");
 
@@ -19,9 +19,9 @@ module.exports = {
     aztec += `❲❒❳ *RAM :* _${formatp(os.totalmem() - os.freemem())}/${formatp(
       os.totalmem()
     )}_\n`;
-    aztec += `❲❒❳ *Speed : _${latensi.toFixed(4)}sec_*\n`;
+    aztec += `❲❒❳ *Speed :* _${latensi.toFixed(4)}sec_*\n`;
     aztec += `❲❒❳ *Runtime :* _${runtime(process.uptime())}_\n`;
-    aztec += `❲❒❳ *Platform :* ${os.platform()}.com\n`;
+    aztec += `❲❒❳ *Platform :* ${os.platform()}\n`;
     aztec += `❲❒❳ *Platform ID :* ${os.hostname()}\n\n`;
     aztec += `❲❒❳ *Latest GPT Version :* ${await getLatestGPTVersion()}\n\n`;
     aztec += `*©vorterx-team*`;
