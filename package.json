@@ -11,8 +11,8 @@
   },
   "author": "Diegoson",
   "dependencies": {
-    "@adiwajishing/baileys": "npm:@whiskeysockets/baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
+    "@whiskeysockets/baileys": "^6.5.0",
     "@consumet/extensions": "^1.5.2",
     "@hapi/boom": "^10.0.1",
     "@types/node": "^16.9.1",
@@ -35,7 +35,6 @@
     "fb-info-video": "^1.0.2",
     "discord.js": "^13.3.0",
     "dotenv": "^16.3.1",
-    "better-sqlite3": "^9.0.0",
     "emoji-strip": "^1.0.1",
     "jimp": "^0.16.1",
     "ffmpeg": "^0.0.4",
