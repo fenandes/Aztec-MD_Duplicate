@@ -3,7 +3,14 @@ const config = require("../../config.js");
 const prefix = config.prefix;
 const { aztec_images } = require("../../mangoes/encryptFunc.js");
 
-async function send_Alive(vorterx, m) {
+module.exports = {
+    name: 'alive',
+    alias: ['bot'],
+    description: 'To check the bot alive or off',
+    category: 'Mics',
+    async xstart(vorterx,m,{text,xReact}) {
+
+        await xReact('🧘');
 const image = {
     url: "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
     mimetype: "image/jpeg",
@@ -40,6 +47,5 @@ const image = {
     },
   };
  await vorterx.sendMessage(m.from, messageOptions, { quoted: m });
-}
+}}
 
-module.exports = send_Alive;
