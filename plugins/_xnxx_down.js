@@ -4,9 +4,9 @@
 
 module.exports = {
   name: "xnxxdn",
-  description: "To download xnxx videos",
+  description: "Download XNXX videos",
   category: "Download",
-  async xstart(vorterx, m, { xReact, text, doReply, args }) {
+  async xstart(vorterx, m, { xReact, text, args }) {
     const axios = require("axios");
 
     if (!text) {
@@ -18,7 +18,8 @@ module.exports = {
     let urlYt = text;
     if (!urlYt.startsWith("https")) {
       await xReact("⛔");
-     doReply("*😏 Provide me with an XNXXVD link.*");
+      m.reply("*😏 Provide me with an XNXXVD link.*");
+      return;
     }
 
     await xReact("🍑");
@@ -26,33 +27,30 @@ module.exports = {
     const res = await axios(`https://raganork-network.vercel.app/api/xvideos/download?url=${text}`);
     const video = res.data;
 
-    let D3centX = `╭─🎬*XNXX VIDEO DOWNLOAD*
-│
-├ 🍑TITLE: XNXX
-├ 
-├ 📟BOTNAME: ${process.env.BOTNAME}
-├ 
-├ 📤DOWNLOAD LINK: [${video}]
-│
-╰──────────⭑ `;
+    let ca_pe = `
+🎬 *XNXX VIDEO DOWNLOAD*
+🍑 *Title:* XNXX
+📟 *Bot Name:* ${process.env.BOTNAME}
+📤 *Download Link:* [${video}]
+`;
 
     let buttonMessage = {
       video: video,
       mimetype: "video/mp4",
       fileName: `vorterx.mp4`,
-      caption: D3centX,
+      caption: ca_pe,
       gifPlayback: false,
       height: 496,
       width: 640,
-      headerType: 4,
-      headerType: 4,
-        messageOptions: {
+      headerType: 1,
+      messageOptions: {
         textColor: "#ffffff", 
-        backgroundColor: "#333333", 
-        footerBackgroundColor: "#222222",  
-        },
-     };
+        backgroundColor: "#000000", 
+        footerTextColor: "#ffffff",
+        footerBackgroundColor: "#333333",  
+      },
+    };
 
     return await vorterx.sendMessage(m.from, buttonMessage, { quoted: m });
-   },
-  };
+  },
+};
