@@ -71,6 +71,7 @@
     "ytdl-core": "^4.11.5",
     "youtube-yts": "^2.0.0", 
     "youtubedl-core": "^4.11.5",
+    "youtube-search": "^1.1.6",
     "mongodb": "^5.9.0"
   },
   "directories": {
