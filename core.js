@@ -9,7 +9,7 @@ const config = require('./config.js');
 const botName = config.botName;
 const { MakeSession } = require("./lib/session/session.js");
 const qr = require("qr-image");
-const contact = require('./mangoes/contact.js');
+const contact = require('./connects/contact.js');
 const MessageHandler = require('./lib/message/vorterx.js');
 
 async function startAztec() {
