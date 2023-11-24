@@ -63,10 +63,16 @@ module.exports = {
       const allCommands = readUniqueCommands(pluginsDir);
       const formattedCommands = formatCommands(allCommands);
       
-      var helpText = `\nKonnichiwa *${m.pushName}* Senpai,\n\nI am *DSAN*, a WhatsApp bot built to take your boring WhatsApp experience to the next level.\n\n*🔖 My Prefix is:*  ${PREFIX}\n\n${formattedCommands}\n\n\n*©️ Team ATLAS- 2023*`;
+     let amarok = `${up_up}
+${up_mid} User: ${tiny(m.pushName)}
+${up_mid} Botname: ${tiny(process.env.BOTNAME)}
+${up_mid} Prefix: ${tiny(process.env.PREFIX)}
+${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
+${up_mid} Time: ${tiny(time)}
+${up_mid} Date: ${tiny(date)}
+${up_btm}\n\n${formattedCommands}`;
 
-      await vorterx.sendMessage(m.from, {
-        image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: helpText }, { quoted: m });
+      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
       } catch (err) {
       m.reply(err.toString());
       console.log(err, 'red');
