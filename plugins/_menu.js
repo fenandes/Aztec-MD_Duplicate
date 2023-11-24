@@ -81,7 +81,7 @@ module.exports = {
   description: 'Reveals menu categories commands',
 
   async xstart(vorterx, m, { text, args, xReact }) {
-    await xReact('🏋️');
+    await xReact('Ⓜ️');
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
 
