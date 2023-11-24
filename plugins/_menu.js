@@ -63,12 +63,12 @@ function formatCommands(allCommands) {
       cmd_L = ` | `;
       ctgry_end = `\n\n└─────────◉\n`;
     }
-
-    formatted += `╟   🏮 *${capitalizedFile}* 🏮   ╢\n\n`;
-    formatted += `\`\`\`${commands
-      .map((cmd) => `${cmd_L}  ${PREFIX + cmd}`)
-      .join("\n")}\`\`\`\n\n\n`;
-  }
+    const aliasesList = aliases
+       .map((cmd) => `${cmd_L} ${PREFIX}${cmd}`)
+       .join("\n");
+    formatted += `${ctgry_L} *${capitalizedFile}* ${ctgry_R}\n\n`;
+    formatted += `\`\`\`${aliasesList}\`\`\`${ctgry_end}\n`;
+    }
 
   return formatted.trim();
 }
