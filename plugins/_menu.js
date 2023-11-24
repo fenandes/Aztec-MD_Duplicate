@@ -1,5 +1,7 @@
 const path = require("path");
 const config = require('../config.js');
+const path = require("path");
+const config = require('../config.js');
 const fs = require("fs");
 
 const PREFIX = process.env.PREFIX;
@@ -47,7 +49,7 @@ function formatCommands(allCommands) {
       process.env.MENU.trim().startsWith("1") ||
       process.env.MENU.toLowerCase().includes("suhail-md")
     ) {
-      up_up = `╭────《  *${tiny(process.env.BOTNAME)}*  》────⊷\n│ ╭──────✧❁✧──────◆`;
+      up_up = `╭────《  *${process.env.BOTNAME}*  》────⊷\n│ ╭──────✧❁✧──────◆`;
       up_mid = `│`;
       up_btm = `│ ╰──────✧❁✧──────◆\n╰══════════════════⊷`;
       ctgry_L = `╭────❏`;
@@ -55,7 +57,7 @@ function formatCommands(allCommands) {
       cmd_L = `│`;
       ctgry_end = `\n╰━━━━━━━━━━━━━━──⊷`;
     } else {
-      up_up = `┏━━⟪ *${tiny(process.env.BOTNAME)}* ⟫━━⦿`;
+      up_up = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
       up_mid = `┃ ✗`;
       up_btm = `┗━━━━━━━━━━━━━━⦿`;
       ctgry_L = `\n┌──『`;
@@ -63,12 +65,12 @@ function formatCommands(allCommands) {
       cmd_L = ` | `;
       ctgry_end = `\n\n└─────────◉\n`;
     }
-    const aliasesList = aliases
-       .map((cmd) => `${cmd_L} ${PREFIX}${cmd}`)
-       .join("\n");
+    const aliasesList = commands
+      .map((cmd) => `${cmd_L} ${PREFIX}${cmd}`)
+      .join("\n");
     formatted += `${ctgry_L} *${capitalizedFile}* ${ctgry_R}\n\n`;
     formatted += `\`\`\`${aliasesList}\`\`\`${ctgry_end}\n`;
-    }
+  }
 
   return formatted.trim();
 }
@@ -92,18 +94,18 @@ module.exports = {
       const formattedCommands = formatCommands(allCommands);
 
       let amarok = `${up_up}
-${up_mid} User: ${tiny(m.pushName)}
-${up_mid} Botname: ${tiny(process.env.BOTNAME)}
-${up_mid} Prefix: ${tiny(process.env.PREFIX)}
-${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
-${up_mid} Time: ${tiny(time)}
-${up_mid} Date: ${tiny(date)}
+${up_mid} User: ${m.pushname}
+${up_mid} Botname: ${process.env.BOTNAME}
+${up_mid} Prefix: ${process.env.PREFIX}
+${up_mid} Runtime: ${process.uptime()} seconds
+${up_mid} Time: ${new Date().toLocaleTimeString()}
+${up_mid} Date: ${new Date().toLocaleDateString()}
 ${up_btm}\n\n${formattedCommands}`;
-
-      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
-    } catch(err) {
-      m.reply(err.toString());
-      console.log(err, 'red');
+      
+  await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
+   } catch(err) {
+   m.reply(err.toString());
+   console.log(err, 'red');
     }
   }
 };
