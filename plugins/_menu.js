@@ -1,7 +1,6 @@
 const path = require("path");
 const config = require('../config.js');
-const path = require("path");
-const config = require('../config.js');
+const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
 
 const PREFIX = process.env.PREFIX;
