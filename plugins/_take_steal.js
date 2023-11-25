@@ -1,7 +1,7 @@
 const { Sticker, StickerTypes } = require('wa-sticker-formatter');
-const { getBuffer } = require("../../mangoes/myFunc.js");
+const { getBuffer } = require("../connects/myFunc.js");
 const fs = require("fs");
-let { downloadMedia } = require("./message/_D3centX.js");
+let { downloadMedia } = require("../lib/message/_D3centX.js");
 const axios = require("axios");
 
 module.exports = {
