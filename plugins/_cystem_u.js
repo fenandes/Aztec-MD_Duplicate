@@ -1,4 +1,4 @@
-const { formatp, runtime } = require("../mangoes/myFunc.js");
+const { formatp, runtime } = require("../connects/myFunc.js");
 const chalk = require("chalk");
 const { bubble } = require("@viper-x/fancytext");
 const { getLatestGPTVersion } = require("../lib/myModule.js");
