@@ -1,4 +1,4 @@
-const translate = require('translate-google-api');
+const translate = require('google-translate-api');
 
 module.exports = {
   name: 'tr',
@@ -25,7 +25,7 @@ module.exports = {
     try {
       await xReact('📝');
       const result = await translate(data, { to: lang });
-      const caption = `📝Text: ${data}\n🧘Translated: ${result}`;
+      const caption = `📝Text: ${data}\n🧘Translated: ${result.text}`;
       await m.reply(caption);
     } catch (error) {
       let errorMessage = 'An error occurred while translating';
