@@ -1,7 +1,6 @@
 const fs = require("fs");
-const config = require("../../config.js");
+const config = require("../config.js");
 const prefix = config.prefix;
-const { aztec_images } = require("../../mangoes/encryptFunc.js");
 
 module.exports = {
     name: 'alive',
