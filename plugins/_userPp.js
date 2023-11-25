@@ -6,7 +6,7 @@ module.exports = {
   alias: ['profile'],
   description: 'Get the user profile picture',
   category: 'General',
-  async xstart(vorterx, m,{xReact,text,mime, args) {
+  async xstart(vorterx, m,{xReact,text,mime, args}) {
     if (!m.quoted) {
       await xReact('❌');
       return m.reply(`*_Please Reply To A User To Get Profile Picture_*`);
