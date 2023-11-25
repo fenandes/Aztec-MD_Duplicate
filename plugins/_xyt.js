@@ -5,7 +5,7 @@
 // MADE WITH LUV BY DIEGOSON
 
 //================================>
-const { getBuffer } = require("../mangoes/myFunc.js");
+const { getBuffer } = require("../connects/myFunc.js");
 const yts = require("youtube-yts");
 
 module.exports = {
