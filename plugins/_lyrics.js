@@ -10,7 +10,7 @@ module.exports = {
       return m.reply('Please provide a song name');
     }
 
-    const apiUrl = `https://api.neoxr.eu/api/song?q=${encodeURIComponent(text)}`;
+    const apiUrl = `https://api.neoxr.eu/api/lyric?q=${encodeURIComponent(text)}&apikey=AlMiT7`;
 
     try {
       await xReact('🍏');
