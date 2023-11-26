@@ -2,7 +2,7 @@ const fs = require("fs");
 const config = require("../config.js");
 const prefix = config.prefix;
 
-let customAliveMsg = ""; // Variable to store the custom alive message
+let customAliveMsg = "";
 
 module.exports = {
   name: 'alive',
