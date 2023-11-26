@@ -71,12 +71,12 @@ case 'script':
     const gitMsg = `
       🌟 Repository Information 🌟
       ----------------------------
-      Name:          ${repo.name}
-      Stars:         ${repo.stargazers_count}
-      Forks:         ${repo.forks_count}
-      License:       ${repo.license.name}
-      Last Updated:  ${new Date(repo.updated_at).toLocaleDateString()}
-      Repository URL: ${repo.html_url}
+    * 〄 _Name:    ${repo.name}
+    * 〄 _Stars:   ${repo.stargazers_count}
+    * 〄 _Forks:    ${repo.forks_count}
+    * 〄 _License:   ${repo.license.name}
+    * 〄 _Updated_At:  ${new Date(repo.updated_at).toLocaleDateString()}
+    * 〄 _Scrip_URL: ${repo.html_url}
     `;
 
     vorterx.sendMessage(m.from, { image: az_git, caption: gitMsg }, { quoted: m});
