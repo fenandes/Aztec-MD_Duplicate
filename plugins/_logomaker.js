@@ -6,8 +6,8 @@ module.exports = {
   description: "Logo maker",
   category: "logomaker",
   async xstart(vorterx, m, { text, xReact, args }) {
+   
     const command = args[0];
-
     if (command === "help") {
       const commandsList =`
 ┌─『 *LOGO MAKERS* 』─❖
@@ -39,9 +39,9 @@ module.exports = {
  `;
 
       const formattedList = commandsList.map((cmd) => `- ${cmd}`).join("\n");
-      const helpMessage = `Available logo commands:\n\n${formattedList}`;
+      const helpMsg = `Available logo commands:\n\n${formattedList}`;
 
-      await vorterx.sendMessage(m.from, helpMessage, { quoted: m });
+      await vorterx.sendMessage(m.from, helpMsg, { quoted: m });
       return;
     }
 
@@ -61,8 +61,8 @@ module.exports = {
 
           vorterx.sendMessage(m.from, {
             image: { url: anu.image },
-            caption: `*Requested by*: *${pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
-          }, { quoted: m });
+            caption: `*Requested by*: *${m.pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
+            }, { quoted: m });
         } catch (error) {
           console.error(error);
           await xReact("❌");
@@ -85,8 +85,8 @@ module.exports = {
 
           vorterx.sendMessage(m.from, {
             image: { url: anu.image },
-            caption: `*Requested by*: *${pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
-          }, { quoted: m });
+            caption: `*Requested by*: *${m.pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
+            }, { quoted: m });
         } catch (error) {
           console.error(error);
           await xReact("❌");
@@ -109,8 +109,8 @@ module.exports = {
 
           vorterx.sendMessage(m.from, {
             image: { url: anu.image },
-            caption: `*Requested by*: *${pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
-          }, { quoted: m });
+            caption: `*Requested by*: *${m.pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
+            }, { quoted: m });
         } catch (error) {
           console.error(error);
           await xReact("❌");
@@ -133,8 +133,8 @@ module.exports = {
 
           vorterx.sendMessage(m.from, {
             image: { url: anu.image },
-            caption: `*Requested by*: *${pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
-          }, { quoted: m });
+            caption: `*Requested by*: *${m.pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
+            }, { quoted: m });
         } catch (error) {
           console.error(error);
           await xReact("❌");
