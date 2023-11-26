@@ -84,7 +84,7 @@ await xReact('🌲');
     
     *〄 _Scrip_URL*: *${repo.html_url}*\n\n\n*WHATSAPP CHATBOT*
     `;
-
+     const az_git = "https://i.ibb.co/fHZz1kV/2076264-200.png";
     vorterx.sendMessage(m.from, { image: az_git, caption: gitMsg }, { quoted: m});
   } catch (error) {
     console.error(error);
