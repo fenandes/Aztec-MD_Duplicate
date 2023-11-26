@@ -127,7 +127,7 @@ await xReact('🌲');
 
           const weatherReport = formatWeatherReport(weatherData);
 
-          const gifUrl = "https://media.tenor.com/bC57J4v11UcAAAPo/weather-sunny.mp4";
+          const gifUrl = "https://i.ibb.co/tD6DL2h/Cloud-burst.gif";
 
           await vorterx.sendMessage(m.from, { body: weatherReport, url: gifUrl, caption: weatherReport, gifPlayback: true }, m);
         } catch (error) {
