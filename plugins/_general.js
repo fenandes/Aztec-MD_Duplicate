@@ -63,9 +63,11 @@ ${prefix}setalive <your message>
     setalive(vorterx, m, { text }) {
     if (isCreator(m.sender)) {
       customAliveMsg = text; 
-      vorterx.reply(m.from, "Custom alive message set successfully!");
+      await xReact('✔️');
+      m.reply("Custom alive message set successfully!");
     } else {
-      vorterx.reply(m.from, "Sorry, you are not authorized to set the custom alive message.");
+      await xReact('❌');
+      m.reply("Sorry, you are not authorized to set the custom alive message.");
     }
   },
 };
