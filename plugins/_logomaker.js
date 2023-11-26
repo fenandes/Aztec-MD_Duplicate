@@ -24,6 +24,30 @@ module.exports = {
     }
 
     switch (command) {
+      case 'black':
+        !text) {
+          await xReact("🤬");
+          return m.reply("*Provide me a text bruh ex black vorterx*");
+        }
+
+        await xReact("👻");
+        try {
+          const url = "https://textpro.me/shiny-black-3d-text-effect-generator-1143.html";
+          const response = await axios.get(url);
+          const html = response.data;
+          const anu = await maker.textpro(html, text);
+
+          vorterx.sendMessage(m.from, {
+            image: { url: anu.image },
+            caption: `*Requested by*: *${pushName}*\n\n*Created by*: *${process.env.BOTNAME}*\n`
+          }, { quoted: m });
+        } catch (error) {
+          console.error(error);
+          await xReact("❌");
+          return m.reply("An error occurred while generating the logo.");
+        }
+        break;
+        
       case "drug":
         if (!text) {
           await xReact("🤬");
