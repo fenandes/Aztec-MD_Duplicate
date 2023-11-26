@@ -10,10 +10,32 @@ module.exports = {
 
     if (command === "help") {
       const commandsList = [
-        "drug - Generate a logo with a plastic bag drug text effect",
-        "shadow - Generate a logo with a gradient text shadow effect",
-        "friday - Generate a logo with a neon light style 3D text effect",
-                
+        ┌─『 *LOGO MAKERS* 』─❖
+
+ | -neon
+ |-neon-light
+ | -black
+ | -friday
+ | -drug
+ | -avengers
+ | -shadow
+ | -graffity
+ | -scifi
+ | -
+ | -fbdl
+ | -mediafiredl
+ | -truth
+ | -dare
+ | -coinflip
+ | -dice
+ | -fact
+ | -awesomecheck
+ | -charactercheck
+ | -cutecheck
+ | -gaycheck
+ | -greatcheck
+ | -handsomechec
+      
       ];
 
       const formattedList = commandsList.map((cmd) => `- ${cmd}`).join("\n");
