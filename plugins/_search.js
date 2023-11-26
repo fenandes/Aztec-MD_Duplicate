@@ -79,7 +79,7 @@ case 'script':
       Repository URL: ${repo.html_url}
     `;
 
-    vorterx.sendMessage(m.from, { image: az_git}, caption: gitMsg ,{ quoted: m}
+    vorterx.sendMessage(m.from, { image: az_git, caption: gitMsg }, { quoted: m});
   } catch (error) {
     console.error(error);
   }
