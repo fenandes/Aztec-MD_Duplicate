@@ -24,9 +24,9 @@ module.exports = {
  | -green-neon
  | -matrix
  | -glitch
- | -truth
- | -dare
- | -coinflip
+ | -black-pink
+ | -batman
+ | -liquid
  | -dropwater
  | -fact
  | -thunder
