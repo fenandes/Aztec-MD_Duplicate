@@ -33,7 +33,7 @@ module.exports = {
  | -charactercheck
  | -bare
  | -neon-style
- | -greatcheck
+ | -futuristic
  | -handsomechec
  └─────────◉   
       ];
