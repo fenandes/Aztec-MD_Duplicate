@@ -10,7 +10,7 @@ module.exports = {
 
     if (command === "help") {
       const commandsList = [
-        ┌─『 *LOGO MAKERS* 』─❖
+┌─『 *LOGO MAKERS* 』─❖
 
  | -neon
  |-neon-light
@@ -35,7 +35,7 @@ module.exports = {
  | -gaycheck
  | -greatcheck
  | -handsomechec
-      
+ └─────────◉   
       ];
 
       const formattedList = commandsList.map((cmd) => `- ${cmd}`).join("\n");
