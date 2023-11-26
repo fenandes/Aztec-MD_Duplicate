@@ -63,6 +63,7 @@ module.exports = {
         
 case 'sc':
 case 'script':
+await xReact('🌲');
   try {
     const repoUrl = 'https://api.github.com/repos/Vorterx/Aztec-MD';
     const repoResponse = await axios.get(repoUrl);
@@ -87,6 +88,7 @@ case 'script':
     vorterx.sendMessage(m.from, { image: az_git, caption: gitMsg }, { quoted: m});
   } catch (error) {
     console.error(error);
+    m.reply('An error occurred while checking aztec md repo');
   }
   break;
         
