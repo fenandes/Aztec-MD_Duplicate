@@ -2,20 +2,27 @@ const fs = require("fs");
 const config = require("../config.js");
 const prefix = config.prefix;
 
+let customAliveMsg = ""; // Variable to store the custom alive message
+
 module.exports = {
-    name: 'alive',
-    alias: ['bot'],
-    description: 'To check the bot alive or off',
-    category: 'Mics',
-    async xstart(vorterx,m,{text,xReact}) {
+  name: 'alive',
+  alias: ['bot'],
+  description: 'To check the bot alive or off',
+  category: 'Mics',
+  async xstart(vorterx, m, { text, xReact }) {
+    await xReact('🧘');
 
-        await xReact('🧘');
-const image = {
-    url: "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
-    mimetype: "image/jpeg",
-  };
+    const image = {
+      url: "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
+      mimetype: "image/jpeg",
+    };
 
-  const cap = `╭─💙 *Bot Status*
+    let aliveMsg = ""; 
+
+    if (customAliveMsg) {
+      aliveMsg = customAliveMsg;
+    } else {
+      aliveMsg = `╭─💙 *Bot Status*
 │
 ├ Hey ${m.pushName}! 👋
 ├ Welcome to ${process.env.BOTNAME}! 🤖
@@ -25,26 +32,44 @@ const image = {
 ├ 📌 *Prefix*: ${prefix}
 ├ 📌 *Version*: 3.0.0
 │
-├ use${prefix}menu tget cmds.
+├ Use ${prefix}menu to get a list of commands.
 │
 ╰──────────⭑
-  `;
 
-  const messageOptions = {
-    image: image,
-    caption: cap,
-    contextInfo: {
-      externalAdReply: {
-        title: "Powered by Aztec",
-        body: "Unleash your imagination",
-        thumbnail: image,
-        mediaType: 1,
-        mediaUrl: "",
-        sourceUrl: "https://vorterx.com",
-        ShowAdAttribution: true,
+To set your own alive message, use the command:
+${prefix}setalive <your message>
+`;
+    }
+
+    const messageOptions = {
+      image: image,
+      caption: aliveMsg,
+      contextInfo: {
+        externalAdReply: {
+          title: "Powered by Aztec",
+          body: "Unleash your imagination",
+          thumbnail: image,
+          mediaType: 1,
+          mediaUrl: "",
+          sourceUrl: "https://vorterx.com",
+          ShowAdAttribution: true,
+        },
       },
-    },
-  };
- await vorterx.sendMessage(m.from, messageOptions, { quoted: m });
-}}
+    };
 
+    await vorterx.sendMessage(m.from, messageOptions, { quoted: m });
+  },
+
+    setalive(vorterx, m, { text }) {
+    if (isCreator(m.sender)) {
+      customAliveMsg = text; 
+      vorterx.reply(m.from, "Custom alive message set successfully!");
+    } else {
+      vorterx.reply(m.from, "Sorry, you are not authorized to set the custom alive message.");
+    }
+  },
+};
+function isCreator(user) {
+  const creator = process.env.MODS;
+  return user === creator;
+    }
