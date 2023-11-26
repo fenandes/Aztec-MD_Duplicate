@@ -27,12 +27,12 @@ module.exports = {
  | -truth
  | -dare
  | -coinflip
- | -dice
+ | -dropwater
  | -fact
  | -awesomecheck
  | -charactercheck
- | -cutecheck
- | -gaycheck
+ | -bare
+ | -neon-style
  | -greatcheck
  | -handsomechec
  └─────────◉   
