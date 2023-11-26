@@ -9,7 +9,7 @@ module.exports = {
     const command = args[0];
 
     if (command === "help") {
-      const commandsList = [
+      const commandsList =`
 ┌─『 *LOGO MAKERS* 』─❖
 
  | -neon
@@ -36,7 +36,7 @@ module.exports = {
  | -futuristic
  | -summer
  └─────────◉   
-      ];
+ `;
 
       const formattedList = commandsList.map((cmd) => `- ${cmd}`).join("\n");
       const helpMessage = `Available logo commands:\n\n${formattedList}`;
@@ -46,8 +46,8 @@ module.exports = {
     }
 
     switch (command) {
-      case 'black':
-        !text) {
+      case 'black': {
+        (!text) {
           await xReact("🤬");
           return m.reply("*Provide me a text bruh ex black vorterx*");
         }
@@ -67,10 +67,10 @@ module.exports = {
           console.error(error);
           await xReact("❌");
           return m.reply("An error occurred while generating the logo.");
-        }
+        } }
         break;
         
-      case "drug":
+      case "drug": {
         if (!text) {
           await xReact("🤬");
           return m.reply("*Provide me a text bruh ex neon vorterx*");
@@ -91,10 +91,10 @@ module.exports = {
           console.error(error);
           await xReact("❌");
           return m.reply("An error occurred while generating the logo.");
-        }
+        }}
         break;
 
-      case "shadow":
+      case "shadow": {
         if (!text) {
           await xReact("🤬");
           return m.reply("*Provide me a text for the shadow effect*");
@@ -115,10 +115,10 @@ module.exports = {
           console.error(error);
           await xReact("❌");
           return m.reply("An error occurred while generating the logo.");
-        }
+        }}
         break;
 
-      case "friday":
+      case "friday": {
         if (!text) {
           await xReact("🤬");
           return m.reply("*Please provide the text for the neon light effect*");
@@ -139,7 +139,7 @@ module.exports = {
           console.error(error);
           await xReact("❌");
           return m.reply("An error occurred while generating the logo.");
-        }
+        }}
         break;
         
       default:
