@@ -69,8 +69,8 @@ case 'script':
     const repo = repoResponse.data;
 
     const gitMsg = `
-      🌟 Repository Information 🌟
-      ----------------------------
+    *乂 AZTEC-MD MD INFORMATION 乂*
+    
     *〄 _Name*:    ${repo.name}
     
     * 〄 _Stars*:   ${repo.stargazers_count}
