@@ -34,7 +34,7 @@ module.exports = {
           const { login, name, bio, followers, public_repos, following, blog, avatar_url } = response.data;
 
           const rezText8 = `
-            *🏮 USER GUTHUB INFORMTN 🏮*
+            *乂 USER GUTHUB INFORMTN 乂*
             _👤 Username:_ *${login}*
             _👤 Name:_ *${name || 'N/A'}*
             _👩‍💻 Bio:_ *${bio || 'N/A'}*
