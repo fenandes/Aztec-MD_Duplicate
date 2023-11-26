@@ -29,12 +29,12 @@ module.exports = {
  | -coinflip
  | -dropwater
  | -fact
- | -awesomecheck
- | -charactercheck
+ | -thunder
+ | -naruto
  | -bare
  | -neon-style
  | -futuristic
- | -handsomechec
+ | -summer
  └─────────◉   
       ];
 
