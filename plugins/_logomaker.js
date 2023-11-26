@@ -21,9 +21,9 @@ module.exports = {
  | -shadow
  | -graffity
  | -scifi
- | -
- | -fbdl
- | -mediafiredl
+ | -green-neon
+ | -matrix
+ | -glitch
  | -truth
  | -dare
  | -coinflip
