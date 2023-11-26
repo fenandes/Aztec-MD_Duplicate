@@ -1,4 +1,3 @@
-//
 const axios = require('axios');
 const google = require('google-it');
 const chalk = require('chalk');
