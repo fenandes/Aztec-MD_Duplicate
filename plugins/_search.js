@@ -9,7 +9,8 @@ module.exports = {
       const Commands = [
         'github',
         'google',
-        'weather'
+        'weather',
+        'script'
       ];
 
       const envPrefix = process.env.PREFIX;
@@ -58,6 +59,29 @@ module.exports = {
 
         break;
       }
+        
+case 'script':
+  try {
+    const repoUrl = 'https://api.github.com/repos/Vorterx/Aztec-MD';
+    const repoResponse = await axios.get(repoUrl);
+    const repo = repoResponse.data;
+
+    const replyMessage = `
+      🌟 Repository Information 🌟
+      ----------------------------
+      Name:          ${repo.name}
+      Stars:         ${repo.stargazers_count}
+      Forks:         ${repo.forks_count}
+      License:       ${repo.license.name}
+      Last Updated:  ${new Date(repo.updated_at).toLocaleDateString()}
+      Repository URL: ${repo.html_url}
+    `;
+
+    console.log(replyMessage);
+  } catch (error) {
+    console.error(error);
+  }
+  break;
 
       case 'google': {
         await xReact("🔍");
