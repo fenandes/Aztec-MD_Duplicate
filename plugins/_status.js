@@ -3,7 +3,6 @@ module.exports = {
   alias: ['sx'],
   category: 'Mics',
   async xstart(vorterx, m, { text, args, xReact }) {
-
     await xReact('🤖');
     const uptime = process.uptime();
     const startTime = Date.now();
@@ -22,6 +21,9 @@ module.exports = {
     const messageOptions = {
       contentText: AmarokBot,
       footerText: 'Bot Status',
+      image: {
+        url: 'https://example.com/image.jpg'
+      }
     };
 
     const sentMessage = await vorterx.sendMessage(m.from, messageOptions, 'textMessage');
@@ -52,4 +54,4 @@ function getUptimeText(uptime) {
   const minutes = Math.floor((uptime % 3600) / 60);
   const seconds = Math.floor(uptime % 60);
   return `${hours}h ${minutes}m ${seconds}s`;
-}
+  }
