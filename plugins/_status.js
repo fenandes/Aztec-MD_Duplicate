@@ -10,12 +10,12 @@ module.exports = {
     const additionalInfo = 'Just do what is the best: time 🏇';
 
     const ter = `
-*🌟Description:* A WhatsApp bot with rich features built in Node.js to enhance your WhatsApp experience.
-*⚡Speed:* Calculating...
-*🚦Uptime:* Calculating...
-*🕸Version:* ${version}
-*👤Owner:* ${owner}
-*ℹ️Additional Info:* ${additionalInfo}`;
+*〄_Description:* A WhatsApp bot with rich features built in Node.js to enhance your WhatsApp experience.
+*〄_Speed:* Calculating...
+*〄_Uptime:* Calculating...
+*〄_Version:* ${version}
+*〄_Owner:* ${owner}
+*〄_Additional Info:* ${additionalInfo}`;
 
     const messageOptions = {
       contentText: ter,
