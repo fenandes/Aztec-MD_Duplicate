@@ -4,6 +4,7 @@ const chalk = require('chalk');
 
 module.exports = {
   name: 'search',
+  category: 'Search',
   async xstart(vorterx, m, { args, text, xReact }) {
     if (args[0] === 'search') {
       const Commands = [
