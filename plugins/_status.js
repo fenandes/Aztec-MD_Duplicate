@@ -1,8 +1,11 @@
+const speed = require('performance-now');
+
 module.exports = {
   name: 'status',
   alias: ['sx'],
   category: 'Mics',
   async xstart(vorterx, m, { text, args, xReact }) {
+    
     await xReact('🤖');
     const uptime = process.uptime();
     const startTime = Date.now();
