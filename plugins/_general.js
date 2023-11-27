@@ -75,4 +75,4 @@ ${prefix}setalive <your message>
 function isCreator(user) {
   const creator = process.env.MODS;
   return user === creator;
-    }
+}
