@@ -1,4 +1,4 @@
-const { Sticker, StickerTypes } = require('wa-sticker-formatter');
+/*const { Sticker, StickerTypes } = require('wa-sticker-formatter');
 const { downloadMedia } = require("../lib/message/_D3centX.js");
 const { getBuffer } = require("../connects/myFunc.js");
 const axios = require("axios");
@@ -38,4 +38,4 @@ module.exports = {
     m.reply("An error occurred while processing");
     console.log(err);
   }
-}}
+}}*/
