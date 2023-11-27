@@ -20,6 +20,7 @@ let config = {
   level_up: process.env.LEVEL_UP || '', // Set true or false or enable/disable
   menu: process.env.MENU || '', // 2 is the default menu Aztec, 0 is Suhail MD menu
   thumb: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
+  auto_react: process.env.AUTO_REACT || 'off', // else {on} to react
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
   LANG: process.env.LANG || 'VOR_TERX',
 };
