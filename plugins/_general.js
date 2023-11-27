@@ -60,9 +60,9 @@ ${prefix}setalive <your message>
     await vorterx.sendMessage(m.from, messageOptions, { quoted: m });
   },
 
-    setalive(vorterx, m, { text }) {
+  async setalive(vorterx, m, { text }) {
     if (isCreator(m.sender)) {
-      customAliveMsg = text; 
+      customAliveMsg = text;
       await xReact('✔️');
       m.reply("Custom alive message set successfully!");
     } else {
@@ -71,6 +71,7 @@ ${prefix}setalive <your message>
     }
   },
 };
+
 function isCreator(user) {
   const creator = process.env.MODS;
   return user === creator;
