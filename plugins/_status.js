@@ -6,7 +6,7 @@ module.exports = {
     await xReact('🤖');
     const uptime = process.uptime();
     const startTime = Date.now();
-    const version = '1.0.0';
+    const version = '3.0.0';
     const owner = process.env.OWNER_NAME;
     const additionalInfo = 'Just do what is the best: time 🏇';
 
