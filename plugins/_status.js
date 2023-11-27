@@ -3,14 +3,16 @@ module.exports = {
   alias: ['sx'],
   category: 'Mics',
   async xstart(vorterx, m, { text, args, xReact }) {
+
+    await xReact('🤖');
     const uptime = process.uptime();
     const startTime = Date.now();
     const version = '1.0.0';
     const owner = process.env.OWNER_NAME;
     const additionalInfo = 'Just do what is the best: time 🏇';
 
-    const ter = `
-*〄_Description:* A WhatsApp bot with rich features built in Node.js to enhance your WhatsApp experience.
+    const AmarokBot = `
+*〄_Description:* WhatsApp Chatbot made by Diegoson.
 *〄_Speed:* Calculating...
 *〄_Uptime:* Calculating...
 *〄_Version:* ${version}
@@ -18,7 +20,7 @@ module.exports = {
 *〄_Additional Info:* ${additionalInfo}`;
 
     const messageOptions = {
-      contentText: ter,
+      contentText: AmarokBot,
       footerText: 'Bot Status',
     };
 
@@ -29,7 +31,7 @@ module.exports = {
     const uptimeText = getUptimeText(uptime);
 
     const AztecBot = `
-*〄_Description:* A WhatsApp bot with rich features built in Node.js to enhance your WhatsApp experience.
+*〄_Description:* WhatsApp Chatbot made by Diegoson.
 *〄_Speed:* ${latency} ms
 *〄_Uptime:* ${uptimeText}
 *〄_Version:* ${version}
