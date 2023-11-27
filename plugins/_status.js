@@ -22,7 +22,7 @@ module.exports = {
       contentText: AmarokBot,
       footerText: 'Bot Status',
       image: {
-        url: 'https://example.com/image.jpg'
+        url: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg'
       }
     };
 
