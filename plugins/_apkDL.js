@@ -6,21 +6,24 @@ module.exports = {
   description: 'To download apk',
   category: 'Downloads',
   async xstart(vorterx, m, { text, args, xReact, quoted }) {
- 
+
     if (!text) {
       await xReact('❌');
       return m.reply('*_Please provide the name of the app you want to download._*');
     }
 
-    await xReact('📤');
-    try {   
+    await xReact('❌');
+    try {
       const results = await search(text);
-        if (results.length === 0) {
-       return m.reply('*No results found for the app you searched.*');
+      if (results.length === 0) {
+        await xReact('❌');
+        return m.reply('*No results found for the app you searched.*');
       }
 
+      m.reply('```\nDownloading your app, please wait...\n```');
+
       await xReact('📤');
-      const app = results[0];      
+      const app = results[0];
       const apkUrl = await download(app);
       const caption = `*〄_APKDL DOWNLOADR_〄*\n\n *📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: ${process.env.BOTNAME}\n\n\n*_BY WhatsApp CHATBOT_*`;
 
@@ -34,9 +37,10 @@ module.exports = {
         quoted: m,
       });
 
-     } catch (error) {
+    } catch (error) {
       console.error(error);
-      m.reply('_Error occurred while downloading the app._');
+      await xReact('❌');
+      return m.reply('_Error occurred while downloading the app._');
     }
   },
 };
