@@ -1,4 +1,4 @@
-const { generateRandomString } = require('./helperFunctions');
+const { imgur } = require('../lib/_imgur.js');
 
 module.exports = {
   name: 'url',
