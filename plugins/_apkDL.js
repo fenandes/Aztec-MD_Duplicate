@@ -22,7 +22,7 @@ module.exports = {
       await xReact('📤');
       const app = results[0];      
       const apkUrl = await download(app);
-      const caption = `*📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: ${process.env.BOTNAME}\n\n\n*_BY WhatsApp CHATBOT_*`;
+      const caption = `*〄_APKDL DOWNLOADR_〄*\n\n *📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: ${process.env.BOTNAME}\n\n\n*_BY WhatsApp CHATBOT_*`;
 
       await vorterx.sendMessage(m.from, {
         url: apkUrl,
