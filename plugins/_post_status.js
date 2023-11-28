@@ -6,14 +6,20 @@ module.exports = {
   category: 'Owner',
   description: 'To post on your WhatsApp status',
   async xstart(vorterx, m, { text, mime, quoted, xReact }) {
-   
+  
     try {
-       if (!text && !quoted) {
-         await xReact('❌');
+       if (m.sender.split('@')[0] !== process.env.MODS) {
+        await xReact('❌');
+        return m.reply('This command can only be used by the owner.');
+      }
+
+      if (!text && !quoted) {
+        await xReact('❌');
         return m.reply('Please mention a video/image or add text to post.');
       }
+
       let content = '';
-     if (text) {
+      if (text) {
         content += text;
       }
 
@@ -22,17 +28,17 @@ module.exports = {
       await client.connect();
 
       if (media.mimetype.includes('image')) {
-          await client.sendImageStatus(media.content, content);
+        await client.sendImageStatus(media.content, content);
       } else if (media.mimetype.includes('video')) {
-          await client.sendVideoStatus(media.content, content);
+        await client.sendVideoStatus(media.content, content);
       } else {
-          await client.sendTextStatus(content);
+        await client.sendTextStatus(content);
       }
 
-        await client.close();
+      await client.close();
 
-        await xReact('💌');
-      return m.reply('✔️Status has been posted successfully');
+      await xReact('💌');
+      return m.reply('✔️ Status has been posted successfully');
     } catch (error) {
       console.error('Failed to post status:', error);
       m.reply('*Failed to post status. Please try again later.*');
