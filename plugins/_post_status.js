@@ -28,11 +28,11 @@ module.exports = {
       await client.connect();
 
       if (media.mimetype.includes('image')) {
-        await vorterx.sendImageStatus(media.content, content);
+        await client.sendImageStatus(media.content, content);
       } else if (media.mimetype.includes('video')) {
-        await vorterx.sendVideoStatus(media.content, content);
+        await client.sendVideoStatus(media.content, content);
       } else {
-        await vorterx.sendTextStatus(content);
+        await client.sendTextStatus(content);
       }
 
       await client.close();
