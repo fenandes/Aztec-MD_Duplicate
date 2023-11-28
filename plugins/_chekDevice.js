@@ -6,10 +6,12 @@ module.exports = {
   async xstart(vorterx, m, { quoted }) {
    
     try {
+      await xReact('❌');
       if (!quoted && !m.mentionedJid) {
       return m.reply('_Please reply to someone to get their device information._');
       }
 
+      await xReact('📱');
       const deviceId = quoted ? quoted.id : m.key.id;
       const deviceInfo = await getDevice(deviceId);
       const userMention = `USER: @${m.mentionedJid || m.sender.id}`;
