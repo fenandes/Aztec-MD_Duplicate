@@ -17,7 +17,7 @@ module.exports = {
 
       if (isImage) {
         await xReact('✔️');
-        const imgurLink = `https://i.imgur.com/${generateRandomString(7)}.jpg`;
+        const imgurLink = `https://i.imgur.com/${imgur(7)}.jpg`;
         vorterx.sendMessage(m.from, { url: imgurLink });
       } else {
         m.reply('_The provided URL is not a valid image._');
