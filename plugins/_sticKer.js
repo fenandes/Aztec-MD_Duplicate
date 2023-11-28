@@ -1,5 +1,5 @@
-const { Sticker, StickerTypes } = require('wa-sticker-formatter');
 const axios = require("axios");
+const { createSticker, StickerTypes } = require('wa-sticker-formatter');
 
 module.exports = {
   name: 'sticker',
@@ -18,13 +18,16 @@ module.exports = {
 
       const imageUrl = quoted.imageMessage.imageUrl;
       const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-      const stickerBuffer = response.data;
+      const imageBuffer = response.data;
 
-      const stickerPack = author;
-      const stickerEmojis = ['🤩', '🎉'];
-      const stickerOptions = { pack: stickerPack, emojis: stickerEmojis };
+      const stickerOptions = {
+        pack: author,
+        type: StickerTypes.FULL,
+        quality: 70
+       };
+     const stickerData = await createSticker(imageBuffer, stickerOptions);
 
-      await vorterx.sendMessage(m.from, { sticker: stickerBuffer, ...stickerOptions }, { quoted: m });
+     await vorterx.sendMessage(m.from, { sticker: stickerData }, { quoted: m });
     } catch (err) {
       m.reply("An error occurred while processing");
       console.log(err);
