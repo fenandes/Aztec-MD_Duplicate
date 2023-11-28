@@ -27,6 +27,10 @@
     "OWNER_NAME": {
     "description": "Add your name (e.g diegosonTech or suhailTechInfo)",
     },
+    "AUTO_READ_STATUS": {
+    "description": "Auto_Status_View use (e.g true to activate else false to disable)",
+    "required": false
+    },
     "MENU": {
     "description": "Choose number between 0 and 2 were 2 is aztec menu 0 suhail menu or if you want it to change randomly leave it blank",
     "value": "2",
