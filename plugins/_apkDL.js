@@ -12,7 +12,6 @@ module.exports = {
       return m.reply('*_Please provide the name of the app you want to download._*');
     }
 
-    await xReact('❌');
     try {
       const results = await search(text);
       if (results.length === 0) {
